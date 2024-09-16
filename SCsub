@@ -1,0 +1,14 @@
+Import('env')
+
+sources = [
+    "register_types.cpp",
+    "sui_sdk.cpp"
+]
+sui_env = env_modules.Clone()
+
+if env["platform"] == "iphone":
+    sui_env.add_source_files(env.modules_sources, "sui_macos.mm")
+    sui_env.add_source_files(env.modules_sources, sources)
+
+elif env["platform"] == "windows" or env["platform"] == "macos" or env["platform"] == "osx" or env["platform"] == "x11" or env["platform"] == "javascript":
+    sui_env.add_source_files(env.modules_sources, sources)
