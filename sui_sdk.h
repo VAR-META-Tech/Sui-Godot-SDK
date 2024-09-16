@@ -28,9 +28,22 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef CAMERA_WIN_H
-#define CAMERA_WIN_H
+/* tts.h */
 
+#ifndef GODOT_TTS_H
+#define GODOT_TTS_H
 #include "header/sui_lib.h"
 
-#endif
+class SuiSDK
+{
+
+protected:
+  static void _bind_methods();
+
+public:
+  WalletList get_wallets();
+
+  SuiSDK();
+};
+
+#endif // GODOT_TTS_H
