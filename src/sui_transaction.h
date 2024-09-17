@@ -8,7 +8,9 @@ protected:
 	// static void _bind_methods();
 
 public:
-	char *signTransaction(const char *sender, const char *recipient, unsigned long long amount);
+	char *signTransaction(const char *sender, const char *recipient, uint64_t amount);
+	char *programmableTransactionAllowSponser(const char *sender_address, const char *recipient_address, uint64_t amount, const char *sponser_address);
+	const char *requestTokensFromFaucet(const char *address_str);
 };
 
 #endif
