@@ -1,5 +1,5 @@
 def can_build(env, platform):
-    return platform == "iphone" or platform == "android" or platform == "windows" or platform == "osx" or platform == "macos" or platform == "x11" or platform == "javascript"
+    return platform == "iphone" or platform == "android" or platform == "windows" or platform == "osx" or platform == "macos" or platform == "linuxbsd" or platform == "javascript"
 
 
 def configure(env):
@@ -33,7 +33,8 @@ def configure(env):
         env.Append(LIBPATH=["#modules/sui_sdk/libs"])
         env.Append(LIBS=["libsui_rust_sdk.dylib"])
         env.Append(RPATH=["."])
-    elif env["platform"] == "x11":
+    elif env["platform"] == "linuxbsd":
+        print("here!!!")
         env.Append(LIBPATH=["#modules/sui_sdk/libs"])
         env.Append(LIBS=["libsui_rust_sdk.so"])
         env.Append(RPATH=["."])
