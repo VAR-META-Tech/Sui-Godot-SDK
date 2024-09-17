@@ -32,14 +32,14 @@ typedef struct
 CSuiObjectDataArray get_wallet_objects(const char *address, const char *object_type);
 void free_sui_object_data_list(CSuiObjectDataArray array);
 
-const char *mint_nft(
+extern char *mint_nft(
 		const char *package_id,
 		const char *sender_address,
 		const char *name,
 		const char *description,
 		const char *uri);
 
-const char *transfer_nft(
+extern char *transfer_nft(
 		const char *package_id,
 		const char *sender_address,
 		const char *nft_id,
