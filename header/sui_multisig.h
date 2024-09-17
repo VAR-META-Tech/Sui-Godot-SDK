@@ -1,31 +1,38 @@
+// rust_functions.h
 #ifndef SUI_MULTISIG_H
 #define SUI_MULTISIG_H
-
 #include <inttypes.h>
-#include <cstddef>
-#include <cstdint>
-#include <cstdio>
-#include <string>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
 
+#ifdef __cplusplus
 extern "C" {
-struct CU8Array {
+#endif
+
+typedef struct
+{
 	const uint8_t *data;
 	uint32_t len;
 	const char *error;
-};
+} CU8Array;
 
-struct MultiSig {
+typedef struct
+{
 	const char *address;
 	CU8Array bytes;
 	const char *error;
-};
-class SuiMultisig {
-public:
-	static MultiSig get_or_create_multisig(SuiClient::CStringArray addresses, CU8Array weights, uint16_t threshold);
-	static CU8Array create_transaction(const char *from_address, const char *to_address, uint64_t amount);
-	static const char *sign_and_execute_transaction(CU8Array multisig, CU8Array tx, SuiClient::CStringArray addresses);
-	static void free_multisig(MultiSig multisig);
-};
+} MultiSig;
+extern MultiSig get_or_create_multisig(CStringArray addresses, CU8Array weights, uint16_t threshold);
+extern CU8Array create_transaction(const char *from_address,
+		const char *to_address, uint64_t amount);
+const char *sign_and_execute_transaction(
+		CU8Array multisig,
+		CU8Array tx,
+		CStringArray addresses);
+extern void free_multisig(MultiSig multisig);
+#ifdef __cplusplus
 }
+#endif
 
 #endif // SUI_MULTISIG_H
