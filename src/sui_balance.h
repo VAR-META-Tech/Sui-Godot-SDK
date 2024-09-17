@@ -35,14 +35,14 @@ public:
 		CCoin *coins;
 		size_t length;
 	};
-	static BalanceArray getBalances(const char *address);
-	static BalanceArray getAllBalancesSync(const char *address);
-	static void freeBalanceArray(BalanceArray balanceArray);
-	static Balance getBalanceSync(const char *address);
-	static void freeBalance(Balance balance);
-	static uint64_t getTotalSupplySync();
-	static CCoinArray getCoinsSync(const char *address);
-	static void freeCoinArray(CCoinArray coins);
+	BalanceArray getBalances(const char *address);
+	BalanceArray getAllBalancesSync(const char *address);
+	void freeBalanceArray(BalanceArray balanceArray);
+	Balance getBalanceSync(const char *address);
+	void freeBalance(Balance balance);
+	uint64_t getTotalSupplySync();
+	CCoinArray getCoinsSync(const char *address);
+	void freeCoinArray(CCoinArray coins);
 };
 }
 
