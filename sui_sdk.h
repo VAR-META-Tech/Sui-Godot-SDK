@@ -34,16 +34,14 @@
 #define GODOT_TTS_H
 #include "header/sui_lib.h"
 
-class SuiSDK
-{
-
+class SuiSDK {
 protected:
-  static void _bind_methods();
+	// static void _bind_methods();
 
 public:
-  WalletList get_wallets();
+	WalletList getWallets();
 
-  SuiSDK();
+	SuiSDK();
 };
 
 #endif // GODOT_TTS_H
