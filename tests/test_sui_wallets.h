@@ -7,7 +7,7 @@
 
 #include "modules/sui_sdk/sui_sdk.h"
 
-namespace TestSDK {
+namespace TestSuiWalletsSDK {
 
 TEST_CASE("Get Wallets") {
 	SuiSDK suiSdk;
@@ -15,6 +15,6 @@ TEST_CASE("Get Wallets") {
 	CHECK(wallets.wallets != NULL);
 }
 
-} //namespace TestSDK
+} //namespace TestSuiWalletsSDK
 
-#endif // TEST_SUI_SDK_H
+#endif
