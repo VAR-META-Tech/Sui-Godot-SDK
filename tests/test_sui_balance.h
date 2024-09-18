@@ -9,7 +9,7 @@ namespace TestSuiBalanceSDK {
 TEST_CASE("Get balance sync") {
 	SuiSDK suiSdk;
 	Balance balance = suiSdk.getBalanceSync("0x0d000320903ccdb00281bc30a568af9b546ec4ef8d748f352f8c31ad08442fdb");
-	CHECK(balance.total_balance > (unsigned long long *)0);
+	CHECK(balance.total_balance!= NULL && balance.total_balance >= (uint64_t*)0);
 }
 
 TEST_CASE("Get balances") {
@@ -39,7 +39,7 @@ TEST_CASE("Get total supply sync") {
 TEST_CASE("free balance") {
 	SuiSDK suiSdk;
 	Balance balance = suiSdk.getBalanceSync("0x0d000320903ccdb00281bc30a568af9b546ec4ef8d748f352f8c31ad08442fdb");
-	CHECK(balance.total_balance > (uint64_t *)0);
+	CHECK(balance.total_balance!=NULL && balance.total_balance >= (uint64_t*)0);
 	suiSdk.freeBalance(balance);
 	char *coinType = balance.coin_type;
 	bool balanceIsNull = coinType == NULL;
