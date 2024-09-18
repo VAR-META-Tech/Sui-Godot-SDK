@@ -1,40 +1,11 @@
 #ifndef SUI_BALANCE_CPP_H
 #define SUI_BALANCE_CPP_H
-
-#include <inttypes.h>
-#include <cstddef>
-#include <cstdint>
-#include <cstdio>
-#include <string>
+#include "../header/sui_lib.h"
 
 extern "C" {
 
 class SuiBalance {
 public:
-	struct Balance {
-		std::string coin_type;
-		size_t coin_object_count;
-		uint64_t total_balance[2];
-	};
-
-	struct BalanceArray {
-		Balance *balances;
-		size_t length;
-	};
-
-	struct CCoin {
-		std::string coin_type;
-		std::string coin_object_id;
-		uint64_t version;
-		std::string digest;
-		uint64_t balance;
-		std::string previous_transaction;
-	};
-
-	struct CCoinArray {
-		CCoin *coins;
-		size_t length;
-	};
 	BalanceArray getBalances(const char *address);
 	BalanceArray getAllBalancesSync(const char *address);
 	void freeBalanceArray(BalanceArray balanceArray);

@@ -1,28 +1,12 @@
-#ifndef SUI_BALANCE_CPP_H
-#define SUI_BALANCE_CPP_H
+#ifndef SUI_CLIENT_CPP_H
+#define SUI_CLIENT_CPP_H
+#include "../header/sui_lib.h"
 
-#include <inttypes.h>
-#include <cstddef>
-#include <cstdint>
-#include <cstdio>
-#include <string>
 
 extern "C" {
 
 class SuiClient {
 public:
-	typedef struct
-	{
-		const char **data;
-		int len;
-	} CStringArray;
-
-	// Struct to hold the result, either CStringArray or error message
-	typedef struct
-	{
-		CStringArray strings;
-		const char *error;
-	} ResultCStringArray;
 
 	void freeStrings(CStringArray array);
 	void freeErrorString(const char *error);
@@ -33,8 +17,8 @@ public:
 	ResultCStringArray availableRpcMethods();
 	ResultCStringArray availableSubscriptions();
 
-	int buildDevnet(void);
-	int buildTestnet(void);
+	int buildDevNetwork(void);
+	int buildTestNetwork(void);
 };
 }
 

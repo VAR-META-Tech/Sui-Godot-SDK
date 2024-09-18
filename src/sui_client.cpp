@@ -5,28 +5,28 @@ char *SuiClient::apiVersion() {
 	return api_version();
 };
 
-int SuiClient::checkApiVersion(void arg) {
-	return check_api_version(arg);
+int SuiClient::checkApiVersion(void) {
+	return check_api_version();
 }
 
 void SuiClient::freeErrorString(const char *error) {
 	return free_error_string(error);
 }
-void SuiClient::freeStrings(SuiClient::CStringArray array) {
+void SuiClient::freeStrings(CStringArray array) {
 	return free_strings(array);
 }
 
-SuiClient::ResultCStringArray SuiClient::availableRpcMethods() {
+ResultCStringArray SuiClient::availableRpcMethods() {
 	return available_rpc_methods();
 }
 
-SuiClient::ResultCStringArray SuiClient::availableSubscriptions() {
+ResultCStringArray SuiClient::availableSubscriptions() {
 	return available_subscriptions();
 }
 
-int SuiClient::buildDevnet(void) {
-	return build_devnet();
+int SuiClient::buildDevNetwork(void) {
+	return buildDevnet();
 }
-int SuiClient::buildTestnet(void) {
-	return build_testnet();
+int SuiClient::buildTestNetwork(void) {
+	return buildTestnet();
 }
