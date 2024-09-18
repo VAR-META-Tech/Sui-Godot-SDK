@@ -1,10 +1,8 @@
 #include "sui_wallet.h"
 
 WalletList SuiWallet::getWallets() {
-	// Retrieve the list of wallets
 	WalletList wallet_list = get_wallets();
 
-	// Check if the retrieval was successful
 	if (wallet_list.wallets == NULL) {
 		printf("Error retrieving wallets\n");
 		// return;
@@ -14,30 +12,25 @@ WalletList SuiWallet::getWallets() {
 }
 
 void SuiWallet::freeWalletList(WalletList wallet_list) {
-	// Free the list of wallets
 	free_wallet_list(wallet_list);
 }
 
 Wallet *SuiWallet::generateWallet(const char *key_scheme, const char *word_length) {
-	// Retrieve the list of wallets
 	Wallet *wallet = generate_wallet(key_scheme, word_length);
 	return wallet;
 }
 
 Wallet *SuiWallet::generateAndAddKey() {
-	// Retrieve the list of wallets
 	Wallet *wallet = generate_and_add_key();
 	return wallet;
 }
 
 Wallet *SuiWallet::getWalletFromAddress(const char *address) {
-	// Retrieve the list of wallets
 	Wallet *wallet = get_wallet_from_address(address);
 	return wallet;
 }
 
 void SuiWallet::freeWallet(Wallet *wallet) {
-	// Free the wallet
 	free_wallet(wallet);
 }
 

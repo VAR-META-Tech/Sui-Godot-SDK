@@ -3,7 +3,6 @@
 
 #include "tests/test_macros.h"
 #include "tests/test_tools.h"
-#include "thirdparty/doctest/doctest.h"
 
 #include "modules/sui_sdk/sui_sdk.h"
 
