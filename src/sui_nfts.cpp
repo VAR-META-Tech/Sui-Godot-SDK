@@ -1,5 +1,4 @@
 #include "sui_nfts.h"
-#include "header/sui_lib.h"
 
 CSuiObjectDataArray SuiNfts::getWalletObjects(const char *address, const char *object_type) {
 	return get_wallet_objects(address, object_type);

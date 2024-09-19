@@ -1,5 +1,4 @@
 #include "sui_multisig.h"
-#include "header/sui_lib.h"
 
 MultiSig SuiMultisig::getOrCreateMultisig(CStringArray addresses, CU8Array weights, uint16_t threshold) {
 	return get_or_create_multisig(addresses, weights, threshold);

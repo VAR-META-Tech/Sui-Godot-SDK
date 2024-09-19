@@ -1,5 +1,4 @@
 #include "sui_client.h"
-#include "header/sui_lib.h"
 
 char *SuiClient::apiVersion() {
 	return api_version();

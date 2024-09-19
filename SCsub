@@ -21,11 +21,11 @@ else:
     # Static compilation
     module_env.add_source_files(env.modules_sources, sources)
 
-sui_env = module_env.Clone()
+# sui_env = module_env.Clone()
 
-if env["platform"] == "iphone":
-    sui_env.add_source_files(env.modules_sources, "sui_macos.mm")
-    sui_env.add_source_files(env.modules_sources, sources)
+# if env["platform"] == "iphone":
+#     sui_env.add_source_files(env.modules_sources, "sui_macos.mm")
+#     sui_env.add_source_files(env.modules_sources, sources)
 
-elif env["platform"] == "windows" or env["platform"] == "macos" or env["platform"] == "osx" or env["platform"] == "x11" or env["platform"] == "javascript":
-    sui_env.add_source_files(env.modules_sources, sources)
+# elif env["platform"] == "windows" or env["platform"] == "macos" or env["platform"] == "osx" or env["platform"] == "x11" or env["platform"] == "javascript":
+#     sui_env.add_source_files(env.modules_sources, sources)

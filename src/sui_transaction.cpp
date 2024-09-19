@@ -1,5 +1,4 @@
 #include "sui_transaction.h"
-#include "header/sui_lib.h"
 
 char *SuiTransaction::signTransaction(const char *sender, const char *recipient, uint64_t amount) {
 	char *result = programmable_transaction(sender, recipient, amount);
