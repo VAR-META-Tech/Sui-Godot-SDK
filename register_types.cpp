@@ -10,8 +10,6 @@ void initialize_sui_sdk_module(ModuleInitializationLevel p_level) {
 	}
 
 	ClassDB::register_class<SuiSDK>();
-	// ClassDB::register_class<SWalletList>();
-	// ClassDB::register_class<SuiWallet>();
 	ClassDB::register_class<WalletWrapper>();
 }
 
