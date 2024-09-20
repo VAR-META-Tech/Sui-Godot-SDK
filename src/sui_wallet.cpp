@@ -1,52 +1,52 @@
 #include "sui_wallet.h"
 
-WalletList SuiWallet::getWallets()
-{
-	WalletList wallet_list = get_wallets();
-
-	if (wallet_list.wallets == NULL)
-	{
-		printf("Error retrieving wallets\n");
-		// return;
-	}
-
-	return wallet_list;
+Ref<WalletWrapper> toWalletWrapper(const WalletStruct &wallet_struct) {
+	Ref<WalletWrapper> wrapper = memnew(WalletWrapper);
+	wrapper->set_address(wallet_struct.address);
+	return wrapper;
 }
 
-void SuiWallet::freeWalletList(WalletList wallet_list)
-{
+TypedArray<WalletWrapper> SuiWallet::getWallets() {
+	WalletList wallet_list = get_wallets();
+	TypedArray<WalletWrapper> wallets;
+	for (int i = 0; i < wallet_list.length; i++) {
+		WalletStruct walletStructItem;
+		walletStructItem.address = wallet_list.wallets[i].address;
+
+		wallets.append(toWalletWrapper(walletStructItem));
+	}
+
+	free_wallet_list(wallet_list);
+	return wallets;
+}
+
+void SuiWallet::freeWalletList(WalletList wallet_list) {
 	free_wallet_list(wallet_list);
 }
 
-Wallet *SuiWallet::generateWallet(const char *key_scheme, const char *word_length)
-{
+Wallet *SuiWallet::generateWallet(const char *key_scheme, const char *word_length) {
 	Wallet *wallet = generate_wallet(key_scheme, word_length);
 	return wallet;
 }
 
-Wallet *SuiWallet::generateAndAddKey()
-{
+Wallet *SuiWallet::generateAndAddKey() {
 	Wallet *wallet = generate_and_add_key();
 	return wallet;
 }
 
-Wallet *SuiWallet::getWalletFromAddress(const char *address)
-{
+Wallet *SuiWallet::getWalletFromAddress(const char *address) {
 	Wallet *wallet = get_wallet_from_address(address);
 	return wallet;
 }
 
-void SuiWallet::freeWallet(Wallet *wallet)
-{
+void SuiWallet::freeWallet(Wallet *wallet) {
 	free_wallet(wallet);
 }
 
-void SuiWallet::importFromPrivateKey(const char *key_base64)
-{
+void SuiWallet::importFromPrivateKey(const char *key_base64) {
 	import_from_private_key(key_base64);
 }
 
-char *SuiWallet::importFromMnemonic(const char *mnemonic)
-{
+char *SuiWallet::importFromMnemonic(const char *mnemonic) {
 	return import_from_mnemonic(mnemonic);
 }

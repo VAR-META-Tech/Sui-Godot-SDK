@@ -19,10 +19,11 @@ protected:
 	static void _bind_methods();
 
 public:
-	String test();
-	void import();
+	TypedArray<WalletWrapper> getWallets() { return SuiWallet::getWallets(); };
+
 	SuiSDK();
 };
+
 } //namespace godot
 
 #endif // GODOT_SUI_SDK_H
