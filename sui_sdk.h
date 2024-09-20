@@ -20,6 +20,7 @@ protected:
 
 public:
 	TypedArray<WalletWrapper> getWallets() { return SuiWallet::getWallets(); };
+	Ref<WalletWrapper> generateWallet(String key_scheme, String word_length) { return SuiWallet::generateWallet(key_scheme, word_length); };
 
 	SuiSDK();
 };

@@ -26,8 +26,8 @@ public:
 	String key_scheme;
 
 	void set_address(String p_address) { address = p_address; }
-	String get_address() { return address; }
-	void set_mnemonic(String p_mnemonic) { address = p_mnemonic; }
+	String get_address() const { return address; }
+	void set_mnemonic(String p_mnemonic) { mnemonic = p_mnemonic; }
 	String get_mnemonic() { return mnemonic; }
 	void set_public_base64_key(String p_public_base64_key) { public_base64_key = p_public_base64_key; }
 	String get_public_base64_key() { return public_base64_key; }
@@ -37,6 +37,7 @@ public:
 	String get_key_scheme() { return key_scheme; }
 
 	static void _bind_methods() {
+		ClassDB::bind_method(D_METHOD("get_address"), &WalletWrapper::get_address);
 		ClassDB::bind_method(D_METHOD("set_address", "address"), &WalletWrapper::set_address);
 		ClassDB::bind_method(D_METHOD("get_mnemonic"), &WalletWrapper::get_mnemonic);
 		ClassDB::bind_method(D_METHOD("set_mnemonic", "mnemonic"), &WalletWrapper::set_mnemonic);
@@ -44,9 +45,8 @@ public:
 		ClassDB::bind_method(D_METHOD("set_public_base64_key", "public_base64_key"), &WalletWrapper::set_public_base64_key);
 		ClassDB::bind_method(D_METHOD("get_private_key"), &WalletWrapper::get_private_key);
 		ClassDB::bind_method(D_METHOD("set_private_key", "private_key"), &WalletWrapper::set_private_key);
-		ClassDB::bind_method(D_METHOD("get_address"), &WalletWrapper::get_address);
-		ClassDB::bind_method(D_METHOD("set_address", "address"), &WalletWrapper::set_address);
-		ClassDB::bind_method(D_METHOD("get_address"), &WalletWrapper::get_address);
+		ClassDB::bind_method(D_METHOD("get_key_scheme"), &WalletWrapper::get_key_scheme);
+		ClassDB::bind_method(D_METHOD("set_key_scheme", "key_scheme"), &WalletWrapper::set_key_scheme);
 	}
 };
 
@@ -54,7 +54,7 @@ class SuiWallet {
 public:
 	TypedArray<WalletWrapper> getWallets();
 	void freeWalletList(WalletList wallet_list);
-	Wallet *generateWallet(const char *key_scheme, const char *word_length);
+	Ref<WalletWrapper> generateWallet(String key_scheme, String word_length);
 	Wallet *generateAndAddKey();
 	Wallet *getWalletFromAddress(const char *address);
 	void freeWallet(Wallet *wallet);

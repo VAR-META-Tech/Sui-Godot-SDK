@@ -32,9 +32,16 @@ void SuiWallet::freeWalletList(WalletList wallet_list) {
 	free_wallet_list(wallet_list);
 }
 
-Wallet *SuiWallet::generateWallet(const char *key_scheme, const char *word_length) {
-	Wallet *wallet = generate_wallet(key_scheme, word_length);
-	return wallet;
+Ref<WalletWrapper> SuiWallet::generateWallet(String key_scheme, String word_length) {
+	Wallet *wallet = generate_wallet((char *)&key_scheme, (char *)&word_length);
+	WalletStruct walletStructItem;
+	walletStructItem.address = wallet->address;
+	walletStructItem.mnemonic = wallet->mnemonic;
+	walletStructItem.public_base64_key = wallet->public_base64_key;
+	walletStructItem.private_key = wallet->private_key;
+	walletStructItem.key_scheme = wallet->key_scheme;
+
+	return toWalletWrapper(walletStructItem);
 }
 
 Wallet *SuiWallet::generateAndAddKey() {

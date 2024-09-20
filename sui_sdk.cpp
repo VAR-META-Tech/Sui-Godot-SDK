@@ -23,6 +23,7 @@ void print_wallet(const Wallet *wallet) {
 
 void SuiSDK::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("getWallets"), &SuiSDK::getWallets);
+	ClassDB::bind_method(D_METHOD("generateWallet"), &SuiSDK::generateWallet);
 	// ClassDB::bind_method(D_METHOD("set_amplitude", "p_amplitude"), &GDExample::set_amplitude);
 	// ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "amplitude"), "set_amplitude", "get_amplitude");
 }
