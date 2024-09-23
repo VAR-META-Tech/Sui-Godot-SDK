@@ -22,6 +22,11 @@ void print_wallet(const Wallet *wallet) {
 }
 
 void SuiSDK::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("getBalances", "address"), &SuiSDK::getBalances);
+	ClassDB::bind_method(D_METHOD("getAllBalancesSync", "address"), &SuiSDK::getAllBalancesSync);
+	ClassDB::bind_method(D_METHOD("getBalanceSync", "address"), &SuiSDK::getBalanceSync);
+	ClassDB::bind_method(D_METHOD("getTotalSupplySync"), &SuiSDK::getTotalSupplySync);
+	ClassDB::bind_method(D_METHOD("getCoinsSync", "address"), &SuiSDK::getCoinsSync);
 	ClassDB::bind_method(D_METHOD("getWallets"), &SuiSDK::getWallets);
 	ClassDB::bind_method(D_METHOD("generateWallet"), &SuiSDK::generateWallet);
 	ClassDB::bind_method(D_METHOD("generateAndAddKey"), &SuiSDK::generateAndAddKey);
