@@ -55,11 +55,11 @@ public:
 	TypedArray<WalletWrapper> getWallets();
 	void freeWalletList(WalletList wallet_list);
 	Ref<WalletWrapper> generateWallet(String key_scheme, String word_length);
-	Wallet *generateAndAddKey();
-	Wallet *getWalletFromAddress(const char *address);
+	Ref<WalletWrapper> generateAndAddKey();
+	Ref<WalletWrapper> getWalletFromAddress(String address);
 	void freeWallet(Wallet *wallet);
-	void importFromPrivateKey(const char *key_base64);
-	char *importFromMnemonic(const char *mnemonic);
+	void importFromPrivateKey(String key_base64);
+	String importFromMnemonic(String mnemonic);
 };
 
 #endif
