@@ -118,7 +118,7 @@ public:
 	TypedArray<BalanceWrapper> getBalances(String address);
 	TypedArray<BalanceWrapper> getAllBalancesSync(String address);
 	Ref<BalanceWrapper> getBalanceSync(String address);
-	unsigned long long int getTotalSupplySync();
+	String getTotalSupplySync();
 	TypedArray<CoinWrapper> getCoinsSync(String address);
 };
 

@@ -9,10 +9,9 @@
 [node name="TabContainer" type="TabContainer" parent="."]
 offset_right = 1153.0
 offset_bottom = 648.0
-current_tab = 2
+current_tab = 0
 
 [node name="Wallets" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 script = ExtResource("1_aiqld")
 metadata/_tab_index = 0
@@ -182,11 +181,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Transaction" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("1_ck3nu")
 metadata/_tab_index = 2
 
 [node name="address_box" type="OptionButton" parent="TabContainer/Transaction"]
+layout_mode = 0
 offset_left = 27.0
 offset_top = 13.0
 offset_right = 1121.0

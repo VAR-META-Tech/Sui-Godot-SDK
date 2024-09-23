@@ -61,8 +61,9 @@ Ref<BalanceWrapper> SuiBalance::getBalanceSync(String address) {
 	return toBalanceWrapper(balanceStructItem);
 }
 
-unsigned long long int SuiBalance::getTotalSupplySync() {
-	return get_total_supply_sync();
+String SuiBalance::getTotalSupplySync() {
+	uint64_t total_supply= get_total_supply_sync();
+	return String::num_uint64(total_supply);
 }
 
 TypedArray<CoinWrapper> SuiBalance::getCoinsSync(String address) {
