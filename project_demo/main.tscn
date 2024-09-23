@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://btvwx1xqjgghb"]
+
+[ext_resource type="Script" path="res://balances.gd" id="1_ck3nu"]
+
+[node name="Main" type="Node2D"]
+
+[node name="TabContainer" type="TabContainer" parent="."]
+offset_right = 1153.0
+offset_bottom = 648.0
+current_tab = 1
+
+[node name="Wallets" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Balances" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+script = ExtResource("1_ck3nu")
+metadata/_tab_index = 1
+
+[node name="btn_send_with_sponser" type="Button" parent="TabContainer/Balances"]
+layout_mode = 0
+offset_left = 872.0
+offset_top = 182.0
+offset_right = 1126.0
+offset_bottom = 230.0
+text = "Send With Sponser"
+
+[node name="btn_request_faucet" type="Button" parent="TabContainer/Balances"]
+layout_mode = 0
+offset_left = 870.0
+offset_top = 61.0
+offset_right = 1124.0
+offset_bottom = 109.0
+text = "Request Faucet"
+
+[node name="btn_load" type="Button" parent="TabContainer/Balances"]
+layout_mode = 0
+offset_left = 870.0
+offset_top = 124.0
+offset_right = 1124.0
+offset_bottom = 172.0
+text = "Load"
+
+[node name="btn_send" type="Button" parent="TabContainer/Balances"]
+layout_mode = 0
+offset_left = 722.0
+offset_top = 124.0
+offset_right = 829.0
+offset_bottom = 170.0
+text = "send"
+
+[node name="txt_amount" type="TextEdit" parent="TabContainer/Balances"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 124.0
+offset_right = 711.0
+offset_bottom = 171.0
+placeholder_text = "Enter Amount"
+
+[node name="txt_address" type="TextEdit" parent="TabContainer/Balances"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 9.0
+offset_right = 834.0
+offset_bottom = 56.0
+placeholder_text = "Enter Address"
+
+[node name="txt_recipient_address" type="TextEdit" parent="TabContainer/Balances"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 65.0
+offset_right = 833.0
+offset_bottom = 112.0
+placeholder_text = "Enter Recipient Address"
+
+[node name="txt_sponser_address" type="TextEdit" parent="TabContainer/Balances"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 184.0
+offset_right = 833.0
+offset_bottom = 231.0
+placeholder_text = "Enter Sponser Address"
+
+[node name="result" type="RichTextLabel" parent="TabContainer/Balances"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 256.0
+offset_right = 1119.0
+offset_bottom = 594.0
+
+[connection signal="pressed" from="TabContainer/Balances/btn_send_with_sponser" to="TabContainer/Balances" method="_on_btn_send_with_sponser_pressed"]
+[connection signal="pressed" from="TabContainer/Balances/btn_request_faucet" to="TabContainer/Balances" method="_on_btn_request_faucet_pressed"]
+[connection signal="pressed" from="TabContainer/Balances/btn_load" to="TabContainer/Balances" method="_on_btn_load_pressed"]
+[connection signal="pressed" from="TabContainer/Balances/btn_send" to="TabContainer/Balances" method="_on_btn_send_pressed"]

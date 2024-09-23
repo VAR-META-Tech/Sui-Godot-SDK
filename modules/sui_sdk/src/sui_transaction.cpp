@@ -1,15 +1,16 @@
 #include "sui_transaction.h"
 
-char *SuiTransaction::signTransaction(const char *sender, const char *recipient, uint64_t amount) {
-	char *result = programmable_transaction(sender, recipient, amount);
-	return result;
+String SuiTransaction::signTransaction(String sender, String recipient, unsigned long long int amount)
+{
+	return programmable_transaction(sender.utf8().get_data(), recipient.utf8().get_data(), amount);
 }
 
-char *SuiTransaction::programmableTransactionAllowSponser(const char *sender_address, const char *recipient_address, uint64_t amount, const char *sponser_address) {
-	char *result = programmable_transaction_allow_sponser(sender_address, recipient_address, amount, sponser_address);
-	return result;
+String SuiTransaction::programmableTransactionAllowSponser(String sender_address, String recipient_address, unsigned long long int amount, String sponser_address)
+{
+	return  programmable_transaction_allow_sponser(sender_address.utf8().get_data(), recipient_address.utf8().get_data(), amount, sponser_address.utf8().get_data());
 }
 
-const char *SuiTransaction::requestTokensFromFaucet(const char *address_str) {
-	return request_tokens_from_faucet_(address_str);
+String SuiTransaction::requestTokensFromFaucet(String address_str)
+{
+	return request_tokens_from_faucet_(address_str.utf8().get_data());
 }
