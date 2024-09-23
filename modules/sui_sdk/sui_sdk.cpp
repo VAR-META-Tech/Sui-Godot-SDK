@@ -9,10 +9,12 @@
 
 using namespace godot;
 
-SuiSDK::SuiSDK() {
+SuiSDK::SuiSDK()
+{
 }
 
-void print_wallet(const Wallet *wallet) {
+void print_wallet(const Wallet *wallet)
+{
 	printf("Wallet Address: %s\n", wallet->address ? wallet->address : "Not set");
 	printf("Mnemonic: %s\n", wallet->mnemonic ? wallet->mnemonic : "Not set");
 	printf("Public Base64 Key: %s\n", wallet->public_base64_key ? wallet->public_base64_key : "Not set");
@@ -21,7 +23,8 @@ void print_wallet(const Wallet *wallet) {
 	printf("\n");
 }
 
-void SuiSDK::_bind_methods() {
+void SuiSDK::_bind_methods()
+{
 	/**
 	 * Balance
 	 */
@@ -30,6 +33,22 @@ void SuiSDK::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("getBalanceSync", "address"), &SuiSDK::getBalanceSync);
 	ClassDB::bind_method(D_METHOD("getTotalSupplySync"), &SuiSDK::getTotalSupplySync);
 	ClassDB::bind_method(D_METHOD("getCoinsSync", "address"), &SuiSDK::getCoinsSync);
+
+	/**
+	 * Client
+	 */
+
+	/**
+	 * Multisig
+	 */
+
+	/**
+	 * NFTs
+	 */
+
+	/**
+	 * Transaction
+	 */
 
 	/**
 	 * Wallet
