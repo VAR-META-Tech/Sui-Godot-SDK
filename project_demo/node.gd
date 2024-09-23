@@ -138,3 +138,8 @@ func _on_button_import_from_private_key_pressed() -> void:
 func _on_button_import_from_mnemonic_pressed() -> void:
 	onImportFromMnemonic()
 	pass # Replace with function body.
+
+
+func _on_button_scene_version_pressed() -> void:
+	get_tree().change_scene_to_file("res://version.tscn")
+	pass # Replace with function body.

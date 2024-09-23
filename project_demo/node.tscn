@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://drvhrb6de53ls"]
+[gd_scene load_steps=3 format=3 uid="uid://ttjdfr1sbut2"]
 
 [ext_resource type="Script" path="res://node.gd" id="1_x2qqd"]
+[ext_resource type="Script" path="res://version.gd" id="2_psavc"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_x2qqd")
@@ -48,9 +49,9 @@ offset_bottom = 103.0
 placeholder_text = "Address"
 
 [node name="result" type="RichTextLabel" parent="."]
-offset_left = 198.0
+offset_left = 310.0
 offset_top = 379.0
-offset_right = 1148.0
+offset_right = 1114.0
 offset_bottom = 636.0
 
 [node name="ButtonGetWallets" type="Button" parent="."]
@@ -94,6 +95,16 @@ offset_right = 190.0
 offset_bottom = 89.0
 text = "import from mnemonic"
 
+[node name="ButtonSceneVersion" type="Button" parent="."]
+offset_left = 53.0
+offset_top = -11.0
+offset_right = 169.0
+offset_bottom = 20.0
+text = "Scene Version"
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_psavc")
+
 [connection signal="pressed" from="btn_get_balances" to="." method="_on_btn_get_balances_pressed"]
 [connection signal="pressed" from="btn_get_all_balances_sync" to="." method="_on_btn_get_all_balances_sync_pressed"]
 [connection signal="pressed" from="btn_get_balance_sync" to="." method="_on_btn_get_balance_sync_pressed"]
@@ -106,3 +117,4 @@ text = "import from mnemonic"
 [connection signal="pressed" from="ButtonGetWalletFromAddress" to="." method="_on_button_get_wallet_from_address_pressed"]
 [connection signal="pressed" from="ButtonImportFromPrivateKey" to="." method="_on_button_import_from_private_key_pressed"]
 [connection signal="pressed" from="ButtonImportFromMnemonic" to="." method="_on_button_import_from_mnemonic_pressed"]
+[connection signal="pressed" from="ButtonSceneVersion" to="." method="_on_button_scene_version_pressed"]
