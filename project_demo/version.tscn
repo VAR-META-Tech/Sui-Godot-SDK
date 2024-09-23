@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxgtl7h0kct57"]
+
+[ext_resource type="Script" path="res://version.gd" id="1_k0upj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5y74r"]
+bg_color = Color(0.895009, 0, 0.126098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_088nj"]
+bg_color = Color(0.0766478, 0.130994, 0, 1)
+
+[node name="Version" type="Node"]
+script = ExtResource("1_k0upj")
+
+[node name="AvailableRPCMethods" type="Button" parent="."]
+offset_left = 417.0
+offset_top = 75.0
+offset_right = 594.0
+offset_bottom = 106.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5y74r")
+text = "Available RPC Methods"
+
+[node name="API Version" type="Button" parent="."]
+offset_left = 78.0
+offset_top = 73.0
+offset_right = 194.0
+offset_bottom = 104.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5y74r")
+text = "API Version"
+
+[node name="result" type="RichTextLabel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 529.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_088nj")
+
+[node name="Return" type="Button" parent="."]
+offset_left = 80.0
+offset_top = 127.0
+offset_right = 196.0
+offset_bottom = 158.0
+text = "Back to Home"
+
+[node name="Check API" type="Button" parent="."]
+offset_left = 242.0
+offset_top = 74.0
+offset_right = 358.0
+offset_bottom = 105.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5y74r")
+text = "Check version"
+
+[connection signal="pressed" from="AvailableRPCMethods" to="." method="_on_available_rpc_methods_pressed"]
+[connection signal="pressed" from="AvailableRPCMethods" to="." method="_on_check_version_pressed"]
+[connection signal="pressed" from="API Version" to="." method="_on_check_version_pressed"]
+[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="Check API" to="." method="_on_check_version_pressed"]
+[connection signal="pressed" from="Check API" to="." method="_on_check_api_pressed"]

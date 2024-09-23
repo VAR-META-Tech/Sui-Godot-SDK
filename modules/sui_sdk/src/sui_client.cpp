@@ -1,31 +1,30 @@
 #include "sui_client.h"
 
-char *SuiClient::apiVersion() {
-	return api_version();
+String SuiClient::apiVersion()
+{
+	char *version = api_version();
+	return version;
 };
 
-int SuiClient::checkApiVersion(void) {
+int SuiClient::checkApiVersion()
+{
 	return check_api_version();
 }
 
-void SuiClient::freeErrorString(const char *error) {
+void SuiClient::freeErrorString(const char *error)
+{
 	return free_error_string(error);
 }
-void SuiClient::freeStrings(CStringArray array) {
+void SuiClient::freeStrings(CStringArray array)
+{
 	return free_strings(array);
 }
 
-ResultCStringArray SuiClient::availableRpcMethods() {
-	return available_rpc_methods();
-}
-
-ResultCStringArray SuiClient::availableSubscriptions() {
-	return available_subscriptions();
-}
-
-int SuiClient::buildDevNetwork(void) {
+int SuiClient::buildDevNetwork(void)
+{
 	return buildDevnet();
 }
-int SuiClient::buildTestNetwork(void) {
+int SuiClient::buildTestNetwork(void)
+{
 	return buildTestnet();
 }

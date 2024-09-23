@@ -33,6 +33,8 @@ namespace godot
 		/**
 		 * Client
 		 */
+		String apiVersion() { return SuiClient::apiVersion(); };
+		int checkApiVersion() { return SuiClient::checkApiVersion(); };
 
 		/**
 		 * Multisig

@@ -1,6 +1,7 @@
 #ifndef SUI_CLIENT_CPP_H
 #define SUI_CLIENT_CPP_H
 #include "../header/sui_lib.h"
+#include "core/object/class_db.h"
 
 extern "C"
 {
@@ -12,13 +13,10 @@ extern "C"
 		void freeErrorString(const char *error);
 
 		// SuiClient functions
-		char *apiVersion();
-		int checkApiVersion(void);
-		ResultCStringArray availableRpcMethods();
-		ResultCStringArray availableSubscriptions();
-
-		int buildDevNetwork(void);
-		int buildTestNetwork(void);
+		String apiVersion();
+		int checkApiVersion();
+		int buildDevNetwork();
+		int buildTestNetwork();
 	};
 }
 
