@@ -27,7 +27,7 @@ namespace godot
 		TypedArray<BalanceWrapper> getBalances(String address) { return SuiBalance::getBalances(address); };
 		TypedArray<BalanceWrapper> getAllBalancesSync(String address) { return SuiBalance::getAllBalancesSync(address); };
 		Ref<BalanceWrapper> getBalanceSync(String address) { return SuiBalance::getBalanceSync(address); };
-		unsigned long long int getTotalSupplySync(String address) { return SuiBalance::getTotalSupplySync(); };
+		unsigned long long int getTotalSupplySync() { return SuiBalance::getTotalSupplySync(); };
 		TypedArray<CoinWrapper> getCoinsSync(String address) { return SuiBalance::getCoinsSync(address); };
 
 		/**

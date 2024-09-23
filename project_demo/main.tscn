@@ -1,96 +1,286 @@
-[gd_scene load_steps=2 format=3 uid="uid://btvwx1xqjgghb"]
+[gd_scene load_steps=4 format=3 uid="uid://btvwx1xqjgghb"]
 
+[ext_resource type="Script" path="res://wallets.gd" id="1_aiqld"]
 [ext_resource type="Script" path="res://balances.gd" id="1_ck3nu"]
+[ext_resource type="Script" path="res://balance.gd" id="2_ah0r3"]
 
 [node name="Main" type="Node2D"]
 
 [node name="TabContainer" type="TabContainer" parent="."]
 offset_right = 1153.0
 offset_bottom = 648.0
-current_tab = 1
+current_tab = 2
 
 [node name="Wallets" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
+script = ExtResource("1_aiqld")
 metadata/_tab_index = 0
 
-[node name="Balances" type="TabBar" parent="TabContainer"]
-layout_mode = 2
-script = ExtResource("1_ck3nu")
-metadata/_tab_index = 1
-
-[node name="btn_send_with_sponser" type="Button" parent="TabContainer/Balances"]
+[node name="address_box" type="OptionButton" parent="TabContainer/Wallets"]
 layout_mode = 0
-offset_left = 872.0
-offset_top = 182.0
-offset_right = 1126.0
-offset_bottom = 230.0
-text = "Send With Sponser"
+offset_left = 43.0
+offset_top = 29.0
+offset_right = 1103.0
+offset_bottom = 68.0
 
-[node name="btn_request_faucet" type="Button" parent="TabContainer/Balances"]
+[node name="import_mnemonic" type="Button" parent="TabContainer/Wallets"]
 layout_mode = 0
-offset_left = 870.0
-offset_top = 61.0
-offset_right = 1124.0
-offset_bottom = 109.0
-text = "Request Faucet"
+offset_left = 951.0
+offset_top = 85.0
+offset_right = 1102.0
+offset_bottom = 125.0
+text = "Import mnemonic"
 
-[node name="btn_load" type="Button" parent="TabContainer/Balances"]
+[node name="import_private_key" type="Button" parent="TabContainer/Wallets"]
 layout_mode = 0
-offset_left = 870.0
-offset_top = 124.0
-offset_right = 1124.0
-offset_bottom = 172.0
+offset_left = 786.0
+offset_top = 85.0
+offset_right = 937.0
+offset_bottom = 124.0
+text = "import private key"
+
+[node name="create_custom" type="Button" parent="TabContainer/Wallets"]
+layout_mode = 0
+offset_left = 549.0
+offset_top = 148.0
+offset_right = 757.0
+offset_bottom = 188.0
+text = "Create custom"
+
+[node name="generate" type="Button" parent="TabContainer/Wallets"]
+layout_mode = 0
+offset_left = 789.0
+offset_top = 148.0
+offset_right = 938.0
+offset_bottom = 188.0
+text = "Generate"
+
+[node name="load" type="Button" parent="TabContainer/Wallets"]
+layout_mode = 0
+offset_left = 954.0
+offset_top = 146.0
+offset_right = 1101.0
+offset_bottom = 189.0
 text = "Load"
 
-[node name="btn_send" type="Button" parent="TabContainer/Balances"]
+[node name="box_key" type="TextEdit" parent="TabContainer/Wallets"]
 layout_mode = 0
-offset_left = 722.0
-offset_top = 124.0
-offset_right = 829.0
-offset_bottom = 170.0
+offset_left = 43.0
+offset_top = 86.0
+offset_right = 757.0
+offset_bottom = 125.0
+placeholder_text = "Enter mnemonic or private key"
+
+[node name="scheme" type="OptionButton" parent="TabContainer/Wallets"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 148.0
+offset_right = 268.0
+offset_bottom = 187.0
+item_count = 3
+popup/item_0/text = "ED25519"
+popup/item_0/id = 0
+popup/item_1/text = "Secp256k1"
+popup/item_1/id = 1
+popup/item_2/text = "Secp256r1"
+popup/item_2/id = 2
+
+[node name="word" type="OptionButton" parent="TabContainer/Wallets"]
+layout_mode = 0
+offset_left = 295.0
+offset_top = 148.0
+offset_right = 523.0
+offset_bottom = 187.0
+item_count = 5
+popup/item_0/text = "word12"
+popup/item_0/id = 0
+popup/item_1/text = "word15"
+popup/item_1/id = 1
+popup/item_2/text = "word18"
+popup/item_2/id = 2
+popup/item_3/text = "word21"
+popup/item_3/id = 3
+popup/item_4/text = "word24"
+popup/item_4/id = 4
+
+[node name="result" type="RichTextLabel" parent="TabContainer/Wallets"]
+layout_mode = 2
+offset_left = 52.0
+offset_top = 219.0
+offset_right = 1102.0
+offset_bottom = 562.0
+
+[node name="scroll" type="ScrollContainer" parent="TabContainer/Wallets/result"]
+layout_mode = 0
+offset_right = 1050.0
+offset_bottom = 354.0
+
+[node name="Balance" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("2_ah0r3")
+metadata/_tab_index = 1
+
+[node name="address_box" type="OptionButton" parent="TabContainer/Balance"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 46.0
+offset_right = 1114.0
+offset_bottom = 85.0
+
+[node name="btn_get_balances" type="Button" parent="TabContainer/Balance"]
+layout_mode = 0
+offset_left = 736.0
+offset_top = 133.0
+offset_right = 915.0
+offset_bottom = 181.0
+text = "get balances"
+
+[node name="btn_get_all_balances_sync" type="Button" parent="TabContainer/Balance"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 135.0
+offset_right = 262.0
+offset_bottom = 183.0
+text = "get balances sync"
+
+[node name="btn_get_balance_sync" type="Button" parent="TabContainer/Balance"]
+layout_mode = 0
+offset_left = 937.0
+offset_top = 133.0
+offset_right = 1111.0
+offset_bottom = 181.0
+text = "get balance sync"
+
+[node name="btn_get_total_supply_sync" type="Button" parent="TabContainer/Balance"]
+layout_mode = 0
+offset_left = 292.0
+offset_top = 134.0
+offset_right = 481.0
+offset_bottom = 182.0
+text = "get total supply"
+
+[node name="btn_get_coins_sync" type="Button" parent="TabContainer/Balance"]
+layout_mode = 0
+offset_left = 509.0
+offset_top = 134.0
+offset_right = 707.0
+offset_bottom = 182.0
+text = "get coins"
+
+[node name="result" type="RichTextLabel" parent="TabContainer/Balance"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 229.0
+offset_right = 1106.0
+offset_bottom = 564.0
+
+[node name="scroll" type="ScrollContainer" parent="TabContainer/Balance/result"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Transaction" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+script = ExtResource("1_ck3nu")
+metadata/_tab_index = 2
+
+[node name="address_box" type="OptionButton" parent="TabContainer/Transaction"]
+offset_left = 27.0
+offset_top = 13.0
+offset_right = 1121.0
+offset_bottom = 56.0
+
+[node name="btn_send_with_sponser" type="Button" parent="TabContainer/Transaction"]
+layout_mode = 0
+offset_left = 866.0
+offset_top = 192.0
+offset_right = 1120.0
+offset_bottom = 240.0
+text = "Send With Sponser"
+
+[node name="btn_request_faucet" type="Button" parent="TabContainer/Transaction"]
+layout_mode = 0
+offset_left = 865.0
+offset_top = 70.0
+offset_right = 1119.0
+offset_bottom = 118.0
+text = "Request Faucet"
+
+[node name="btn_load" type="Button" parent="TabContainer/Transaction"]
+layout_mode = 0
+offset_left = 866.0
+offset_top = 132.0
+offset_right = 1120.0
+offset_bottom = 180.0
+text = "Load"
+
+[node name="btn_send" type="Button" parent="TabContainer/Transaction"]
+layout_mode = 0
+offset_left = 726.0
+offset_top = 133.0
+offset_right = 833.0
+offset_bottom = 179.0
 text = "send"
 
-[node name="txt_amount" type="TextEdit" parent="TabContainer/Balances"]
+[node name="txt_amount" type="TextEdit" parent="TabContainer/Transaction"]
 layout_mode = 0
-offset_left = 22.0
-offset_top = 124.0
-offset_right = 711.0
-offset_bottom = 171.0
+offset_left = 25.0
+offset_top = 133.0
+offset_right = 714.0
+offset_bottom = 180.0
 placeholder_text = "Enter Amount"
 
-[node name="txt_address" type="TextEdit" parent="TabContainer/Balances"]
+[node name="txt_recipient_address" type="TextEdit" parent="TabContainer/Transaction"]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 9.0
-offset_right = 834.0
-offset_bottom = 56.0
-placeholder_text = "Enter Address"
-
-[node name="txt_recipient_address" type="TextEdit" parent="TabContainer/Balances"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 65.0
-offset_right = 833.0
-offset_bottom = 112.0
+offset_left = 25.0
+offset_top = 71.0
+offset_right = 835.0
+offset_bottom = 118.0
 placeholder_text = "Enter Recipient Address"
 
-[node name="txt_sponser_address" type="TextEdit" parent="TabContainer/Balances"]
+[node name="txt_sponser_address" type="TextEdit" parent="TabContainer/Transaction"]
 layout_mode = 0
-offset_left = 23.0
-offset_top = 184.0
-offset_right = 833.0
-offset_bottom = 231.0
+offset_left = 25.0
+offset_top = 194.0
+offset_right = 835.0
+offset_bottom = 241.0
 placeholder_text = "Enter Sponser Address"
 
-[node name="result" type="RichTextLabel" parent="TabContainer/Balances"]
+[node name="result" type="RichTextLabel" parent="TabContainer/Transaction"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 256.0
 offset_right = 1119.0
 offset_bottom = 594.0
 
-[connection signal="pressed" from="TabContainer/Balances/btn_send_with_sponser" to="TabContainer/Balances" method="_on_btn_send_with_sponser_pressed"]
-[connection signal="pressed" from="TabContainer/Balances/btn_request_faucet" to="TabContainer/Balances" method="_on_btn_request_faucet_pressed"]
-[connection signal="pressed" from="TabContainer/Balances/btn_load" to="TabContainer/Balances" method="_on_btn_load_pressed"]
-[connection signal="pressed" from="TabContainer/Balances/btn_send" to="TabContainer/Balances" method="_on_btn_send_pressed"]
+[node name="scroll" type="ScrollContainer" parent="TabContainer/Transaction/result"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Nfts" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="Multisig" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[connection signal="pressed" from="TabContainer/Wallets/import_mnemonic" to="TabContainer/Wallets" method="_on_import_mnemonic_pressed"]
+[connection signal="pressed" from="TabContainer/Wallets/import_private_key" to="TabContainer/Wallets" method="_on_import_private_key_pressed"]
+[connection signal="pressed" from="TabContainer/Wallets/create_custom" to="TabContainer/Wallets" method="_on_create_custom_pressed"]
+[connection signal="pressed" from="TabContainer/Wallets/generate" to="TabContainer/Wallets" method="_on_generate_pressed"]
+[connection signal="pressed" from="TabContainer/Wallets/load" to="TabContainer/Wallets" method="_on_load_pressed"]
+[connection signal="pressed" from="TabContainer/Balance/btn_get_balances" to="TabContainer/Balance" method="_on_btn_get_balances_pressed"]
+[connection signal="pressed" from="TabContainer/Balance/btn_get_all_balances_sync" to="TabContainer/Balance" method="_on_btn_get_all_balances_sync_pressed"]
+[connection signal="pressed" from="TabContainer/Balance/btn_get_balance_sync" to="TabContainer/Balance" method="_on_btn_get_balance_sync_pressed"]
+[connection signal="pressed" from="TabContainer/Balance/btn_get_total_supply_sync" to="TabContainer/Balance" method="_on_btn_get_total_supply_sync_pressed"]
+[connection signal="pressed" from="TabContainer/Balance/btn_get_coins_sync" to="TabContainer/Balance" method="_on_btn_get_coins_sync_pressed"]
+[connection signal="pressed" from="TabContainer/Transaction/btn_send_with_sponser" to="TabContainer/Transaction" method="_on_btn_send_with_sponser_pressed"]
+[connection signal="pressed" from="TabContainer/Transaction/btn_request_faucet" to="TabContainer/Transaction" method="_on_btn_request_faucet_pressed"]
+[connection signal="pressed" from="TabContainer/Transaction/btn_load" to="TabContainer/Transaction" method="_on_btn_load_pressed"]
+[connection signal="pressed" from="TabContainer/Transaction/btn_send" to="TabContainer/Transaction" method="_on_btn_send_pressed"]

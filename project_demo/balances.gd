@@ -2,14 +2,28 @@ extends TabBar
 
 var address = ""
 var sdk = SuiSDK.new()
-		
+var wallets = []
+
+func _ready():
+	self.load_wallets()
+
+func  load_wallets():
+	wallets = sdk.getWallets()
+	var box= get_node("address_box")
+	box.clear()
+	for i in wallets.size():
+		var wallet = wallets[i]
+		box.add_item(wallet.get_address(),i)
+
 func _on_btn_send_with_sponser_pressed() -> void:
-	var sender = get_node("txt_address").text
+	var address = get_node("address_box").get_selected_id()
 	var recipient = get_node("txt_recipient_address").text
 	var sponser_address = get_node("txt_recipient_address").text
 	var amount = get_node("txt_amount").text
-	if sender == "":
-		get_node("result").text = "Plase input your address"
+	
+	if address == -1:
+		get_node("result").text = "Plase enter your address"
+	var sender = get_node("address_box").get_item_text(address)
 	if recipient == "":
 		get_node("result").text = "Plase enter recipient address"
 	if sponser_address == "":
@@ -24,10 +38,11 @@ func _on_btn_send_with_sponser_pressed() -> void:
 
 
 func _on_btn_load_pressed() -> void:
-	if get_node("txt_address").text == "":
+	var address = get_node("address_box").get_selected_id()
+	if address == -1:
 		get_node("result").text = "Plase enter your address"
-	if get_node("txt_address").text != "":
-		var balances = sdk.getBalances(get_node("txt_address").text)
+	else:
+		var balances = sdk.getBalances(get_node("address_box").get_item_text(address))
 		var res=""
 		for balance in balances:
 			res = res+ "Balance: " + str(balance.get_total_balance()) + "\n"
@@ -37,19 +52,22 @@ func _on_btn_load_pressed() -> void:
 
 
 func _on_btn_request_faucet_pressed() -> void:
-	if get_node("txt_address").text == "":
+	var address = get_node("address_box").get_selected_id()
+	if address == -1:
 		get_node("result").text = "Plase enter your address"
-	if get_node("txt_address").text != "":
-		var result = sdk.requestTokensFromFaucet(get_node("txt_address").text)
-		self.get_node("result").text=result
+	else:
+		var result = sdk.requestTokensFromFaucet(get_node("address_box").get_item_text(address))
+		self.get_node("result").text = result
 
 
 func _on_btn_send_pressed() -> void:
-	var sender = get_node("txt_address").text
+	var address = get_node("address_box").get_selected_id()
 	var recipient = get_node("txt_recipient_address").text
 	var amount = get_node("txt_amount").text
-	if sender == "":
-		get_node("result").text = "Plase input your address"
+	
+	if address == -1:
+		get_node("result").text = "Plase enter your address"
+	var sender = get_node("address_box").get_item_text(address)
 	if recipient == "":
 		get_node("result").text = "Plase enter recipient address"
 	if amount == "":
