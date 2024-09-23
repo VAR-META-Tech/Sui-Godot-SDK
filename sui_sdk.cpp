@@ -22,17 +22,24 @@ void print_wallet(const Wallet *wallet) {
 }
 
 void SuiSDK::_bind_methods() {
+	/**
+	 * Balance
+	 */
 	ClassDB::bind_method(D_METHOD("getBalances", "address"), &SuiSDK::getBalances);
 	ClassDB::bind_method(D_METHOD("getAllBalancesSync", "address"), &SuiSDK::getAllBalancesSync);
 	ClassDB::bind_method(D_METHOD("getBalanceSync", "address"), &SuiSDK::getBalanceSync);
 	ClassDB::bind_method(D_METHOD("getTotalSupplySync"), &SuiSDK::getTotalSupplySync);
 	ClassDB::bind_method(D_METHOD("getCoinsSync", "address"), &SuiSDK::getCoinsSync);
+
+	/**
+	 * Wallet
+	 */
 	ClassDB::bind_method(D_METHOD("getWallets"), &SuiSDK::getWallets);
-	ClassDB::bind_method(D_METHOD("generateWallet"), &SuiSDK::generateWallet);
+	ClassDB::bind_method(D_METHOD("generateWallet", "key_scheme", "word_length"), &SuiSDK::generateWallet);
 	ClassDB::bind_method(D_METHOD("generateAndAddKey"), &SuiSDK::generateAndAddKey);
-	ClassDB::bind_method(D_METHOD("getWalletFromAddress"), &SuiSDK::getWalletFromAddress);
-	ClassDB::bind_method(D_METHOD("importFromPrivateKey"), &SuiSDK::importFromPrivateKey);
-	ClassDB::bind_method(D_METHOD("importFromMnemonic"), &SuiSDK::importFromMnemonic);
+	ClassDB::bind_method(D_METHOD("getWalletFromAddress", "address"), &SuiSDK::getWalletFromAddress);
+	ClassDB::bind_method(D_METHOD("importFromPrivateKey", "key_base64"), &SuiSDK::importFromPrivateKey);
+	ClassDB::bind_method(D_METHOD("importFromMnemonic", "mnemonic"), &SuiSDK::importFromMnemonic);
 
 	// ClassDB::bind_method(D_METHOD("set_amplitude", "p_amplitude"), &GDExample::set_amplitude);
 	// ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "amplitude"), "set_amplitude", "get_amplitude");

@@ -11,18 +11,23 @@ Ref<WalletWrapper> toWalletWrapper(const WalletStruct &wallet_struct) {
 	return wrapper;
 }
 
+Ref<WalletWrapper> makeWalletStruct(Wallet *wallet) {
+	WalletStruct walletStructItem;
+	walletStructItem.address = wallet->address;
+	walletStructItem.mnemonic = wallet->mnemonic;
+	walletStructItem.public_base64_key = wallet->public_base64_key;
+	walletStructItem.private_key = wallet->private_key;
+	walletStructItem.key_scheme = wallet->key_scheme;
+
+	return toWalletWrapper(walletStructItem);
+}
+
 TypedArray<WalletWrapper> SuiWallet::getWallets() {
 	WalletList wallet_list = get_wallets();
 	TypedArray<WalletWrapper> wallets;
 	for (int i = 0; i < wallet_list.length; i++) {
-		WalletStruct walletStructItem;
-		walletStructItem.address = wallet_list.wallets[i].address;
-		walletStructItem.mnemonic = wallet_list.wallets[i].mnemonic;
-		walletStructItem.public_base64_key = wallet_list.wallets[i].public_base64_key;
-		walletStructItem.private_key = wallet_list.wallets[i].private_key;
-		walletStructItem.key_scheme = wallet_list.wallets[i].key_scheme;
-
-		wallets.append(toWalletWrapper(walletStructItem));
+		Wallet *wallet = &wallet_list.wallets[i];
+		wallets.append(makeWalletStruct(wallet));
 	}
 
 	free_wallet_list(wallet_list);
@@ -34,39 +39,22 @@ void SuiWallet::freeWalletList(WalletList wallet_list) {
 }
 
 Ref<WalletWrapper> SuiWallet::generateWallet(String key_scheme, String word_length) {
-	Wallet *wallet = generate_wallet((char *)&key_scheme, (char *)&word_length);
-	WalletStruct walletStructItem;
-	walletStructItem.address = wallet->address;
-	walletStructItem.mnemonic = wallet->mnemonic;
-	walletStructItem.public_base64_key = wallet->public_base64_key;
-	walletStructItem.private_key = wallet->private_key;
-	walletStructItem.key_scheme = wallet->key_scheme;
-
-	return toWalletWrapper(walletStructItem);
+	Wallet *wallet = generate_wallet(key_scheme.utf8().get_data(), word_length.utf8().get_data());
+	return makeWalletStruct(wallet);
 }
 
 Ref<WalletWrapper> SuiWallet::generateAndAddKey() {
 	Wallet *wallet = generate_and_add_key();
-	WalletStruct walletStructItem;
-	walletStructItem.address = wallet->address;
-	walletStructItem.mnemonic = wallet->mnemonic;
-	walletStructItem.public_base64_key = wallet->public_base64_key;
-	walletStructItem.private_key = wallet->private_key;
-	walletStructItem.key_scheme = wallet->key_scheme;
-
-	return toWalletWrapper(walletStructItem);
+	return makeWalletStruct(wallet);
 }
 
 Ref<WalletWrapper> SuiWallet::getWalletFromAddress(String address) {
-	Wallet *wallet = get_wallet_from_address((char *)&address);
-	WalletStruct walletStructItem;
-	walletStructItem.address = wallet->address;
-	walletStructItem.mnemonic = wallet->mnemonic;
-	walletStructItem.public_base64_key = wallet->public_base64_key;
-	walletStructItem.private_key = wallet->private_key;
-	walletStructItem.key_scheme = wallet->key_scheme;
-
-	return toWalletWrapper(walletStructItem);
+	Wallet *wallet = get_wallet_from_address(address.utf8().get_data());
+	if (!wallet) {
+		std::cout << "Wallet not found" << '\n';
+		return NULL;
+	}
+	return makeWalletStruct(wallet);
 }
 
 void SuiWallet::freeWallet(Wallet *wallet) {
@@ -74,10 +62,10 @@ void SuiWallet::freeWallet(Wallet *wallet) {
 }
 
 void SuiWallet::importFromPrivateKey(String key_base64) {
-	import_from_private_key((char *)&key_base64);
+	import_from_private_key(key_base64.utf8().get_data());
 }
 
 String SuiWallet::importFromMnemonic(String mnemonic) {
-	char *address = import_from_mnemonic((char *)&mnemonic);
+	char *address = import_from_mnemonic(mnemonic.utf8().get_data());
 	return address;
 }
