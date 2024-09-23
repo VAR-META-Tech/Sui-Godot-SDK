@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Test"
+config/name="sui_demo"
 run/main_scene="res://node.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
