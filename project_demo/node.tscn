@@ -1,83 +1,105 @@
-[gd_scene load_steps=3 format=3 uid="uid://ttjdfr1sbut2"]
+[gd_scene load_steps=2 format=3 uid="uid://drvhrb6de53ls"]
 
-[ext_resource type="Script" path="res://sui.gd" id="1_44u3d"]
-
-[sub_resource type="GDScript" id="GDScript_tok6u"]
-script/source = "extends Button
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	#print($ButtonGetWallets)
-	#$ButtonGetWallets.connect(\"pressed\", Callable(self, \"onGetWallets\"))
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func onGetWallets():
-	var sdk = SuiSDK.new()
-	var wallets = sdk.getWallets()
-	
-	for wallet in wallets:
-		print(wallet.get_address())
-		print(wallet.get_mnemonic())
-		print(wallet.get_public_base64_key())
-		print(wallet.get_private_key())
-		print(wallet.get_key_scheme())
-"
+[ext_resource type="Script" path="res://node.gd" id="1_x2qqd"]
 
 [node name="Node" type="Node"]
-script = ExtResource("1_44u3d")
+script = ExtResource("1_x2qqd")
+
+[node name="btn_get_balances" type="Button" parent="."]
+offset_left = 581.0
+offset_top = 135.0
+offset_right = 835.0
+offset_bottom = 183.0
+text = "get balances"
+
+[node name="btn_get_all_balances_sync" type="Button" parent="."]
+offset_left = 302.0
+offset_top = 135.0
+offset_right = 556.0
+offset_bottom = 183.0
+text = "get balances sync"
+
+[node name="btn_get_balance_sync" type="Button" parent="."]
+offset_left = 857.0
+offset_top = 133.0
+offset_right = 1111.0
+offset_bottom = 181.0
+text = "get balance sync"
+
+[node name="btn_get_total_supply_sync" type="Button" parent="."]
+offset_left = 304.0
+offset_top = 214.0
+offset_right = 558.0
+offset_bottom = 262.0
+text = "get total supply"
+
+[node name="btn_get_coins_sync" type="Button" parent="."]
+offset_left = 585.0
+offset_top = 213.0
+offset_right = 839.0
+offset_bottom = 261.0
+text = "get coins"
+
+[node name="txt_address" type="TextEdit" parent="."]
+offset_left = 298.0
+offset_top = 40.0
+offset_right = 1108.0
+offset_bottom = 103.0
+placeholder_text = "Address"
+
+[node name="result" type="RichTextLabel" parent="."]
+offset_left = 198.0
+offset_top = 379.0
+offset_right = 1148.0
+offset_bottom = 636.0
 
 [node name="ButtonGetWallets" type="Button" parent="."]
-offset_left = 105.0
-offset_top = 59.0
-offset_right = 285.0
-offset_bottom = 101.0
-toggle_mode = true
-button_pressed = true
-action_mode = 0
-text = "Get Wallets"
-script = SubResource("GDScript_tok6u")
+offset_left = 1.0
+offset_top = 105.0
+offset_right = 194.0
+offset_bottom = 147.0
+text = "get wallets"
 
 [node name="ButtonGenWallet" type="Button" parent="."]
-offset_left = 107.0
-offset_top = 111.0
-offset_right = 288.0
-offset_bottom = 145.0
-text = "Gen Wallet"
+offset_left = -1.0
+offset_top = 163.0
+offset_right = 195.0
+offset_bottom = 203.0
+text = "gen wallet"
 
 [node name="ButtonGenerateAndAddKey" type="Button" parent="."]
-offset_left = 109.0
-offset_top = 156.0
-offset_right = 283.0
-offset_bottom = 188.0
-text = "Gen & Add Key"
+offset_left = 2.0
+offset_top = 216.0
+offset_right = 196.0
+offset_bottom = 257.0
+text = "generate and add key"
 
 [node name="ButtonGetWalletFromAddress" type="Button" parent="."]
-offset_left = 109.0
-offset_top = 204.0
-offset_right = 309.0
-offset_bottom = 235.0
-text = "Get Wallet From Address"
+offset_left = 3.0
+offset_top = 272.0
+offset_right = 193.0
+offset_bottom = 313.0
+text = "get from address"
 
 [node name="ButtonImportFromPrivateKey" type="Button" parent="."]
-offset_left = 111.0
-offset_top = 256.0
-offset_right = 308.0
-offset_bottom = 287.0
-text = "Import From Private Key"
+offset_left = 3.0
+offset_top = 327.0
+offset_right = 196.0
+offset_bottom = 368.0
+text = "import from private key"
 
 [node name="ButtonImportFromMnemonic" type="Button" parent="."]
-offset_left = 115.0
-offset_top = 307.0
-offset_right = 307.0
-offset_bottom = 338.0
-text = "Import From Mnemonic"
+offset_top = 44.0
+offset_right = 190.0
+offset_bottom = 89.0
+text = "import from mnemonic"
 
+[connection signal="pressed" from="btn_get_balances" to="." method="_on_btn_get_balances_pressed"]
+[connection signal="pressed" from="btn_get_all_balances_sync" to="." method="_on_btn_get_all_balances_sync_pressed"]
+[connection signal="pressed" from="btn_get_balance_sync" to="." method="_on_btn_get_balance_sync_pressed"]
+[connection signal="pressed" from="btn_get_total_supply_sync" to="." method="_on_btn_get_total_supply_sync_pressed"]
+[connection signal="pressed" from="btn_get_coins_sync" to="." method="_on_btn_get_coins_sync_pressed"]
+[connection signal="text_changed" from="txt_address" to="." method="_on_txt_address_text_changed"]
 [connection signal="pressed" from="ButtonGetWallets" to="." method="_on_button_get_wallets_pressed"]
 [connection signal="pressed" from="ButtonGenWallet" to="." method="_on_button_gen_wallet_pressed"]
 [connection signal="pressed" from="ButtonGenerateAndAddKey" to="." method="_on_button_generate_and_add_key_pressed"]
