@@ -49,6 +49,9 @@ void SuiSDK::_bind_methods()
 	/**
 	 * Transaction
 	 */
+	ClassDB::bind_method(D_METHOD("signTransaction", "sender_address", "recipient_address", "amount"), &SuiSDK::signTransaction);
+	ClassDB::bind_method(D_METHOD("programmableTransactionAllowSponser", "sender_address", "recipient_address", "amount", "sponser_address"), &SuiSDK::programmableTransactionAllowSponser);
+	ClassDB::bind_method(D_METHOD("requestTokensFromFaucet", "address"), &SuiSDK::requestTokensFromFaucet);
 
 	/**
 	 * Wallet

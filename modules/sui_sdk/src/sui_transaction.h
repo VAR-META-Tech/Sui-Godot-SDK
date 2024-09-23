@@ -2,15 +2,15 @@
 #define GODOT_SUI_TRANSACTION_H
 
 #include "../header/sui_lib.h"
+#include "core/object/class_db.h"
 
-class SuiTransaction {
+class SuiTransaction
+{
 protected:
-	// static void _bind_methods();
-
 public:
-	char *signTransaction(const char *sender, const char *recipient, uint64_t amount);
-	char *programmableTransactionAllowSponser(const char *sender_address, const char *recipient_address, uint64_t amount, const char *sponser_address);
-	const char *requestTokensFromFaucet(const char *address_str);
+	String signTransaction(String sender, String recipient, unsigned long long int amount);
+	String programmableTransactionAllowSponser(String sender_address, String recipient_address, unsigned long long int amount, String sponser_address);
+	String requestTokensFromFaucet(String address_str);
 };
 
 #endif
