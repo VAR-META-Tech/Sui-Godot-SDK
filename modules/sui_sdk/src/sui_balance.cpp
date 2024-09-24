@@ -24,7 +24,7 @@ TypedArray<BalanceWrapper> SuiBalance::getBalances(String address) {
 	TypedArray<BalanceWrapper> balances;
 	for (int i = 0; i < balance_list.length; i++) {
 		BalanceStruct balanceItem;
-		balanceItem.total_balance = *balance_list.balances[i].total_balance;
+		balanceItem.total_balance = String::num_uint64(balance_list.balances[i].total_balance[0]);
 		balanceItem.coin_type = balance_list.balances[i].coin_type;
 		balanceItem.coin_object_count = balance_list.balances[i].coin_object_count;
 
@@ -40,7 +40,7 @@ TypedArray<BalanceWrapper> SuiBalance::getAllBalancesSync(String address) {
 	TypedArray<BalanceWrapper> balances;
 	for (int i = 0; i < balance_list.length; i++) {
 		BalanceStruct balanceItem;
-		balanceItem.total_balance = *balance_list.balances[i].total_balance;
+		balanceItem.total_balance = String::num_uint64(balance_list.balances[i].total_balance[0]);
 		balanceItem.coin_type = balance_list.balances[i].coin_type;
 		balanceItem.coin_object_count = balance_list.balances[i].coin_object_count;
 
@@ -56,7 +56,7 @@ Ref<BalanceWrapper> SuiBalance::getBalanceSync(String address) {
 	BalanceStruct balanceStructItem;
 	balanceStructItem.coin_object_count = balance.coin_object_count;
 	balanceStructItem.coin_type = balance.coin_type;
-	balanceStructItem.total_balance = (unsigned long long int)balance.total_balance;
+	balanceStructItem.total_balance = String::num_uint64(balance.total_balance[0]);
 	free_balance(balance);
 	return toBalanceWrapper(balanceStructItem);
 }
@@ -71,11 +71,11 @@ TypedArray<CoinWrapper> SuiBalance::getCoinsSync(String address) {
 	TypedArray<CoinWrapper> coins;
 	for (int i = 0; i < coin_list.length; i++) {
 		CCoinStruct coin;
-		coin.balance = coin_list.coins[i].balance;
+		coin.balance = String::num_uint64(coin_list.coins[i].balance);
 		coin.coin_type = coin_list.coins[i].coin_type;
 		coin.coin_object_id = coin_list.coins[i].coin_object_id;
 		coin.digest = coin_list.coins[i].digest;
-		coin.version = coin_list.coins[i].version;
+		coin.version = String::num_uint64(coin_list.coins[i].version);
 		coin.previous_transaction = coin_list.coins[i].previous_transaction;
 
 		coins.append(toCoinWrapper(coin));

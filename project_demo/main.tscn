@@ -10,10 +10,9 @@
 [node name="TabContainer" type="TabContainer" parent="."]
 offset_right = 1153.0
 offset_bottom = 648.0
-current_tab = 3
+current_tab = 0
 
 [node name="Wallets" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 script = ExtResource("1_aiqld")
 metadata/_tab_index = 0
@@ -264,17 +263,20 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Nfts" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("4_pdyft")
 metadata/_tab_index = 3
 
 [node name="address_box" type="OptionButton" parent="TabContainer/Nfts"]
+layout_mode = 0
 offset_left = 43.0
 offset_top = 29.0
 offset_right = 1103.0
 offset_bottom = 68.0
 
 [node name="address" type="TextEdit" parent="TabContainer/Nfts"]
+layout_mode = 0
 offset_left = 279.0
 offset_top = 141.0
 offset_right = 729.0
@@ -282,6 +284,7 @@ offset_bottom = 180.0
 placeholder_text = "Enter Address"
 
 [node name="nft_id" type="TextEdit" parent="TabContainer/Nfts"]
+layout_mode = 0
 offset_left = 44.0
 offset_top = 141.0
 offset_right = 260.0
@@ -289,6 +292,7 @@ offset_bottom = 180.0
 placeholder_text = "Enter NFT ID"
 
 [node name="nft_uri" type="TextEdit" parent="TabContainer/Nfts"]
+layout_mode = 0
 offset_left = 647.0
 offset_top = 80.0
 offset_right = 918.0
@@ -296,6 +300,7 @@ offset_bottom = 119.0
 placeholder_text = "URI"
 
 [node name="nft_description" type="TextEdit" parent="TabContainer/Nfts"]
+layout_mode = 0
 offset_left = 339.0
 offset_top = 80.0
 offset_right = 627.0
@@ -320,6 +325,7 @@ text = "Send
 "
 
 [node name="btn_load" type="Button" parent="TabContainer/Nfts"]
+layout_mode = 0
 offset_left = 930.0
 offset_top = 142.0
 offset_right = 1101.0

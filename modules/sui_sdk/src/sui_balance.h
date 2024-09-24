@@ -10,15 +10,15 @@
 struct BalanceStruct {
 	String coin_type;
 	long long coin_object_count;
-	unsigned long long int total_balance;
+	String total_balance;
 };
 
 struct CCoinStruct {
 	String coin_type;
 	String coin_object_id;
-	uint64_t version;
+	String version;
 	String digest;
-	uint64_t balance;
+	String balance;
 	String previous_transaction;
 };
 
@@ -28,7 +28,7 @@ class BalanceWrapper : public RefCounted {
 public:
 	String coin_type;
 	long long coin_object_count;
-	unsigned long long int total_balance;
+	String total_balance;
 
 	void set_coin_type(String p_coin_type) {
 		coin_type = p_coin_type;
@@ -45,11 +45,11 @@ public:
 		return coin_object_count;
 	}
 
-	void set_total_balance(unsigned long long int p_total_balance) {
+	void set_total_balance(String p_total_balance) {
 		total_balance = p_total_balance;
 	}
 
-	unsigned long long int get_total_balance() const {
+	String get_total_balance() const {
 		return total_balance;
 	}
 
@@ -69,9 +69,9 @@ class CoinWrapper : public RefCounted {
 public:
 	String coin_type;
 	String coin_object_id;
-	unsigned long long int version;
+	String version;
 	String digest;
-	unsigned long long int balance;
+	String balance;
 	String previous_transaction;
 
 	void set_coin_type(String p_coin_type) { coin_type = p_coin_type; }
@@ -81,17 +81,17 @@ public:
 
 	String get_coin_object_id() const { return coin_object_id; }
 
-	void set_version(uint64_t p_version) { version = p_version; }
+	void set_version(String p_version) { version = p_version; }
 
-	uint64_t get_version() const { return version; }
+	String get_version() const { return version; }
 
 	void set_digest(String p_digest) { digest = p_digest; }
 
 	String get_digest() const { return digest; }
 
-	void set_balance(uint64_t p_balance) { balance = p_balance; }
+	void set_balance(String p_balance) { balance = p_balance; }
 
-	uint64_t get_balance() const { return balance; }
+	String get_balance() const { return balance; }
 
 	void set_previous_transaction(String p_previous_transaction) { previous_transaction = p_previous_transaction; }
 
