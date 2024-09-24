@@ -44,8 +44,8 @@ func _on_create_custom_pressed() -> void:
 func _on_generate_pressed() -> void:
 	var wallet = sdk.generateAndAddKey()
 	var res = ""
-	res = res +  "Balance: " + wallet.get_address() + "\n"
-	res = res +  "Mnemonic: " + wallet.get_address() + "\n"
+	res = res +  "Address: " + wallet.get_address() + "\n"
+	res = res +  "Mnemonic: " + wallet.get_mnemonic() + "\n"
 	res = res +  "public key: " + wallet.get_public_base64_key() + "\n"
 	res = res +  "private key: " + wallet.get_private_key() + "\n"
 	res = res +  "scheme key: " + wallet.get_key_scheme() + "\n\n"
@@ -57,8 +57,8 @@ func _on_load_pressed() -> void:
 	wallets = sdk.getWallets()
 	var res = ""
 	for wallet in wallets:
-		res = res +  "Balance: " + wallet.get_address() + "\n"
-		res = res +  "Mnemonic: " + wallet.get_address() + "\n"
+		res = res +  "Address: " + wallet.get_address() + "\n"
+		res = res +  "Mnemonic: " + wallet.get_mnemonic() + "\n"
 		res = res +  "public key: " + wallet.get_public_base64_key() + "\n"
 		res = res +  "private key: " + wallet.get_private_key() + "\n"
 		res = res +  "scheme key: " + wallet.get_key_scheme() + "\n\n"

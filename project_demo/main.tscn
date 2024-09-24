@@ -1,17 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://btvwx1xqjgghb"]
+[gd_scene load_steps=5 format=3 uid="uid://btvwx1xqjgghb"]
 
 [ext_resource type="Script" path="res://wallets.gd" id="1_aiqld"]
 [ext_resource type="Script" path="res://balances.gd" id="1_ck3nu"]
 [ext_resource type="Script" path="res://balance.gd" id="2_ah0r3"]
+[ext_resource type="Script" path="res://nfts.gd" id="4_pdyft"]
 
 [node name="Main" type="Node2D"]
 
 [node name="TabContainer" type="TabContainer" parent="."]
 offset_right = 1153.0
 offset_bottom = 648.0
-current_tab = 0
+current_tab = 3
 
 [node name="Wallets" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("1_aiqld")
 metadata/_tab_index = 0
@@ -262,9 +264,89 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Nfts" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
+script = ExtResource("4_pdyft")
 metadata/_tab_index = 3
+
+[node name="address_box" type="OptionButton" parent="TabContainer/Nfts"]
+offset_left = 43.0
+offset_top = 29.0
+offset_right = 1103.0
+offset_bottom = 68.0
+
+[node name="address" type="TextEdit" parent="TabContainer/Nfts"]
+offset_left = 279.0
+offset_top = 141.0
+offset_right = 729.0
+offset_bottom = 180.0
+placeholder_text = "Enter Address"
+
+[node name="nft_id" type="TextEdit" parent="TabContainer/Nfts"]
+offset_left = 44.0
+offset_top = 141.0
+offset_right = 260.0
+offset_bottom = 180.0
+placeholder_text = "Enter NFT ID"
+
+[node name="nft_uri" type="TextEdit" parent="TabContainer/Nfts"]
+offset_left = 647.0
+offset_top = 80.0
+offset_right = 918.0
+offset_bottom = 119.0
+placeholder_text = "URI"
+
+[node name="nft_description" type="TextEdit" parent="TabContainer/Nfts"]
+offset_left = 339.0
+offset_top = 80.0
+offset_right = 627.0
+offset_bottom = 119.0
+placeholder_text = "Description"
+
+[node name="nft_name" type="TextEdit" parent="TabContainer/Nfts"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 81.0
+offset_right = 324.0
+offset_bottom = 120.0
+placeholder_text = "Name"
+
+[node name="btn_send" type="Button" parent="TabContainer/Nfts"]
+layout_mode = 0
+offset_left = 747.0
+offset_top = 142.0
+offset_right = 923.0
+offset_bottom = 180.0
+text = "Send
+"
+
+[node name="btn_load" type="Button" parent="TabContainer/Nfts"]
+offset_left = 930.0
+offset_top = 142.0
+offset_right = 1101.0
+offset_bottom = 181.0
+text = "load"
+
+[node name="btn_mint" type="Button" parent="TabContainer/Nfts"]
+layout_mode = 0
+offset_left = 932.0
+offset_top = 79.0
+offset_right = 1103.0
+offset_bottom = 118.0
+text = "Mint"
+
+[node name="result" type="RichTextLabel" parent="TabContainer/Nfts"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 234.0
+offset_right = 1098.0
+offset_bottom = 564.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Nfts/result"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 249.0
+offset_right = 91.0
+offset_bottom = 289.0
 
 [node name="Multisig" type="TabBar" parent="TabContainer"]
 visible = false
@@ -285,3 +367,6 @@ metadata/_tab_index = 4
 [connection signal="pressed" from="TabContainer/Transaction/btn_request_faucet" to="TabContainer/Transaction" method="_on_btn_request_faucet_pressed"]
 [connection signal="pressed" from="TabContainer/Transaction/btn_load" to="TabContainer/Transaction" method="_on_btn_load_pressed"]
 [connection signal="pressed" from="TabContainer/Transaction/btn_send" to="TabContainer/Transaction" method="_on_btn_send_pressed"]
+[connection signal="pressed" from="TabContainer/Nfts/btn_send" to="TabContainer/Nfts" method="_on_btn_send_pressed"]
+[connection signal="pressed" from="TabContainer/Nfts/btn_load" to="TabContainer/Nfts" method="_on_btn_load_pressed"]
+[connection signal="pressed" from="TabContainer/Nfts/btn_mint" to="TabContainer/Nfts" method="_on_btn_mint_pressed"]
