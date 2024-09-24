@@ -50,7 +50,11 @@ namespace godot
 				String name,
 				String description,
 				String uri) { return SuiNfts::mintNft(package_id, sender_address, name, description, uri); };
-		
+		String transferNft(
+				String package_id,
+				String sender_address,
+				String nft_id,
+				String recipient_address) { return SuiNfts::transferNft(package_id, sender_address, nft_id, recipient_address); };
 
 		/**
 		 * Transaction
