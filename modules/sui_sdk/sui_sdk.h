@@ -43,6 +43,14 @@ namespace godot
 		/**
 		 * NFTs
 		 */
+		TypedArray<WalletObjectWrapper> getWalletObjects(String address, String object_type) { return SuiNfts::getWalletObjects(address, object_type); };
+		String mintNft(
+				String package_id,
+				String sender_address,
+				String name,
+				String description,
+				String uri) { return SuiNfts::mintNft(package_id, sender_address, name, description, uri); };
+		
 
 		/**
 		 * Transaction
