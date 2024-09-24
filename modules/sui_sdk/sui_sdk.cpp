@@ -47,6 +47,9 @@ void SuiSDK::_bind_methods()
 	/**
 	 * NFTs
 	 */
+	ClassDB::bind_method(D_METHOD("getWalletObjects", "address", "object_type"), &SuiSDK::getWalletObjects);
+	ClassDB::bind_method(D_METHOD("mintNft", "package_id", "sender_address", "name", "description", "uri"), &SuiSDK::mintNft);
+	ClassDB::bind_method(D_METHOD("transferNft", "package_id", "sender_address", "nft_id", "recipient_address"), &SuiSDK::transferNft);
 
 	/**
 	 * Transaction
