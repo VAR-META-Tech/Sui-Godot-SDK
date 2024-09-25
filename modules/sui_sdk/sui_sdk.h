@@ -39,6 +39,10 @@ namespace godot
 		/**
 		 * Multisig
 		 */
+		Ref<MulSigWrapper> getOrCreateMultisig(TypedArray<String> addresses, TypedArray<uint8_t> weights, uint16_t threshold)
+		{
+			return SuiMultisig::getOrCreateMultisig(addresses, weights, threshold);
+		};
 
 		/**
 		 * NFTs
