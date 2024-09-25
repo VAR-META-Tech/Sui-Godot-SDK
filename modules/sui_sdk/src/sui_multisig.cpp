@@ -54,10 +54,16 @@ Ref<MulSigWrapper> SuiMultisig::getOrCreateMultisig(TypedArray<String> addresses
 	return makeMultiSigStruct(multiSig);
 }
 
-CU8Array SuiMultisig::createTransaction(const char *from_address,
-																				const char *to_address, uint64_t amount)
+TypedArray<uint8_t> SuiMultisig::createTransaction(String from_address, String to_address, uint64_t amount)
 {
-	return create_transaction(from_address, to_address, amount);
+	CU8Array tx = create_transaction(from_address.utf8(), to_address.utf8(), amount);
+	TypedArray<uint8_t> txArray;
+	for (size_t i = 0; i < tx.len; i++)
+	{
+		txArray.append(tx.data[i]);
+	}
+
+	return txArray;
 }
 
 const char *SuiMultisig::signAndExecuteTransaction(CU8Array multisig,
