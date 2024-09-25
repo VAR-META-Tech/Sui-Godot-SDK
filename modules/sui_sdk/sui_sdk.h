@@ -47,6 +47,10 @@ namespace godot
 		{
 			return SuiMultisig::createTransaction(from_address, to_address, amount);
 		};
+		String signAndExecuteTransaction(Ref<MulSigWrapper> multisig, TypedArray<uint8_t> tx, TypedArray<String> addresses)
+		{
+			return SuiMultisig::signAndExecuteTransaction(multisig, tx, addresses);
+		}
 
 		/**
 		 * NFTs

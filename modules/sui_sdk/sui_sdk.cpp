@@ -35,6 +35,7 @@ void SuiSDK::_bind_methods()
 	 */
 	ClassDB::bind_method(D_METHOD("getOrCreateMultisig", "addresses", "weights", "threshold"), &SuiSDK::getOrCreateMultisig);
 	ClassDB::bind_method(D_METHOD("createTransaction", "from_address", "to_address", "amount"), &SuiSDK::createTransaction);
+	ClassDB::bind_method(D_METHOD("signAndExecuteTransaction", "multisig", "tx", "addresses"), &SuiSDK::signAndExecuteTransaction);
 
 	/**
 	 * NFTs

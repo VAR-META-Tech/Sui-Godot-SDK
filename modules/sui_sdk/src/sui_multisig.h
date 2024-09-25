@@ -43,10 +43,7 @@ protected:
 public:
 	Ref<MulSigWrapper> getOrCreateMultisig(TypedArray<String> addresses, TypedArray<uint8_t> weights, uint16_t threshold);
 	TypedArray<uint8_t> createTransaction(String from_address, String to_address, uint64_t amount);
-	const char *signAndExecuteTransaction(
-			CU8Array multisig,
-			CU8Array tx,
-			CStringArray addresses);
+	String signAndExecuteTransaction(Ref<MulSigWrapper> multisig, TypedArray<uint8_t> tx, TypedArray<String> addresses);
 	void freeMultisig(MultiSig multisig);
 };
 
