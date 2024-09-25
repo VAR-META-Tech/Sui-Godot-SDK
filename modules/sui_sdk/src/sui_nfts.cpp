@@ -38,7 +38,7 @@ TypedArray<WalletObjectWrapper> SuiNfts::getWalletObjects(String address, String
 {
 	TypedArray<WalletObjectWrapper> walletObjects;
 	CSuiObjectDataArray wallet_objects = get_wallet_objects(address.utf8().get_data(), object_type.utf8().get_data());
-	if (wallet_objects.len == NULL || wallet_objects.len == 0)
+	if (wallet_objects.len == 0)
 	{
 		return walletObjects;
 	}
