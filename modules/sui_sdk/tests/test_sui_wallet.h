@@ -6,20 +6,24 @@
 
 #include "modules/sui_sdk/sui_sdk.h"
 
-namespace TestSuiWalletSDK {
+using namespace godot;
+namespace TestSuiWalletSDK
+{
 
-TEST_CASE("Get Wallets") {
-	SuiSDK suiSDK;
-	WalletList wallets = suiSDK.getWallets();
-	CHECK(wallets.wallets != NULL);
-}
+  TEST_CASE("Get Wallets")
+  {
+    SuiSDK suiSDK;
+    TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
+    CHECK(wallets.size() != (const int)0);
+  }
 
-TEST_CASE("Gen Wallet") {
-	SuiSDK suiSDK;
-	Wallet *wallet = suiSDK.generateWallet("ed25519", "word12");
-	CHECK(wallet->mnemonic != NULL);
-}
+  TEST_CASE("Gen Wallet")
+  {
+    SuiSDK suiSDK;
+    Ref<WalletWrapper> wallet = suiSDK.generateWallet("ed25519", "word12");
+    CHECK(wallet->get_mnemonic() != "");
+  }
 
-} //namespace TestSuiWalletSDK
+} // namespace TestSuiWalletSDK
 
 #endif

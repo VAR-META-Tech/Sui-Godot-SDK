@@ -5,19 +5,21 @@
 #include "tests/test_tools.h"
 
 #include "modules/sui_sdk/sui_sdk.h"
+using namespace godot;
+namespace TestSuiTransactionSDK
+{
 
-namespace TestSuiTransactionSDK {
+  TEST_CASE("Sign Transaction")
+  {
+    SuiSDK suiSDK;
+    String sender = "0x3b681380d39b7109e029a4869cb53d42cc4ac9a92b5749ce65173bc3e8680c11";
+    String recipient = "0x3f2c2374b9902cdd7423c24618c7993e516df6f3fc6034822e844f80cd79e49e";
+    unsigned long long amount = 10000000;
 
-TEST_CASE("Sign Transaction") {
-	SuiSDK suiSDK;
-	const char *sender = "0x66e350a92a4ddf98906f4ae1a208a23e40047105f470c780d2d6bec139031f75";
-	const char *recipient = "0xfee0108a2467a551f50f3f7c2dc77128406ae314ef4515030dc62accb0c15bcc";
-	unsigned long long amount = 1000000000;
+    String result = suiSDK.signTransaction(sender, recipient, amount);
+    CHECK(result == "Transaction completed successfully");
+  }
 
-	char *result = suiSDK.signTransaction(sender, recipient, amount);
-	CHECK(result != NULL);
-}
-
-} //namespace TestSuiTransactionSDK
+} // namespace TestSuiTransactionSDK
 
 #endif
