@@ -3,6 +3,7 @@
 
 #include "tests/test_macros.h"
 #include "tests/test_tools.h"
+#include <unistd.h>
 
 #include "modules/sui_sdk/sui_sdk.h"
 using namespace godot;
@@ -12,14 +13,55 @@ namespace TestSuiTransactionSDK
   TEST_CASE("Sign Transaction")
   {
     SuiSDK suiSDK;
-    String sender = "0x3b681380d39b7109e029a4869cb53d42cc4ac9a92b5749ce65173bc3e8680c11";
-    String recipient = "0x3f2c2374b9902cdd7423c24618c7993e516df6f3fc6034822e844f80cd79e49e";
+    TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
+    if (wallets.size() < 2)
+    {
+      CHECK(false);
+    }
+
+    Ref<WalletWrapper> sender = wallets[0];
+    Ref<WalletWrapper> recipient = wallets[1];
     unsigned long long amount = 10000000;
 
-    String result = suiSDK.signTransaction(sender, recipient, amount);
+    String result = suiSDK.signTransaction(sender->get_address(), recipient->get_address(), amount);
     CHECK(result == "Transaction completed successfully");
   }
 
-} // namespace TestSuiTransactionSDK
+  TEST_CASE("Sign Transaction Faucet")
+  {
+    SuiSDK suiSDK;
+    TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
+    if (wallets.size() < 1)
+    {
+      CHECK(false);
+    }
+    Ref<WalletWrapper> sponser = wallets[0];
+    suiSDK.requestTokensFromFaucet(sponser->get_address());
+    sleep(5);
+  }
+
+  TEST_CASE("Sign Transaction Allow Sponser")
+  {
+    SuiSDK suiSDK;
+    TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
+    if (wallets.size() < 3)
+    {
+      CHECK(false);
+    }
+
+    Ref<WalletWrapper> sponser = wallets[0];
+    Ref<WalletWrapper> sender = wallets[1];
+    Ref<WalletWrapper> recipient = wallets[2];
+    unsigned long long amount = 10000000;
+
+    String result = suiSDK.programmableTransactionAllowSponser(
+        sender->get_address(),
+        recipient->get_address(),
+        amount,
+        sponser->get_address());
+    CHECK(result == "Transaction completed successfully");
+  }
+
+}
 
 #endif
