@@ -2,8 +2,8 @@ extends TabBar
 
 var sdk = SuiSDK.new()
 var wallets = []
-const NFT_PACKAGE_ID = "0x43d037dda49e37c977a1e2a4ed261147659a2913867d439a101c57b41216c216";
-const NFT_OBJECT_TYPE = "0x43d037dda49e37c977a1e2a4ed261147659a2913867d439a101c57b41216c216::nft::NFT";
+const NFT_PACKAGE_ID = "0x9e2d18c8564a5487dddc7698fc5c895caae20ef6c581bf05dcb00306bd005e12";
+const NFT_OBJECT_TYPE = "0x9e2d18c8564a5487dddc7698fc5c895caae20ef6c581bf05dcb00306bd005e12::nft::NFT";
 
 func _ready():
 	self.load_wallets()
@@ -30,7 +30,27 @@ func _on_btn_send_pressed() -> void:
 		get_node("result").text = result
 
 func _on_btn_load_pressed() -> void:
-	pass # Replace with function body.
+	var address = get_node("address_box").get_selected_id()
+	if address == -1:
+		get_node("result").text = "Plase enter your address"
+	else:
+		var sender = get_node("address_box").get_item_text(address)
+		var objects = sdk.getWalletObjects(sender,NFT_OBJECT_TYPE)
+		var res = ""
+		print(objects.size())
+		for object in objects:
+			res = res + "object id: " + object.get_object_id() + "\n"
+			res = res + "version: " + str(object.get_version()) + "\n"
+			res = res + "digest: " + object.get_digest() + "\n"
+			res = res + "type: " + object.get_type() + "\n"
+			res = res + "owner: " + object.get_owner() + "\n"
+			res = res + "previous transaction: " + object.get_previous_transaction() + "\n"
+			res = res + "storage rebate: " + str(object.get_storage_rebate()) + "\n"
+			res = res + "display: " + object.get_display() + "\n"
+			res = res + "bcs: " + object.get_bcs() + "\n"
+			res = res + "content: " + object.get_content() + "\n\n"
+		get_node("result").text = res
+			
 
 
 func _on_btn_mint_pressed() -> void:
