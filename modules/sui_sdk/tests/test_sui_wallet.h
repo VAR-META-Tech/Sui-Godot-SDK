@@ -17,7 +17,8 @@ namespace TestSuiWalletSDK
     CHECK(wallets.size() != (const int)0);
   }
 
-  TEST_CASE("Gen wallet"){
+  TEST_CASE("Gen wallet")
+  {
     SuiSDK suiSDK;
     Ref<WalletWrapper> wallets = suiSDK.generateAndAddKey();
     CHECK(wallets->address != "");
@@ -65,7 +66,7 @@ namespace TestSuiWalletSDK
     CHECK(wallet->get_mnemonic() != "");
   }
 
-   TEST_CASE("Gen Wallet Custom Ed25519-Word18")
+  TEST_CASE("Gen Wallet Custom Ed25519-Word18")
   {
     SuiSDK suiSDK;
     Ref<WalletWrapper> wallet = suiSDK.generateWallet("ed25519", "word18");
@@ -86,7 +87,7 @@ namespace TestSuiWalletSDK
     CHECK(wallet->get_mnemonic() != "");
   }
 
-   TEST_CASE("Gen Wallet Custom Ed25519-Word21")
+  TEST_CASE("Gen Wallet Custom Ed25519-Word21")
   {
     SuiSDK suiSDK;
     Ref<WalletWrapper> wallet = suiSDK.generateWallet("ed25519", "word21");
@@ -107,7 +108,7 @@ namespace TestSuiWalletSDK
     CHECK(wallet->get_mnemonic() != "");
   }
 
-   TEST_CASE("Gen Wallet Custom Ed25519-Word24")
+  TEST_CASE("Gen Wallet Custom Ed25519-Word24")
   {
     SuiSDK suiSDK;
     Ref<WalletWrapper> wallet = suiSDK.generateWallet("ed25519", "word24");
@@ -128,26 +129,29 @@ namespace TestSuiWalletSDK
     CHECK(wallet->get_mnemonic() != "");
   }
 
-  TEST_CASE("Import Wallet from PrivateKey"){
+  TEST_CASE("Import Wallet from PrivateKey")
+  {
     SuiSDK suiSDK;
     String private_key = "ANP7YuU7I0NnwHMJGlRraQ7hcW3XekCecvEysqUTC8Ue";
     suiSDK.importFromPrivateKey(private_key);
   }
 
-  TEST_CASE("Import Wallet from Mnemonic"){
+  TEST_CASE("Import Wallet from Mnemonic")
+  {
     SuiSDK suiSDK;
     String mnemonic = "naive sheriff vehicle hold latin network menu track sniff salon train moon";
     String address = suiSDK.importFromMnemonic(mnemonic);
     CHECK(address == "0x552ae47bb91c3eae96e41bfab4aea7b4ca3d1722158d11e5cc8188f8182401e3");
   }
 
-  TEST_CASE("Get Wallet From Address"){
+  TEST_CASE("Get Wallet From Address")
+  {
     SuiSDK suiSDK;
     String address = "0x552ae47bb91c3eae96e41bfab4aea7b4ca3d1722158d11e5cc8188f8182401e3";
     Ref<WalletWrapper> wallet = suiSDK.getWalletFromAddress(address);
     CHECK(wallet->get_address() == address);
   }
 
-} // namespace TestSuiWalletSDK
+}
 
 #endif

@@ -1,12 +1,14 @@
 #ifndef TEST_SUI_SDK_BALANCE
+#define TEST_SUI_SDK_BALANCE
+
+#include "tests/test_macros.h"
 #include "tests/test_tools.h"
-#include <stddef.h>
+
 #include "modules/sui_sdk/sui_sdk.h"
 
 using namespace godot;
 namespace TestSuiBalanceSDK
 {
-
 	TEST_CASE("Get balance sync")
 	{
 		SuiSDK suiSdk;

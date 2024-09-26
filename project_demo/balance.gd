@@ -17,7 +17,7 @@ func  load_wallets():
 func _on_btn_get_balances_pressed() -> void:
 	var address = get_node("address_box").get_selected_id()
 	if address == -1:
-		get_node("result").text = "Plase input your address"
+		get_node("result").text = "Please input your address"
 	else:
 		var balances = sdk.getAllBalancesSync(get_node("address_box").get_item_text(address))
 		var res=""
@@ -32,7 +32,7 @@ func _on_btn_get_balances_pressed() -> void:
 func _on_btn_get_all_balances_sync_pressed() -> void:
 	var address = get_node("address_box").get_selected_id()
 	if address == -1:
-		get_node("result").text = "Plase input your address"
+		get_node("result").text = "Please input your address"
 	else:
 		var sdk = SuiSDK.new()
 		var balances = sdk.getAllBalancesSync(get_node("address_box").get_item_text(address))
@@ -48,7 +48,7 @@ func _on_btn_get_all_balances_sync_pressed() -> void:
 func _on_btn_get_balance_sync_pressed() -> void:
 	var address = get_node("address_box").get_selected_id()
 	if address == -1:
-		get_node("result").text = "Plase input your address"
+		get_node("result").text = "Please input your address"
 	else:
 		var balance = sdk.getBalanceSync(get_node("address_box").get_item_text(address))
 		var res=""
@@ -67,7 +67,7 @@ func _on_btn_get_total_supply_sync_pressed() -> void:
 func _on_btn_get_coins_sync_pressed() -> void:
 	var address = get_node("address_box").get_selected_id()
 	if address == -1:
-		get_node("result").text = "Plase input your address"
+		get_node("result").text = "Please input your address"
 	else:
 		var coins = sdk.getCoinsSync(get_node("address_box").get_item_text(address))
 		var res=""

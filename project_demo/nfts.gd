@@ -24,7 +24,7 @@ func _on_btn_send_pressed() -> void:
 		get_node("result").text = "enter nft and recipient info"
 	var address = get_node("address_box").get_selected_id()
 	if address == -1:
-		get_node("result").text = "Plase enter your address"
+		get_node("result").text = "Please enter your address"
 	else:
 		var result = sdk.transferNft(NFT_PACKAGE_ID,get_node("address_box").get_item_text(address),nft,recipient)
 		get_node("result").text = result
@@ -32,7 +32,7 @@ func _on_btn_send_pressed() -> void:
 func _on_btn_load_pressed() -> void:
 	var address = get_node("address_box").get_selected_id()
 	if address == -1:
-		get_node("result").text = "Plase enter your address"
+		get_node("result").text = "Please enter your address"
 	else:
 		var sender = get_node("address_box").get_item_text(address)
 		var objects = sdk.getWalletObjects(sender,NFT_OBJECT_TYPE)
@@ -58,10 +58,10 @@ func _on_btn_mint_pressed() -> void:
 	var desc = get_node("nft_description").text
 	var uri = get_node("nft_uri").text
 	if name == ""  or desc == "" or uri == "":
-		get_node("result").text = "Plase enter nft info"
+		get_node("result").text = "Please enter nft info"
 	var address = get_node("address_box").get_selected_id()
 	if address == -1:
-		get_node("result").text = "Plase enter your address"
+		get_node("result").text = "Please enter your address"
 	else:
 		var result = sdk.mintNft(NFT_PACKAGE_ID,get_node("address_box").get_item_text(address),name,desc,uri)
 		get_node("result").text = result

@@ -22,16 +22,16 @@ func _on_btn_send_with_sponser_pressed() -> void:
 	var amount = get_node("txt_amount").text
 	
 	if address == -1:
-		get_node("result").text = "Plase enter your address"
+		get_node("result").text = "Please enter your address"
 	var sender = get_node("address_box").get_item_text(address)
 	if recipient == "":
-		get_node("result").text = "Plase enter recipient address"
+		get_node("result").text = "Please enter recipient address"
 	if sponser_address == "":
-		get_node("result").text = "Plase enter sponser address"
+		get_node("result").text = "Please enter sponser address"
 	if amount == "":
-		get_node("result").text = "Plase enter amount"
+		get_node("result").text = "Please enter amount"
 	if int(amount) == 0:
-		get_node("result").text = "Plase enter correct amount"
+		get_node("result").text = "Please enter correct amount"
 	else:
 		var result = sdk.programmableTransactionAllowSponser(sender,recipient,int(amount),sponser_address)
 		self.get_node("result").text=result
@@ -40,7 +40,7 @@ func _on_btn_send_with_sponser_pressed() -> void:
 func _on_btn_load_pressed() -> void:
 	var address = get_node("address_box").get_selected_id()
 	if address == -1:
-		get_node("result").text = "Plase enter your address"
+		get_node("result").text = "Please enter your address"
 	else:
 		var balances = sdk.getBalances(get_node("address_box").get_item_text(address))
 		var res=""
@@ -54,7 +54,7 @@ func _on_btn_load_pressed() -> void:
 func _on_btn_request_faucet_pressed() -> void:
 	var address = get_node("address_box").get_selected_id()
 	if address == -1:
-		get_node("result").text = "Plase enter your address"
+		get_node("result").text = "Please enter your address"
 	else:
 		var result = sdk.requestTokensFromFaucet(get_node("address_box").get_item_text(address))
 		self.get_node("result").text = result
@@ -66,14 +66,14 @@ func _on_btn_send_pressed() -> void:
 	var amount = get_node("txt_amount").text
 	
 	if address == -1:
-		get_node("result").text = "Plase enter your address"
+		get_node("result").text = "Please enter your address"
 	var sender = get_node("address_box").get_item_text(address)
 	if recipient == "":
-		get_node("result").text = "Plase enter recipient address"
+		get_node("result").text = "Please enter recipient address"
 	if amount == "":
-		get_node("result").text = "Plase enter amount"
+		get_node("result").text = "Please enter amount"
 	if int(amount) == 0:
-		get_node("result").text = "Plase enter correct amount"
+		get_node("result").text = "Please enter correct amount"
 	else:
 		var result = sdk.signTransaction(sender,recipient,int(amount))
 		self.get_node("result").text=result
