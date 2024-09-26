@@ -103,6 +103,7 @@ CU8Array parseTx(TypedArray<uint8_t> txRef)
 		txData[i] = txRef[i];
 	}
 	tx.data = txData;
+	return tx;
 };
 
 CStringArray parseAddress(TypedArray<String> addresses)

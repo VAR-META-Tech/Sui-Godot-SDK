@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://nfts.gd" id="4_pdyft"]
 
 [node name="Main" type="Node2D"]
+z_as_relative = false
 
 [node name="TabContainer" type="TabContainer" parent="."]
 offset_right = 1153.0
