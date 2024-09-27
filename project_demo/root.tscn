@@ -1,0 +1,121 @@
+[gd_scene load_steps=10 format=3 uid="uid://c5lfpqvt8krrq"]
+
+[ext_resource type="Script" path="res://root_wallet.gd" id="1_yagtv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihrby"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7unm"]
+bg_color = Color(0.0117647, 0.0823529, 0.145098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h7ke"]
+bg_color = Color(0.141176, 0.168627, 0.25098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7j36y"]
+bg_color = Color(0.270588, 0.6, 0.976471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jx5u4"]
+bg_color = Color(0.270588, 0.6, 0.976471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gyte4"]
+bg_color = Color(0.270588, 0.6, 0.976471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t83vm"]
+bg_color = Color(0.141176, 0.168627, 0.25098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmdjs"]
+bg_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[node name="Root" type="Node2D"]
+
+[node name="TabContainer" type="TabContainer" parent="."]
+offset_top = 1.0
+offset_right = 1152.0
+offset_bottom = 644.0
+theme_override_styles/tab_focus = SubResource("StyleBoxFlat_ihrby")
+theme_override_styles/panel = SubResource("StyleBoxFlat_a7unm")
+current_tab = 0
+
+[node name="Wallet" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+clip_tabs = false
+max_tab_width = 200
+scrolling_enabled = false
+script = ExtResource("1_yagtv")
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Wallet"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Wallet/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Wallet/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_0h7ke")
+placeholder_text = "Enter the wallet address"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Wallet/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Create Wallet" type="Button" parent="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_7j36y")
+text = "Gen Wallet"
+
+[node name="Button" type="Button" parent="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_jx5u4")
+text = "Gen & Add wallet"
+
+[node name="Button2" type="Button" parent="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_gyte4")
+text = "Import wallet"
+
+[node name="Label" type="Label" parent="TabContainer/Wallet/VBoxContainer"]
+layout_mode = 2
+text = "List wallets"
+
+[node name="listWalletsTree" type="Tree" parent="TabContainer/Wallet/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_t83vm")
+theme_override_styles/title_button_normal = SubResource("StyleBoxFlat_hmdjs")
+columns = 5
+column_titles_visible = true
+allow_reselect = true
+allow_rmb_select = true
+allow_search = false
+hide_root = true
+
+[node name="TabBar" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[connection signal="text_changed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer2/LineEdit" to="TabContainer/Wallet" method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer/Create Wallet" to="TabContainer/Wallet" method="_on_create_wallet_pressed"]
+[connection signal="pressed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer/Button" to="TabContainer/Wallet" method="_on_button_pressed"]
+[connection signal="pressed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer/Button2" to="TabContainer/Wallet" method="_on_button_2_pressed"]
+[connection signal="button_clicked" from="TabContainer/Wallet/VBoxContainer/listWalletsTree" to="TabContainer/Wallet" method="_on_tree_button_clicked"]
+[connection signal="cell_selected" from="TabContainer/Wallet/VBoxContainer/listWalletsTree" to="TabContainer/Wallet" method="_on_tree_cell_selected"]
