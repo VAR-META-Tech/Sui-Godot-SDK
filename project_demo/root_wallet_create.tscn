@@ -1,0 +1,152 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjg4vyjtwfkt"]
+
+[ext_resource type="Script" path="res://root_wallet_create.gd" id="1_vf2ws"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ihey"]
+bg_color = Color(0.0117647, 0.0823529, 0.145098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8m11i"]
+bg_color = Color(0.141176, 0.168627, 0.25098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0t3j"]
+bg_color = Color(0.141176, 0.168627, 0.25098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6bqi"]
+bg_color = Color(0.278431, 0.32549, 0.396078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7e02g"]
+bg_color = Color(0.270588, 0.6, 0.976471, 1)
+
+[node name="RootWalletCreate" type="Node2D"]
+script = ExtResource("1_vf2ws")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 644.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ihey")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -359.0
+offset_top = 40.0
+offset_right = 408.0
+offset_bottom = 612.0
+grow_horizontal = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Generate Wallet"
+horizontal_alignment = 1
+
+[node name="panelResult" type="Panel" parent="Control/Panel/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/panelResult"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="walletTree" type="Tree" parent="Control/Panel/VBoxContainer/panelResult/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Button" type="Button" parent="Control/Panel/VBoxContainer/panelResult/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Save wallet"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Scheme
+"
+
+[node name="scheme" type="OptionButton" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_8m11i")
+item_count = 3
+popup/item_0/text = "ED25519"
+popup/item_1/text = "Secp256k1"
+popup/item_1/id = 1
+popup/item_2/text = "Secp256r1"
+popup/item_2/id = 2
+
+[node name="schemeError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Word"
+
+[node name="word" type="OptionButton" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_k0t3j")
+item_count = 5
+popup/item_0/text = "word12"
+popup/item_1/text = "word15"
+popup/item_1/id = 1
+popup/item_2/text = "word18"
+popup/item_2/id = 2
+popup/item_3/text = "word21"
+popup/item_3/id = 3
+popup/item_4/text = "word24"
+popup/item_4/id = 4
+
+[node name="wordError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_t6bqi")
+text = "Cancel"
+
+[node name="generate" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_7e02g")
+text = "Generate"
+
+[connection signal="button_clicked" from="Control/Panel/VBoxContainer/panelResult/VBoxContainer/walletTree" to="." method="_on_wallet_tree_button_clicked"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/panelResult/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/generate" to="." method="_on_generate_pressed"]

@@ -24,7 +24,7 @@ func _on_check_version_pressed() -> void:
 	onApiVersion()
 
 func _on_return_pressed() -> void:
-	get_tree().change_scene_to_file("res://node.tscn")
+	get_tree().change_scene_to_file.bind("res://root.tscn").callv([111])
 
 
 func _on_check_api_pressed() -> void:

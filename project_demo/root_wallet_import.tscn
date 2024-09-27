@@ -1,0 +1,246 @@
+[gd_scene load_steps=9 format=3 uid="uid://blk7e0cs2rqsg"]
+
+[ext_resource type="Texture2D" uid="uid://kgwxw3xpfgkx" path="res://icons/copy.svg" id="1_0p1hp"]
+[ext_resource type="Script" path="res://root_wallet_import.gd" id="1_3fkry"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdk5c"]
+bg_color = Color(0.0117647, 0.0823529, 0.145098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g22my"]
+bg_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5os1"]
+bg_color = Color(0.270588, 0.6, 0.976471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfu54"]
+bg_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cq4ej"]
+bg_color = Color(0.270588, 0.6, 0.976471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ucqe8"]
+bg_color = Color(0.278431, 0.32549, 0.396078, 1)
+
+[node name="RootWalletImport" type="Node2D"]
+script = ExtResource("1_3fkry")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 644.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mdk5c")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -376.5
+offset_top = 40.0
+offset_right = 376.5
+offset_bottom = 339.0
+grow_horizontal = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Import Wallet"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Import from private key"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="privateKey" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_g22my")
+placeholder_text = "Enter the private key of wallet"
+
+[node name="importPrivateKeyButton" type="Button" parent="Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_e5os1")
+text = "Import"
+
+[node name="privateKeyError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Import from mnemonic"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="LineEdit" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_dfu54")
+placeholder_text = "Enter the mnemonic of wallet"
+
+[node name="importMnemonicButton" type="Button" parent="Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cq4ej")
+text = "Import"
+
+[node name="mnemonicError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ucqe8")
+text = "Cancel"
+
+[node name="panelResult" type="Panel" parent="Control/Panel"]
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -356.0
+offset_top = -221.0
+offset_right = 357.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="walletTree" type="Tree" parent="Control/Panel/panelResult"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 229.5
+offset_top = 460.0
+offset_right = 209.5
+offset_bottom = 440.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Address"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer2/HBoxContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="address_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer/HBoxContainer"]
+position = Vector2(124, 14)
+texture = ExtResource("1_0p1hp")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "Mnemonic"
+
+[node name="mnemonic_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer2"]
+position = Vector2(196, 14)
+texture = ExtResource("1_0p1hp")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+text = "Public key"
+
+[node name="public_base64_key_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+
+[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer3"]
+position = Vector2(196, 14)
+texture = ExtResource("1_0p1hp")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+text = "Private key"
+
+[node name="private_key_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+
+[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer4"]
+position = Vector2(196, 14)
+texture = ExtResource("1_0p1hp")
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+text = "Scheme"
+
+[node name="scheme_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+
+[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer5"]
+position = Vector2(196, 14)
+texture = ExtResource("1_0p1hp")
+
+[connection signal="pressed" from="Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/importPrivateKeyButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer/importMnemonicButton" to="." method="_on_import_mnemonic_button_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
