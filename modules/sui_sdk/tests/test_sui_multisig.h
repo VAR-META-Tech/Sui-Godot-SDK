@@ -3,7 +3,13 @@
 
 #include "tests/test_macros.h"
 #include "tests/test_tools.h"
-#include <unistd.h>
+#ifdef _WIN32
+#include <windows.h>
+#define SLEEP(milliseconds) Sleep(milliseconds)
+#else
+#include <unistd.h> // For sleep function on Unix-like systems
+#define SLEEP(seconds) sleep(seconds)
+#endif
 
 #include "modules/sui_sdk/sui_sdk.h"
 
@@ -39,7 +45,11 @@ namespace TestSuiMultisigSDK
 
     Ref<MulSigWrapper> multisig = suiSDK.getOrCreateMultisig(addresses, weights, threshold);
     suiSDK.requestTokensFromFaucet(multisig->address);
-    sleep(5);
+    #ifdef _WIN32
+      SLEEP(5000);
+    #else
+      SLEEP(5);
+    #endif
     TypedArray<uint8_t> tx = suiSDK.createTransaction(multisig->address, addresses[2], 1000);
     String message = suiSDK.signAndExecuteTransaction(multisig, tx, addresses);
 
@@ -74,7 +84,11 @@ namespace TestSuiMultisigSDK
 
     Ref<MulSigWrapper> multisig = suiSDK.getOrCreateMultisig(addresses, weights, threshold);
     suiSDK.requestTokensFromFaucet(multisig->address);
-    sleep(5);
+    #ifdef _WIN32
+      SLEEP(5000);
+    #else
+      SLEEP(5);
+    #endif
     TypedArray<uint8_t> tx = suiSDK.createTransaction(multisig->address, addresses[2], 1000);
     TypedArray<String> addressesConfirm;
     Ref<WalletWrapper> wallet = wallets[0];
@@ -113,7 +127,11 @@ namespace TestSuiMultisigSDK
 
     Ref<MulSigWrapper> multisig = suiSDK.getOrCreateMultisig(addresses, weights, threshold);
     suiSDK.requestTokensFromFaucet(multisig->address);
-    sleep(5);
+    #ifdef _WIN32
+      SLEEP(5000);
+    #else
+      SLEEP(5);
+    #endif
     TypedArray<uint8_t> tx = suiSDK.createTransaction(multisig->address, addresses[2], 1000);
     TypedArray<String> addressesConfirm;
     Ref<WalletWrapper> wallet = wallets[3];
