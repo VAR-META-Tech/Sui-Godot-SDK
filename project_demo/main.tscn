@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://btvwx1xqjgghb"]
+[gd_scene load_steps=35 format=3 uid="uid://btvwx1xqjgghb"]
 
 [ext_resource type="Script" path="res://wallets.gd" id="1_aiqld"]
 [ext_resource type="Script" path="res://balances.gd" id="1_ck3nu"]
@@ -74,6 +74,31 @@ bg_color = Color(0.141176, 0.168627, 0.25098, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jj05q"]
 bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_1v0b3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iechn"]
+texture = SubResource("CanvasTexture_1v0b3")
+texture_margin_left = 8.0
+modulate_color = Color(0.141176, 0.168627, 0.25098, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wehgy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3obar"]
+texture = SubResource("CanvasTexture_wehgy")
+modulate_color = Color(0.141176, 0.168627, 0.25098, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_uo77j"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_737o6"]
+texture = SubResource("CanvasTexture_uo77j")
+modulate_color = Color(0.141176, 0.168627, 0.25098, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gp2rk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0hsi6"]
+texture = SubResource("CanvasTexture_gp2rk")
+modulate_color = Color(0.141176, 0.168627, 0.25098, 1)
+
 [node name="Main" type="Node2D"]
 z_as_relative = false
 
@@ -83,9 +108,10 @@ offset_bottom = 648.0
 theme_override_styles/tab_focus = SubResource("StyleBoxTexture_4k8t6")
 theme_override_styles/tabbar_background = SubResource("StyleBoxTexture_fy3eu")
 theme_override_styles/panel = SubResource("StyleBoxTexture_vqykd")
-current_tab = 0
+current_tab = 1
 
 [node name="Wallets" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("1_aiqld")
 metadata/_tab_index = 0
@@ -203,69 +229,84 @@ allow_search = false
 hide_root = true
 
 [node name="Balance" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 script = ExtResource("2_ah0r3")
 metadata/_tab_index = 1
 
-[node name="address_box" type="OptionButton" parent="TabContainer/Balance"]
-layout_mode = 0
-offset_left = 54.0
-offset_top = 46.0
-offset_right = 1114.0
-offset_bottom = 85.0
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Balance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 20.0
+offset_right = -19.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
 
-[node name="btn_get_balances" type="Button" parent="TabContainer/Balance"]
-layout_mode = 0
-offset_left = 736.0
-offset_top = 133.0
-offset_right = 915.0
-offset_bottom = 181.0
+[node name="h_box_address" type="HBoxContainer" parent="TabContainer/Balance/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="address_box" type="OptionButton" parent="TabContainer/Balance/VBoxContainer/h_box_address"]
+custom_minimum_size = Vector2(1115, 52)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_iechn")
+
+[node name="h_box_gen" type="HBoxContainer" parent="TabContainer/Balance/VBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="btn_get_balances" type="Button" parent="TabContainer/Balance/VBoxContainer/h_box_gen"]
+custom_minimum_size = Vector2(207, 52)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_3obar")
 text = "get balances"
 
-[node name="btn_get_all_balances_sync" type="Button" parent="TabContainer/Balance"]
-layout_mode = 0
-offset_left = 59.0
-offset_top = 135.0
-offset_right = 262.0
-offset_bottom = 183.0
+[node name="btn_get_all_balances_sync" type="Button" parent="TabContainer/Balance/VBoxContainer/h_box_gen"]
+custom_minimum_size = Vector2(207, 52)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_737o6")
 text = "get balances sync"
 
-[node name="btn_get_balance_sync" type="Button" parent="TabContainer/Balance"]
-layout_mode = 0
-offset_left = 937.0
-offset_top = 133.0
-offset_right = 1111.0
-offset_bottom = 181.0
+[node name="btn_get_balance_sync" type="Button" parent="TabContainer/Balance/VBoxContainer/h_box_gen"]
+custom_minimum_size = Vector2(207, 52)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_0hsi6")
 text = "get balance sync"
 
-[node name="btn_get_total_supply_sync" type="Button" parent="TabContainer/Balance"]
-layout_mode = 0
-offset_left = 292.0
-offset_top = 134.0
-offset_right = 481.0
-offset_bottom = 182.0
+[node name="btn_get_total_supply_sync" type="Button" parent="TabContainer/Balance/VBoxContainer/h_box_gen"]
+custom_minimum_size = Vector2(207, 52)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_0hsi6")
 text = "get total supply"
 
-[node name="btn_get_coins_sync" type="Button" parent="TabContainer/Balance"]
-layout_mode = 0
-offset_left = 509.0
-offset_top = 134.0
-offset_right = 707.0
-offset_bottom = 182.0
+[node name="btn_get_coins_sync" type="Button" parent="TabContainer/Balance/VBoxContainer/h_box_gen"]
+custom_minimum_size = Vector2(207, 52)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_0hsi6")
 text = "get coins"
 
-[node name="result" type="RichTextLabel" parent="TabContainer/Balance"]
-layout_mode = 0
-offset_left = 67.0
-offset_top = 229.0
-offset_right = 1106.0
-offset_bottom = 564.0
+[node name="Label" type="Label" parent="TabContainer/Balance/VBoxContainer"]
+layout_mode = 2
+text = "Result"
 
-[node name="scroll" type="ScrollContainer" parent="TabContainer/Balance/result"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="list_result_tree" type="Tree" parent="TabContainer/Balance/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ypulg")
+theme_override_styles/title_button_normal = SubResource("StyleBoxFlat_jj05q")
+columns = 4
+column_titles_visible = true
+allow_reselect = true
+allow_rmb_select = true
+allow_search = false
+hide_root = true
 
 [node name="Transaction" type="TabBar" parent="TabContainer"]
 visible = false
@@ -451,11 +492,12 @@ metadata/_tab_index = 4
 [connection signal="pressed" from="TabContainer/Wallets/VBoxContainer/h_box_gen/generate" to="TabContainer/Wallets" method="_on_generate_pressed"]
 [connection signal="pressed" from="TabContainer/Wallets/VBoxContainer/h_box_gen/load" to="TabContainer/Wallets" method="_on_load_pressed"]
 [connection signal="button_clicked" from="TabContainer/Wallets/VBoxContainer/listWalletsTree" to="TabContainer/Wallets" method="_on_list_wallets_tree_button_clicked"]
-[connection signal="pressed" from="TabContainer/Balance/btn_get_balances" to="TabContainer/Balance" method="_on_btn_get_balances_pressed"]
-[connection signal="pressed" from="TabContainer/Balance/btn_get_all_balances_sync" to="TabContainer/Balance" method="_on_btn_get_all_balances_sync_pressed"]
-[connection signal="pressed" from="TabContainer/Balance/btn_get_balance_sync" to="TabContainer/Balance" method="_on_btn_get_balance_sync_pressed"]
-[connection signal="pressed" from="TabContainer/Balance/btn_get_total_supply_sync" to="TabContainer/Balance" method="_on_btn_get_total_supply_sync_pressed"]
-[connection signal="pressed" from="TabContainer/Balance/btn_get_coins_sync" to="TabContainer/Balance" method="_on_btn_get_coins_sync_pressed"]
+[connection signal="pressed" from="TabContainer/Balance/VBoxContainer/h_box_gen/btn_get_balances" to="TabContainer/Balance" method="_on_btn_get_balances_pressed"]
+[connection signal="pressed" from="TabContainer/Balance/VBoxContainer/h_box_gen/btn_get_all_balances_sync" to="TabContainer/Balance" method="_on_btn_get_all_balances_sync_pressed"]
+[connection signal="pressed" from="TabContainer/Balance/VBoxContainer/h_box_gen/btn_get_balance_sync" to="TabContainer/Balance" method="_on_btn_get_balance_sync_pressed"]
+[connection signal="pressed" from="TabContainer/Balance/VBoxContainer/h_box_gen/btn_get_total_supply_sync" to="TabContainer/Balance" method="_on_btn_get_total_supply_sync_pressed"]
+[connection signal="pressed" from="TabContainer/Balance/VBoxContainer/h_box_gen/btn_get_coins_sync" to="TabContainer/Balance" method="_on_btn_get_coins_sync_pressed"]
+[connection signal="button_clicked" from="TabContainer/Balance/VBoxContainer/list_result_tree" to="TabContainer/Wallets" method="_on_list_wallets_tree_button_clicked"]
 [connection signal="pressed" from="TabContainer/Transaction/btn_send_with_sponser" to="TabContainer/Transaction" method="_on_btn_send_with_sponser_pressed"]
 [connection signal="pressed" from="TabContainer/Transaction/btn_request_faucet" to="TabContainer/Transaction" method="_on_btn_request_faucet_pressed"]
 [connection signal="pressed" from="TabContainer/Transaction/btn_load" to="TabContainer/Transaction" method="_on_btn_load_pressed"]
