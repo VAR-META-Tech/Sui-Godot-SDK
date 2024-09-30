@@ -11,17 +11,16 @@ config_version=5
 [application]
 
 config/name="sui_demo"
-run/main_scene="res://root.tscn"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=2304
-window/size/viewport_height=1296
 window/size/resizable=false
-window/stretch/scale=2.0
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_width"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_table/plugin.cfg", "res://addons/table_container/plugin.cfg")
+enabled=PackedStringArray()
