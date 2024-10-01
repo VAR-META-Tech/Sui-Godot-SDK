@@ -101,4 +101,4 @@ You can custom your ``project_demo`` and run below built file in  directory to c
   ```
 
 ### License ###
-This project is licensed under the Apache-2.0 License. Refer to the LICENSE.txt file for details.
+This project is licensed under the Apache-2.0 License. Refer to the LICENSE file for details.
