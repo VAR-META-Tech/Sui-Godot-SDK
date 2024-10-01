@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5lfpqvt8krrq"]
+[gd_scene load_steps=14 format=3 uid="uid://c5lfpqvt8krrq"]
 
 [ext_resource type="Script" path="res://root_wallet.gd" id="1_yagtv"]
+[ext_resource type="Script" path="res://root_balance.gd" id="2_0lirm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihrby"]
 
@@ -12,18 +13,44 @@ bg_color = Color(0.141176, 0.168627, 0.25098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7j36y"]
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jx5u4"]
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gyte4"]
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t83vm"]
 bg_color = Color(0.141176, 0.168627, 0.25098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmdjs"]
 bg_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q7ye8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d3vt6"]
+texture = SubResource("CanvasTexture_q7ye8")
+texture_margin_left = 8.0
+modulate_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3ng2"]
+bg_color = Color(0.270588, 0.6, 0.976471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Root" type="Node2D"]
 
@@ -33,9 +60,10 @@ offset_right = 1152.0
 offset_bottom = 644.0
 theme_override_styles/tab_focus = SubResource("StyleBoxFlat_ihrby")
 theme_override_styles/panel = SubResource("StyleBoxFlat_a7unm")
-current_tab = 0
+current_tab = 1
 
 [node name="Wallet" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 clip_tabs = false
 max_tab_width = 200
@@ -108,10 +136,82 @@ allow_rmb_select = true
 allow_search = false
 hide_root = true
 
-[node name="TabBar" type="TabBar" parent="TabContainer"]
-visible = false
+[node name="Balance" type="TabBar" parent="TabContainer"]
 layout_mode = 2
+script = ExtResource("2_0lirm")
 metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Balance"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 40.0
+offset_right = 400.0
+offset_bottom = 577.0
+grow_horizontal = 2
+theme_override_constants/separation = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Balance/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="TabContainer/Balance/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SUI total suply:"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="suiTotalSuply" type="Label" parent="TabContainer/Balance/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Balance/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="TabContainer/Balance/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Wallet"
+
+[node name="walletsOption" type="OptionButton" parent="TabContainer/Balance/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxTexture_d3vt6")
+
+[node name="action" type="HBoxContainer" parent="TabContainer/Balance/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="action1" type="Button" parent="TabContainer/Balance/VBoxContainer/action"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Faucet"
+
+[node name="action2" type="Button" parent="TabContainer/Balance/VBoxContainer/action"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Send"
+
+[node name="balance" type="Label" parent="TabContainer/Balance/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0 SUI"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="coinList" type="VBoxContainer" parent="TabContainer/Balance/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
 
 [connection signal="text_changed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer2/LineEdit" to="TabContainer/Wallet" method="_on_line_edit_text_changed"]
 [connection signal="pressed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer/Create Wallet" to="TabContainer/Wallet" method="_on_create_wallet_pressed"]
@@ -119,3 +219,6 @@ metadata/_tab_index = 1
 [connection signal="pressed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer/Button2" to="TabContainer/Wallet" method="_on_button_2_pressed"]
 [connection signal="button_clicked" from="TabContainer/Wallet/VBoxContainer/listWalletsTree" to="TabContainer/Wallet" method="_on_tree_button_clicked"]
 [connection signal="cell_selected" from="TabContainer/Wallet/VBoxContainer/listWalletsTree" to="TabContainer/Wallet" method="_on_tree_cell_selected"]
+[connection signal="item_selected" from="TabContainer/Balance/VBoxContainer/VBoxContainer/walletsOption" to="TabContainer/Balance" method="_on_wallets_option_item_selected"]
+[connection signal="pressed" from="TabContainer/Balance/VBoxContainer/action/action1" to="TabContainer/Balance" method="_on_action_1_pressed"]
+[connection signal="pressed" from="TabContainer/Balance/VBoxContainer/action/action2" to="TabContainer/Balance" method="_on_action_2_pressed"]
