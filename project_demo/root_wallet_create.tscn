@@ -1,21 +1,37 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjg4vyjtwfkt"]
+[gd_scene load_steps=9 format=3 uid="uid://cjg4vyjtwfkt"]
 
 [ext_resource type="Script" path="res://root_wallet_create.gd" id="1_vf2ws"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ihey"]
 bg_color = Color(0.0117647, 0.0823529, 0.145098, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8m11i"]
-bg_color = Color(0.141176, 0.168627, 0.25098, 1)
+[sub_resource type="CanvasTexture" id="CanvasTexture_r5jwf"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0t3j"]
-bg_color = Color(0.141176, 0.168627, 0.25098, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eiv5c"]
+content_margin_left = 8.0
+texture = SubResource("CanvasTexture_r5jwf")
+modulate_color = Color(0.141176, 0.168627, 0.25098, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_63tgd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0ybmx"]
+content_margin_left = 8.0
+texture = SubResource("CanvasTexture_63tgd")
+modulate_color = Color(0.141176, 0.168627, 0.25098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6bqi"]
 bg_color = Color(0.278431, 0.32549, 0.396078, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7e02g"]
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="RootWalletCreate" type="Node2D"]
 script = ExtResource("1_vf2ws")
@@ -86,7 +102,7 @@ text = "Scheme
 [node name="scheme" type="OptionButton" parent="Control/Panel/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 50)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_8m11i")
+theme_override_styles/normal = SubResource("StyleBoxTexture_eiv5c")
 item_count = 3
 popup/item_0/text = "ED25519"
 popup/item_1/text = "Secp256k1"
@@ -111,7 +127,7 @@ text = "Word"
 [node name="word" type="OptionButton" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(500, 50)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_k0t3j")
+theme_override_styles/normal = SubResource("StyleBoxTexture_0ybmx")
 item_count = 5
 popup/item_0/text = "word12"
 popup/item_1/text = "word15"
