@@ -1,7 +1,7 @@
 extends TabBar
 
 var suiSDK = SuiSDK.new()
-var walletAddress
+var wallets = []
 
 func number_format(n):
 	n = str(n)
@@ -17,10 +17,11 @@ func number_format(n):
 	return s
 
 func getWallets():
-	var wallets = suiSDK.getWallets()
+	wallets = suiSDK.getWallets()
+
+func addWalletsToPopup():
 	var walletsOption: OptionButton = get_node("VBoxContainer/VBoxContainer/walletsOption")
 	walletsOption.clear()
-
 	for i in wallets.size():
 		var wallet = wallets[i]
 		walletsOption.add_item(wallet.get_address(), i)
@@ -29,7 +30,7 @@ func getWallets():
 func getBalance(address):
 	var balance = suiSDK.getBalanceSync(address)
 	var balanceText: Label = get_node("VBoxContainer/balance")
-	balanceText.text = str(number_format(float(balance.get_total_balance()) / 10**9)) + " SUI"
+	balanceText.text = str(float(balance.get_total_balance()) / 10**9) + " SUI"
 
 func getCoins(address):
 	var coinList: VBoxContainer = get_node("VBoxContainer/coinList")
@@ -39,7 +40,6 @@ func getCoins(address):
 
 	var coins = suiSDK.getCoinsSync(address)
 	for coin in coins:
-		print(coin)
 		var coinH = HBoxContainer.new()
 		var coinType = Label.new()
 		var coinBalance = Label.new()
@@ -58,34 +58,39 @@ func getTotalSuply():
 	var totalSuplyLableValue: Label = get_node("VBoxContainer/HBoxContainer/suiTotalSuply")
 	totalSuplyLableValue.text = str(number_format(float(totalSuply)/10**9))
 
+func setCurrentWallet(address):
+	var walletsOption: OptionButton = get_node("VBoxContainer/VBoxContainer/walletsOption")
+	var walletIndex = -1
+	for id in wallets.size():
+		if wallets[id].get_address() == address:
+			walletIndex = id
+	walletsOption.select(walletIndex)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	getWallets()
+	addWalletsToPopup()
 	getTotalSuply()
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-
+	var walletsOption: OptionButton = get_node("VBoxContainer/VBoxContainer/walletsOption")
+	if Global.currentWallet != "" && walletsOption.text != Global.currentWallet:
+		setCurrentWallet(Global.currentWallet)
+		getBalance(Global.currentWallet)
+		getCoins(Global.currentWallet)
 
 func _on_wallets_option_item_selected(index: int) -> void:
 	var walletsOption: OptionButton = get_node("VBoxContainer/VBoxContainer/walletsOption")
-	walletAddress = walletsOption.get_item_text(index)
-	Global.setCurrentWallet(walletAddress)
-	
-	getBalance(walletAddress)
-	getCoins(walletAddress)
-
+	var walletAddress = walletsOption.text
+	Global.currentWallet = walletAddress
+	getBalance(Global.currentWallet)
+	getCoins(Global.currentWallet)
 
 func _on_action_1_pressed() -> void:
-	var walletsOption: OptionButton = get_node("VBoxContainer/VBoxContainer/walletsOption")
-	var walletIndex = walletsOption.get_selected_id()
-	var walletAddress = walletsOption.get_item_text(walletIndex)
-	suiSDK.requestTokensFromFaucet(walletAddress)
-	getBalance(walletAddress)
-	getCoins(walletAddress)
+	suiSDK.requestTokensFromFaucet(Global.currentWallet)
+	getBalance(Global.currentWallet)
+	getCoins(Global.currentWallet)
 
 
 func _on_action_2_pressed() -> void:

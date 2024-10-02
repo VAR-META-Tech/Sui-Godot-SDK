@@ -1,0 +1,296 @@
+[gd_scene load_steps=8 format=3 uid="uid://bh5lqs72nvxxf"]
+
+[ext_resource type="Script" path="res://root_nft_mint.gd" id="1_apke3"]
+[ext_resource type="Texture2D" uid="uid://kgwxw3xpfgkx" path="res://icons/copy.svg" id="2_bbmjr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5y4m1"]
+bg_color = Color(0.0117647, 0.0823529, 0.145098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2wcy"]
+content_margin_left = 8.0
+bg_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqcjp"]
+content_margin_left = 8.0
+bg_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn7q5"]
+bg_color = Color(0.278431, 0.32549, 0.396078, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agtqv"]
+bg_color = Color(0.270588, 0.6, 0.976471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="RootNftMint" type="Node2D"]
+script = ExtResource("1_apke3")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 644.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5y4m1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -376.5
+offset_top = 40.0
+offset_right = 376.5
+offset_bottom = 339.0
+grow_horizontal = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Mint NFT"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Owner address"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="sender" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_c2wcy")
+placeholder_text = "Enter the wallet address"
+
+[node name="senderError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="name" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_nqcjp")
+placeholder_text = "Enter the name of NFT"
+
+[node name="nameError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3"]
+layout_mode = 2
+text = "Description"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="description" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_nqcjp")
+placeholder_text = "Enter the description NFT"
+
+[node name="descriptionError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer4"]
+layout_mode = 2
+text = "URI"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer4"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="uri" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_nqcjp")
+placeholder_text = "Enter the URI"
+
+[node name="uriError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer4"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_bn7q5")
+text = "Cancel"
+
+[node name="mint" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_agtqv")
+text = "Mint"
+
+[node name="panelResult" type="Panel" parent="Control/Panel"]
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -356.0
+offset_top = -221.0
+offset_right = 357.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="walletTree" type="Tree" parent="Control/Panel/panelResult"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 229.5
+offset_top = 460.0
+offset_right = 209.5
+offset_bottom = 440.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Address"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer2/HBoxContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="address_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer/HBoxContainer"]
+position = Vector2(124, 14)
+texture = ExtResource("2_bbmjr")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "Mnemonic"
+
+[node name="mnemonic_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer2"]
+position = Vector2(196, 14)
+texture = ExtResource("2_bbmjr")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+text = "Public key"
+
+[node name="public_base64_key_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+
+[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer3"]
+position = Vector2(196, 14)
+texture = ExtResource("2_bbmjr")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+text = "Private key"
+
+[node name="private_key_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+
+[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer4"]
+position = Vector2(196, 14)
+texture = ExtResource("2_bbmjr")
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+text = "Scheme"
+
+[node name="scheme_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+
+[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer5"]
+position = Vector2(196, 14)
+texture = ExtResource("2_bbmjr")
+
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/mint" to="." method="_on_mint_pressed"]

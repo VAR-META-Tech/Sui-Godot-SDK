@@ -23,9 +23,7 @@ Global="*res://global.gd"
 
 window/size/viewport_width=2304
 window/size/viewport_height=1296
-window/stretch/mode="canvas_items"
-window/stretch/aspect="keep_width"
-window/stretch/scale=2.0
+window/size/resizable=false
 
 [editor_plugins]
 

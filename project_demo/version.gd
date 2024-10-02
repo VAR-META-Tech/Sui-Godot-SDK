@@ -17,7 +17,6 @@ func onApiVersion():
 	
 func onCheckAPIVersion():
 	var isSuccess = sdk.checkApiVersion()
-	print(isSuccess)
 	self.get_node("result").text="Success: " + str(isSuccess == 1)
 
 func _on_check_version_pressed() -> void:

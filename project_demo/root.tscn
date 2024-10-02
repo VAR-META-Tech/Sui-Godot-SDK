@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c5lfpqvt8krrq"]
+[gd_scene load_steps=16 format=3 uid="uid://c5lfpqvt8krrq"]
 
+[ext_resource type="Script" path="res://root.gd" id="1_4e471"]
 [ext_resource type="Script" path="res://root_wallet.gd" id="1_yagtv"]
 [ext_resource type="Script" path="res://root_balance.gd" id="2_0lirm"]
+[ext_resource type="Script" path="res://root_nft.gd" id="4_ngr5i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihrby"]
 
@@ -53,6 +55,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [node name="Root" type="Node2D"]
+script = ExtResource("1_4e471")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 offset_top = 1.0
@@ -60,7 +63,7 @@ offset_right = 1152.0
 offset_bottom = 644.0
 theme_override_styles/tab_focus = SubResource("StyleBoxFlat_ihrby")
 theme_override_styles/panel = SubResource("StyleBoxFlat_a7unm")
-current_tab = 1
+current_tab = 2
 
 [node name="Wallet" type="TabBar" parent="TabContainer"]
 visible = false
@@ -137,6 +140,7 @@ allow_search = false
 hide_root = true
 
 [node name="Balance" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("2_0lirm")
 metadata/_tab_index = 1
@@ -213,6 +217,78 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
+[node name="NFT" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+script = ExtResource("4_ngr5i")
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/NFT"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 40.0
+offset_right = 400.0
+offset_bottom = 577.0
+grow_horizontal = 2
+theme_override_constants/separation = 30
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/NFT/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="TabContainer/NFT/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Wallet"
+
+[node name="walletsOption" type="OptionButton" parent="TabContainer/NFT/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxTexture_d3vt6")
+
+[node name="action" type="HBoxContainer" parent="TabContainer/NFT/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="action1" type="Button" parent="TabContainer/NFT/VBoxContainer/VBoxContainer2/action"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Mint"
+
+[node name="action2" type="Button" parent="TabContainer/NFT/VBoxContainer/VBoxContainer2/action"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Transfer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/NFT/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="TabContainer/NFT/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "List NFTs"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/NFT/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="nftsList" type="GridContainer" parent="TabContainer/NFT/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 4
+
+[connection signal="tab_clicked" from="TabContainer" to="." method="_on_tab_container_tab_clicked"]
 [connection signal="text_changed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer2/LineEdit" to="TabContainer/Wallet" method="_on_line_edit_text_changed"]
 [connection signal="pressed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer/Create Wallet" to="TabContainer/Wallet" method="_on_create_wallet_pressed"]
 [connection signal="pressed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer/Button" to="TabContainer/Wallet" method="_on_button_pressed"]
@@ -222,3 +298,6 @@ theme_override_constants/separation = 20
 [connection signal="item_selected" from="TabContainer/Balance/VBoxContainer/VBoxContainer/walletsOption" to="TabContainer/Balance" method="_on_wallets_option_item_selected"]
 [connection signal="pressed" from="TabContainer/Balance/VBoxContainer/action/action1" to="TabContainer/Balance" method="_on_action_1_pressed"]
 [connection signal="pressed" from="TabContainer/Balance/VBoxContainer/action/action2" to="TabContainer/Balance" method="_on_action_2_pressed"]
+[connection signal="item_selected" from="TabContainer/NFT/VBoxContainer/VBoxContainer2/walletsOption" to="TabContainer/NFT" method="_on_wallets_option_item_selected"]
+[connection signal="pressed" from="TabContainer/NFT/VBoxContainer/VBoxContainer2/action/action1" to="TabContainer/NFT" method="_on_action_1_pressed"]
+[connection signal="pressed" from="TabContainer/NFT/VBoxContainer/VBoxContainer2/action/action2" to="TabContainer/NFT" method="_on_action_2_pressed"]

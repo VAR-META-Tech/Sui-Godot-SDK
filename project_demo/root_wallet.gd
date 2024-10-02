@@ -28,7 +28,6 @@ func genRowTree(row, index, wallet):
 
 func loadWallets():
 	var wallets = sdk.getWallets()
-	print(wallets.size())
 	var tree: Tree = get_node("VBoxContainer/listWalletsTree")
 	tree.clear()
 	var root = tree.create_item()
