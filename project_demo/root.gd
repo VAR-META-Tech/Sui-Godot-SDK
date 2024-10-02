@@ -1,20 +1,15 @@
-extends Node
-
-var tabIndex = 2
-var currentWallet: String = ""
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	var tabs: TabContainer = get_node("TabContainer")
+	print(Global.tabIndex)
+	tabs.current_tab = Global.tabIndex
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func getCurrentWallet():
-	return currentWallet
-	
-func setCurrentWallet(wallet):
-	currentWallet = wallet
+func _on_tab_container_tab_clicked(tab: int) -> void:
+	Global.tabIndex = tab

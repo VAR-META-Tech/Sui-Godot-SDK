@@ -23,8 +23,8 @@ namespace TestSuiWalletSDK
     Ref<WalletWrapper> walletSender = wallets[0];
     Ref<WalletWrapper> walletReceipt = wallets[0];
 
-    String package_id = "0x9e2d18c8564a5487dddc7698fc5c895caae20ef6c581bf05dcb00306bd005e12";
-    String object_type = "0x9e2d18c8564a5487dddc7698fc5c895caae20ef6c581bf05dcb00306bd005e12::nft::NFT";
+    String package_id = "0x48a557eb090729457000b7303796c4447abea2362b009988b3ab7445b60ed6a3";
+    String object_type = "0x48a557eb090729457000b7303796c4447abea2362b009988b3ab7445b60ed6a3::nft::NFT";
     String sender_address = walletSender->get_address();
     String recipient_address = walletReceipt->get_address();
     String name = "Unit test mint nft";
