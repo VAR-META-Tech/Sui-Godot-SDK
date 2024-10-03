@@ -49,17 +49,17 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -376.5
+offset_left = -250.0
 offset_top = 40.0
-offset_right = 376.5
-offset_bottom = 339.0
+offset_right = 250.0
+offset_bottom = 437.0
 grow_horizontal = 2
 theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Send"
+text = "Send amount"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
@@ -68,6 +68,7 @@ theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "From"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer"]
@@ -75,9 +76,10 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="from" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_ulpst")
 placeholder_text = "Enter the from wallet address"
 
@@ -93,6 +95,7 @@ theme_override_constants/separation = 10
 
 [node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Receive"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
@@ -100,9 +103,10 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="receive" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_n0axb")
 placeholder_text = "Enter the receive wallet address"
 
@@ -118,6 +122,7 @@ theme_override_constants/separation = 10
 
 [node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Amount"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3"]
@@ -125,9 +130,10 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="amount" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_n0axb")
 placeholder_text = "Enter the amount"
 
@@ -138,28 +144,28 @@ theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
 theme_override_font_sizes/font_size = 12
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 20
 
 [node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_0m428")
 text = "Cancel"
 
 [node name="send" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_jug3o")
 text = "Send"
 
 [node name="sendWithSponsor" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(130, 50)
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_jug3o")
-text = "Send 
-with sponsor"
+text = "Send with sponsor"
 
 [node name="panelResult" type="Panel" parent="Control/Panel"]
 visible = false

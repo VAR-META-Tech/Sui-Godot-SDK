@@ -1,6 +1,6 @@
 extends Node
 
-var tabIndex = 3
+var tabIndex = 0
 var currentWallet: String = ""
 
 
@@ -18,3 +18,14 @@ func getCurrentWallet():
 	
 func setCurrentWallet(wallet):
 	currentWallet = wallet
+
+func showToast(message: String):
+	ToastParty.show({
+		"text": message,                  # Text (emojis can be used)
+		"bgcolor": Color(0, 0, 0, 1),     # Background Color
+		"color": Color(1, 1, 1, 1),       # Text Color
+		"gravity": "top",                 # top or bottom
+		"direction": "center",            # left or center or right
+		"text_size": 16,                  # [optional] Text (font) size // experimental (warning!)
+		"use_font": false                 # [optional] Use custom ToastParty font // experimental (warning!)
+	})

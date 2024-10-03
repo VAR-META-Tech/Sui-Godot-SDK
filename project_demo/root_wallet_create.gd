@@ -79,6 +79,8 @@ func _on_generate_pressed() -> void:
 	rowScheme.add_button(1, buttonCopy, 0, false, "Copy")
 	
 	panelResult.visible = true
+	
+	Global.showToast("Generate wallet successfully")
 
 func _on_cancel_pressed() -> void:
 	get_tree().change_scene_to_file("res://root.tscn")
@@ -87,10 +89,12 @@ func _on_cancel_pressed() -> void:
 func _on_wallet_tree_button_clicked(item: TreeItem, column: int, id: int, mouse_button_index: int) -> void:
 	var label = item.get_text(column)
 	DisplayServer.clipboard_set(label)
+	Global.showToast("Copied")
 
 
 func _on_button_pressed() -> void:
 	if wallet == null:
 		return
 	suiSDK.importFromMnemonic(wallet.get_mnemonic())
+	Global.showToast("Import wallet " + wallet.get_address() + " successfully")
 	_on_cancel_pressed()

@@ -6,10 +6,15 @@ var objectType = "0x48a557eb090729457000b7303796c4447abea2362b009988b3ab7445b60e
 
 func _http_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray, image: Image):
 	var headersString: String = " ".join(headers)
+	print(headersString)
 	if "png" in headersString:
 		image.load_png_from_buffer(body)
 	elif "image/jpeg" in headersString || "image/jpg" in headersString:
 		image.load_jpg_from_buffer(body)
+
+func handleCopyNftId(nftId: String):
+	DisplayServer.clipboard_set(nftId)
+	Global.showToast("Copied")
 
 func getListNfts():
 	if Global.currentWallet != "":
@@ -23,12 +28,28 @@ func getListNfts():
 			var nftContent = JSON.parse_string(nft.get_content())
 			print(nftContent)
 			var nftURI = nftContent.url
+			var nftId: String = nftContent.id.id
 			var vBox = VBoxContainer.new()
 			var hBox = HBoxContainer.new()
 			var image = Image.new()
 
 			var httpRequest = HTTPRequest.new()
 			self.add_child(httpRequest)
+
+			var idLabel: Label = Label.new()
+			var idTextLabel: Label = Label.new()
+			idLabel.text = "ID: #"
+			idTextLabel.text = nftId.substr(0, 6) + "..." + nftId.substr(nftId.length() - 6, nftId.length())
+
+			var buttonCopy: Texture2D = load("res://icons/copy.svg")
+			var boxId = HBoxContainer.new()
+			var buttonCopyId = TextureButton.new()
+			buttonCopyId.texture_normal = buttonCopy
+			buttonCopyId.connect("pressed", func(): handleCopyNftId(nftId))
+			boxId.add_child(idLabel)
+			boxId.add_child(idTextLabel)
+			boxId.add_child(buttonCopyId)
+			boxId.add_theme_constant_override("separation", 0)
 
 			var nameLabel: Label = Label.new()
 			var descriptionLabel: Label = Label.new()
@@ -50,6 +71,7 @@ func getListNfts():
 			
 			texture.texture = textureImage
 			vBox.add_child(texture)
+			vBox.add_child(boxId)
 			vBox.add_child(nameLabel)
 			vBox.add_child(descriptionLabel)
 			hBox.add_child(vBox)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5lfpqvt8krrq"]
+[gd_scene load_steps=24 format=3 uid="uid://c5lfpqvt8krrq"]
 
 [ext_resource type="Script" path="res://root.gd" id="1_4e471"]
 [ext_resource type="Script" path="res://root_wallet.gd" id="1_yagtv"]
@@ -7,11 +7,37 @@
 [ext_resource type="Script" path="res://root_multi_sig.gd" id="5_u1tto"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihrby"]
+bg_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kk20w"]
+bg_color = Color(0.0117647, 0.0823529, 0.145098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7unm"]
 bg_color = Color(0.0117647, 0.0823529, 0.145098, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m11gy"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0.0862745, 0.694118, 1, 0.847059)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgjj2"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ckcq8"]
+content_margin_left = 30.0
+content_margin_right = 30.0
+bg_color = Color(0.141176, 0.168627, 0.25098, 0)
+border_width_bottom = 1
+border_color = Color(0.168627, 0.231373, 0.352941, 1)
+shadow_color = Color(0.168627, 0.231373, 0.352941, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h7ke"]
+content_margin_left = 8.0
 bg_color = Color(0.141176, 0.168627, 0.25098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7j36y"]
@@ -73,8 +99,12 @@ offset_top = 1.0
 offset_right = 1152.0
 offset_bottom = 644.0
 theme_override_styles/tab_focus = SubResource("StyleBoxFlat_ihrby")
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_kk20w")
 theme_override_styles/panel = SubResource("StyleBoxFlat_a7unm")
-current_tab = 3
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_m11gy")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_qgjj2")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_ckcq8")
+current_tab = 2
 
 [node name="Wallet" type="TabBar" parent="TabContainer"]
 visible = false
@@ -96,7 +126,7 @@ offset_right = -20.0
 offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Wallet/VBoxContainer"]
 layout_mode = 2
@@ -109,6 +139,7 @@ size_flags_horizontal = 3
 [node name="LineEdit" type="LineEdit" parent="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_0h7ke")
 placeholder_text = "Enter the wallet address"
 
@@ -117,19 +148,19 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="Create Wallet" type="Button" parent="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 50)
+custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_7j36y")
 text = "Gen Wallet"
 
 [node name="Button" type="Button" parent="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_jx5u4")
 text = "Gen & Add wallet"
 
 [node name="Button2" type="Button" parent="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(180, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_gyte4")
 text = "Import wallet"
@@ -193,9 +224,10 @@ layout_mode = 2
 text = "Wallet"
 
 [node name="walletsOption" type="OptionButton" parent="TabContainer/Balance/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxTexture_d3vt6")
 
 [node name="action" type="HBoxContainer" parent="TabContainer/Balance/VBoxContainer"]
@@ -204,13 +236,13 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="action1" type="Button" parent="TabContainer/Balance/VBoxContainer/action"]
-custom_minimum_size = Vector2(130, 50)
+custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
 text = "Faucet"
 
 [node name="action2" type="Button" parent="TabContainer/Balance/VBoxContainer/action"]
-custom_minimum_size = Vector2(130, 50)
+custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
 text = "Send"
@@ -229,7 +261,6 @@ size_flags_vertical = 3
 theme_override_constants/separation = 20
 
 [node name="NFT" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 script = ExtResource("4_ngr5i")
 metadata/_tab_index = 2
@@ -256,9 +287,10 @@ layout_mode = 2
 text = "Wallet"
 
 [node name="walletsOption" type="OptionButton" parent="TabContainer/NFT/VBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxTexture_d3vt6")
 
 [node name="action" type="HBoxContainer" parent="TabContainer/NFT/VBoxContainer/VBoxContainer2"]
@@ -267,13 +299,13 @@ theme_override_constants/separation = 20
 alignment = 2
 
 [node name="action1" type="Button" parent="TabContainer/NFT/VBoxContainer/VBoxContainer2/action"]
-custom_minimum_size = Vector2(130, 50)
+custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
 text = "Mint"
 
 [node name="action2" type="Button" parent="TabContainer/NFT/VBoxContainer/VBoxContainer2/action"]
-custom_minimum_size = Vector2(130, 50)
+custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
 text = "Transfer"
@@ -301,6 +333,7 @@ theme_override_constants/v_separation = 10
 columns = 4
 
 [node name="MultiSig" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("5_u1tto")
 metadata/_tab_index = 3

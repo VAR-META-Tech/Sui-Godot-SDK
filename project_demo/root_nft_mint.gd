@@ -63,5 +63,6 @@ func _on_mint_pressed() -> void:
 	if owner.text == "" || name.text == "" || description.text == "" || uri.text == "":
 		return
 		
-	suiSDK.mintNft(packageId, owner.text, name.text, description.text, uri.text)
+	var message = suiSDK.mintNft(packageId, owner.text, name.text, description.text, uri.text)
+	Global.showToast(message)
 	returnRoot()	

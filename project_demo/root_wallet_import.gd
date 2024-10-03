@@ -26,6 +26,7 @@ func _on_button_pressed() -> void:
 		privateKeyError.visible = false
 	
 	suiSDK.importFromPrivateKey(privateKey.text)
+	Global.showToast("Import wallet successfully")
 	backToWallet()
 
 
@@ -41,6 +42,7 @@ func _on_import_mnemonic_button_pressed() -> void:
 		mnemonicError.visible = false
 
 	suiSDK.importFromMnemonic(mnemonic.text)
+	Global.showToast("Import wallet successfully")
 	backToWallet()
 
 
