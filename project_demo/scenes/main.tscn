@@ -225,7 +225,7 @@ offset_bottom = 647.0
 theme_override_styles/tab_focus = SubResource("StyleBoxTexture_4k8t6")
 theme_override_styles/tabbar_background = SubResource("StyleBoxTexture_fy3eu")
 theme_override_styles/panel = SubResource("StyleBoxTexture_vqykd")
-current_tab = 3
+current_tab = 0
 tabs_visible = false
 all_tabs_in_front = true
 
@@ -550,6 +550,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Nfts" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("4_pdyft")
 metadata/_tab_index = 3
@@ -665,7 +666,6 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ykgew")
 
 [node name="Multisig" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 

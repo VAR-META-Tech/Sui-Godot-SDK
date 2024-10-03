@@ -6,8 +6,6 @@ var objectType = "0x48a557eb090729457000b7303796c4447abea2362b009988b3ab7445b60e
 
 func _http_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray, image: Image):
 	var headersString: String = " ".join(headers)
-	print(headers)
-	print("image/png" in headersString)
 	if "png" in headersString:
 		image.load_png_from_buffer(body)
 	elif "image/jpeg" in headersString || "image/jpg" in headersString:
@@ -16,6 +14,9 @@ func _http_request_completed(result: int, response_code: int, headers: PackedStr
 func getListNfts():
 	if Global.currentWallet != "":
 		var nftsList = get_node("VBoxContainer/ScrollContainer/nftsList")
+		for nft in nftsList.get_children():
+			nftsList.remove_child(nft)
+
 		var nfts = suiSDK.getWalletObjects(Global.currentWallet, objectType)
 
 		for nft in nfts:

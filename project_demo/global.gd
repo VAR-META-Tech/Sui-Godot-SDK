@@ -1,6 +1,6 @@
 extends Node
 
-var tabIndex = 2
+var tabIndex = 3
 var currentWallet: String = ""
 
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://c5lfpqvt8krrq"]
+[gd_scene load_steps=20 format=3 uid="uid://c5lfpqvt8krrq"]
 
 [ext_resource type="Script" path="res://root.gd" id="1_4e471"]
 [ext_resource type="Script" path="res://root_wallet.gd" id="1_yagtv"]
 [ext_resource type="Script" path="res://root_balance.gd" id="2_0lirm"]
 [ext_resource type="Script" path="res://root_nft.gd" id="4_ngr5i"]
+[ext_resource type="Script" path="res://root_multi_sig.gd" id="5_u1tto"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihrby"]
 
@@ -54,6 +55,16 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxksm"]
+content_margin_left = 8.0
+bg_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4rmt"]
+content_margin_left = 8.0
+bg_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqvib"]
+
 [node name="Root" type="Node2D"]
 script = ExtResource("1_4e471")
 
@@ -63,7 +74,7 @@ offset_right = 1152.0
 offset_bottom = 644.0
 theme_override_styles/tab_focus = SubResource("StyleBoxFlat_ihrby")
 theme_override_styles/panel = SubResource("StyleBoxFlat_a7unm")
-current_tab = 2
+current_tab = 3
 
 [node name="Wallet" type="TabBar" parent="TabContainer"]
 visible = false
@@ -218,6 +229,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 20
 
 [node name="NFT" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("4_ngr5i")
 metadata/_tab_index = 2
@@ -288,6 +300,346 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 4
 
+[node name="MultiSig" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+script = ExtResource("5_u1tto")
+metadata/_tab_index = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MultiSig"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 1132.0
+offset_bottom = 571.0
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MultiSig/HBoxContainer"]
+custom_minimum_size = Vector2(350, 150)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="AddresssesVBoxContainer" type="VBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="AddressBoxContainer" type="VBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer/AddressBoxContainer"]
+layout_mode = 2
+text = "Wallet"
+
+[node name="walletsOption" type="OptionButton" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer/AddressBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxTexture_d3vt6")
+
+[node name="Label2" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer/AddressBoxContainer"]
+layout_mode = 2
+text = "Weight"
+
+[node name="LineEdit" type="LineEdit" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer/AddressBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_wxksm")
+placeholder_text = "Enter the weight of wallet"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="addWallet" type="Button" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Add more address"
+
+[node name="addressesError" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label3" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Threshold"
+
+[node name="thresholdLineEdit" type="LineEdit" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4rmt")
+placeholder_text = "Enter the threshold"
+
+[node name="thresholdError" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="getSig" type="Button" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Get Multi-Sig"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/MultiSig/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "MultiSig address:"
+
+[node name="multiSigAddress" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="faucet" type="Button" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Faucet"
+
+[node name="copySigAddress" type="Button" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Copy"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "MultiSig bytes:"
+
+[node name="multiSigBytes" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="copySigBytes" type="Button" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Copy"
+
+[node name="multiSigError" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="Panel" type="Panel" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uqvib")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "From Wallet"
+
+[node name="fromWallet" type="LineEdit" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4rmt")
+placeholder_text = "Enter the from wallet address"
+
+[node name="fromWalletError" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "To Wallet"
+
+[node name="toWallet" type="LineEdit" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4rmt")
+placeholder_text = "Enter the to wallet address"
+
+[node name="toWalletError" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label3" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Amount"
+
+[node name="amount" type="LineEdit" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4rmt")
+placeholder_text = "Enter the amount"
+
+[node name="amountError" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="button" type="Button" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2/VBoxContainer2"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Create Tx"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Tx bytes:"
+
+[node name="txBytes" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="copyTxBytes" type="Button" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Copy"
+
+[node name="txError" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="Panel3" type="Panel" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uqvib")
+
+[node name="Label2" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Address confirm:"
+
+[node name="ScrollContainerListAddress" type="ScrollContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainerListAddress" type="VBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/ScrollContainerListAddress"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="confirmAddressError" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="signAndExecuteTx" type="Button" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Sign & execute transaction"
+
 [connection signal="tab_clicked" from="TabContainer" to="." method="_on_tab_container_tab_clicked"]
 [connection signal="text_changed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer2/LineEdit" to="TabContainer/Wallet" method="_on_line_edit_text_changed"]
 [connection signal="pressed" from="TabContainer/Wallet/VBoxContainer/HBoxContainer/HBoxContainer/Create Wallet" to="TabContainer/Wallet" method="_on_create_wallet_pressed"]
@@ -301,3 +653,12 @@ columns = 4
 [connection signal="item_selected" from="TabContainer/NFT/VBoxContainer/VBoxContainer2/walletsOption" to="TabContainer/NFT" method="_on_wallets_option_item_selected"]
 [connection signal="pressed" from="TabContainer/NFT/VBoxContainer/VBoxContainer2/action/action1" to="TabContainer/NFT" method="_on_action_1_pressed"]
 [connection signal="pressed" from="TabContainer/NFT/VBoxContainer/VBoxContainer2/action/action2" to="TabContainer/NFT" method="_on_action_2_pressed"]
+[connection signal="item_selected" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer/AddressBoxContainer/walletsOption" to="TabContainer/NFT" method="_on_wallets_option_item_selected"]
+[connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer/HBoxContainer/addWallet" to="TabContainer/MultiSig" method="_on_add_wallet_pressed"]
+[connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer/HBoxContainer2/getSig" to="TabContainer/MultiSig" method="_on_get_sig_pressed"]
+[connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/faucet" to="TabContainer/MultiSig" method="_on_faucet_pressed"]
+[connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/copySigAddress" to="TabContainer/MultiSig" method="_on_copy_sig_address_pressed"]
+[connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/copySigBytes" to="TabContainer/MultiSig" method="_on_copy_sig_bytes_pressed"]
+[connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2/VBoxContainer2/button" to="TabContainer/MultiSig" method="_on_button_pressed"]
+[connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer4/copyTxBytes" to="TabContainer/MultiSig" method="_on_copy_tx_bytes_pressed"]
+[connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/signAndExecuteTx" to="TabContainer/MultiSig" method="_on_sign_and_execute_tx_pressed"]
