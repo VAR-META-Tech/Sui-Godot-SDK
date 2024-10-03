@@ -24,6 +24,8 @@ Global="*res://global.gd"
 window/size/viewport_width=2304
 window/size/viewport_height=1296
 window/size/resizable=false
+window/stretch/scale=2.0
+window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
