@@ -49,10 +49,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -376.5
+offset_left = -250.0
 offset_top = 40.0
-offset_right = 376.5
-offset_bottom = 339.0
+offset_right = 250.0
+offset_bottom = 379.0
 grow_horizontal = 2
 theme_override_constants/separation = 20
 
@@ -68,6 +68,7 @@ theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "From"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer"]
@@ -75,9 +76,10 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="sender" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_xf4vw")
 placeholder_text = "Enter the wallet address"
 
@@ -93,6 +95,7 @@ theme_override_constants/separation = 10
 
 [node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "To"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
@@ -100,9 +103,10 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="to" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_amkn8")
 placeholder_text = "Enter the wallet address"
 
@@ -118,6 +122,7 @@ theme_override_constants/separation = 10
 
 [node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "NFT ID"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3"]
@@ -125,9 +130,10 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="nftId" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_amkn8")
 placeholder_text = "Enter the NFT ID"
 
@@ -143,13 +149,13 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 20
 
 [node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_g1rig")
 text = "Cancel"
 
 [node name="mint" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(130, 50)
+custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_kulu4")
 text = "Transfer"

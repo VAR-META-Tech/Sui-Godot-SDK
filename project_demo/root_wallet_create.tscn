@@ -53,9 +53,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -359.0
+offset_left = -250.0
 offset_top = 40.0
-offset_right = 408.0
+offset_right = 250.0
 offset_bottom = 612.0
 grow_horizontal = 2
 theme_override_constants/separation = 20
@@ -96,12 +96,14 @@ theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Scheme
 "
 
 [node name="scheme" type="OptionButton" parent="Control/Panel/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 50)
+custom_minimum_size = Vector2(500, 40)
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxTexture_eiv5c")
 item_count = 3
 popup/item_0/text = "ED25519"
@@ -122,11 +124,13 @@ theme_override_constants/separation = 10
 
 [node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Word"
 
 [node name="word" type="OptionButton" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(500, 50)
+custom_minimum_size = Vector2(500, 40)
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxTexture_0ybmx")
 item_count = 5
 popup/item_0/text = "word12"
@@ -151,13 +155,13 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 20
 
 [node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_t6bqi")
 text = "Cancel"
 
 [node name="generate" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_7e02g")
 text = "Generate"

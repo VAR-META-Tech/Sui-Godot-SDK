@@ -174,6 +174,8 @@ func _on_get_sig_pressed() -> void:
 	var multiSigBytesText: Label = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/multiSigBytes")
 	multiSigAddressText.text = multiSigAddress
 	multiSigBytesText.text = "".join(multiSigBytes)
+	
+	Global.showToast("Get multi-sig successfully")
 
 func _on_add_wallet_pressed() -> void:
 	addMoreWallet()
@@ -211,11 +213,13 @@ func handleWeightChange(id: String, value: String):
 func _on_copy_sig_address_pressed() -> void:
 	var multiSigAddressText: Label = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/multiSigAddress")
 	DisplayServer.clipboard_set(multiSigAddressText.text)
+	Global.showToast("Copied")
 
 
 func _on_copy_sig_bytes_pressed() -> void:
 	var multiSigBytesText: Label = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/multiSigBytes")
 	DisplayServer.clipboard_set(multiSigBytesText.text)
+	Global.showToast("Copied")
 
 func _on_button_pressed() -> void:
 	var fromWallet: LineEdit = get_node("HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer/fromWallet")
@@ -250,11 +254,13 @@ func _on_button_pressed() -> void:
 		
 	txBytes = suiSDK.createTransaction(fromWallet.text, toWallet.text, int(amount.text)*10**9)
 	txBytesText.text = "".join(txBytes)
+	Global.showToast("Create transaction successfully")
 
 
 func _on_copy_tx_bytes_pressed() -> void:
 	var txBytesText: Label = get_node("HBoxContainer/VBoxContainer2/HBoxContainer4/txBytes")
 	DisplayServer.clipboard_set(txBytesText.text)
+	Global.showToast("Copied")
 
 func _on_sign_and_execute_tx_pressed() -> void:
 	var multiSigError = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/multiSigError")
@@ -293,9 +299,7 @@ func _on_sign_and_execute_tx_pressed() -> void:
 	#multiSig.set_bytes(multiSigBytes)
 	
 	var message = suiSDK.signAndExecuteTransaction(multiSig, txBytes, addressConfirm)
-	print(message)
-	if message == "Sign and execute transaction success":
-		print("OK")
+	Global.showToast(message)
 
 
 func _on_faucet_pressed() -> void:
@@ -307,4 +311,5 @@ func _on_faucet_pressed() -> void:
 	else:
 		multiSigError.visible = false
 		multiSigError.text = ""
-	suiSDK.requestTokensFromFaucet(multiSigAddress)
+	var message = suiSDK.requestTokensFromFaucet(multiSigAddress)
+	Global.showToast(message)

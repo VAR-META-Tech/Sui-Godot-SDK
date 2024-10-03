@@ -49,7 +49,8 @@ func _on_mint_pressed() -> void:
 	if from.text == "" || to.text == "" || nftId.text == "":
 		return
 		
-	suiSDK.transferNft(packageId, from.text, to.text, nftId.text)
+	var message = suiSDK.transferNft(packageId, from.text, nftId.text, to.text)
+	Global.showToast(message)
 	returnRoot()	
 
 

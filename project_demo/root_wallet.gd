@@ -50,6 +50,7 @@ func _process(delta: float) -> void:
 func _on_tree_button_clicked(item: TreeItem, column: int, id: int, mouse_button_index: int) -> void:
 	var label = item.get_text(column)
 	DisplayServer.clipboard_set(label)
+	Global.showToast("Copied")
 
 func _on_create_wallet_pressed() -> void:
 	get_tree().change_scene_to_file("res://root_wallet_create.tscn")
@@ -75,6 +76,7 @@ func getDetailWallet(walletAddress):
 func _on_button_pressed() -> void:
 	var wallet = sdk.generateAndAddKey()
 	loadWallets()
+	Global.showToast("Added wallet " + wallet.get_address())
 
 
 func _on_button_2_pressed() -> void:

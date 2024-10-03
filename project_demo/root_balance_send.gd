@@ -53,7 +53,8 @@ func _on_send_pressed() -> void:
 	if from.text == "" || receive.text == "" || amount.text == "":
 		return
 		
-	suiSDK.signTransaction(from.text, receive.text, float(amount.text)*10**9)
+	var message = suiSDK.signTransaction(from.text, receive.text, float(amount.text)*10**9)
+	Global.showToast(message)
 	returnRoot()	
 
 

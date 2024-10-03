@@ -88,9 +88,10 @@ func _on_wallets_option_item_selected(index: int) -> void:
 	getCoins(Global.currentWallet)
 
 func _on_action_1_pressed() -> void:
-	suiSDK.requestTokensFromFaucet(Global.currentWallet)
+	var message = suiSDK.requestTokensFromFaucet(Global.currentWallet)
 	getBalance(Global.currentWallet)
 	getCoins(Global.currentWallet)
+	Global.showToast(message)
 
 
 func _on_action_2_pressed() -> void:
