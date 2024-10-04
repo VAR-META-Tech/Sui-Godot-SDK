@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 	pass
 
 func backToWallet():
-	get_tree().change_scene_to_file("res://root.tscn")
+	Global.changeScene(Global.SCREEN.ROOT)
 
 func _on_button_pressed() -> void:
 	var privateKey: LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/privateKey")

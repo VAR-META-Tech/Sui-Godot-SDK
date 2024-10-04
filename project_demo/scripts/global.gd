@@ -29,3 +29,24 @@ func showToast(message: String):
 		"text_size": 16,                  # [optional] Text (font) size // experimental (warning!)
 		"use_font": false                 # [optional] Use custom ToastParty font // experimental (warning!)
 	})
+
+enum SCREEN {
+	ROOT,
+	ROOT_BALACNE_SEND,
+	ROOT_NFT_MINT,
+	ROOT_NFT_TRANSFER,
+	ROOT_WALLET_CREATE,
+	ROOT_WALLET_IMPORT
+}
+
+func changeScene(scene):
+	var path = ""
+	match scene:
+		SCREEN.ROOT: path = "res://scenes/root.tscn"
+		SCREEN.ROOT_BALACNE_SEND: path = "res://scenes/root_balance_send.tscn"
+		SCREEN.ROOT_NFT_MINT: path = "res://scenes/root_nft_mint.tscn"
+		SCREEN.ROOT_NFT_TRANSFER: path = "res://scenes/root_nft_transfer.tscn"
+		SCREEN.ROOT_WALLET_CREATE: path = "res://scenes/root_wallet_create.tscn"
+		SCREEN.ROOT_WALLET_IMPORT: path = "res://scenes/root_wallet_import.tscn"
+	
+	get_tree().change_scene_to_file(path)

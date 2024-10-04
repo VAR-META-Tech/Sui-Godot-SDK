@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	pass
 	
 func returnRoot():
-	get_tree().change_scene_to_file("res://root.tscn")
+	Global.changeScene(Global.SCREEN.ROOT)
 
 func _on_mint_pressed() -> void:
 	var from:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/sender")
