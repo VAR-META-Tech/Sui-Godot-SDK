@@ -123,8 +123,8 @@ func _on_wallets_option_item_selected(index: int) -> void:
 
 
 func _on_action_1_pressed() -> void:
-	get_tree().change_scene_to_file("res://root_nft_mint.tscn")
+	Global.changeScene(Global.SCREEN.ROOT_NFT_MINT)
 
 
 func _on_action_2_pressed() -> void:
-	get_tree().change_scene_to_file("res://root_nft_transfer.tscn")
+	Global.changeScene(Global.SCREEN.ROOT_NFT_TRANSFER)

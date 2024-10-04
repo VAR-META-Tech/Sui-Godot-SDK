@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	pass
 
 func returnRoot():
-	get_tree().change_scene_to_file("res://root.tscn")
+	Global.changeScene(Global.SCREEN.ROOT)
 
 
 func _on_cancel_pressed() -> void:

@@ -83,7 +83,7 @@ func _on_generate_pressed() -> void:
 	Global.showToast("Generate wallet successfully")
 
 func _on_cancel_pressed() -> void:
-	get_tree().change_scene_to_file("res://root.tscn")
+	Global.changeScene(Global.SCREEN.ROOT)
 
 
 func _on_wallet_tree_button_clicked(item: TreeItem, column: int, id: int, mouse_button_index: int) -> void:

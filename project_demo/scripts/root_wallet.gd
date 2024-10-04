@@ -53,7 +53,7 @@ func _on_tree_button_clicked(item: TreeItem, column: int, id: int, mouse_button_
 	Global.showToast("Copied")
 
 func _on_create_wallet_pressed() -> void:
-	get_tree().change_scene_to_file("res://root_wallet_create.tscn")
+	Global.changeScene(Global.SCREEN.ROOT_WALLET_CREATE)
 
 func _on_line_edit_text_changed(new_text: String) -> void:
 	if new_text.length() == 66:
@@ -80,4 +80,4 @@ func _on_button_pressed() -> void:
 
 
 func _on_button_2_pressed() -> void:
-	get_tree().change_scene_to_file("res://root_wallet_import.tscn")
+	Global.changeScene(Global.SCREEN.ROOT_WALLET_IMPORT)

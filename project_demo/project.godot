@@ -24,7 +24,7 @@ ToastParty="*res://addons/toastparty/toast-autoload.gd"
 
 window/size/viewport_width=1728
 window/size/viewport_height=972
-window/size/resizable=false
+window/stretch/mode="viewport"
 window/stretch/scale=1.5
 
 [editor_plugins]

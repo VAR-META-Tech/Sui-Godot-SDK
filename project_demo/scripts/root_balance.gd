@@ -95,8 +95,4 @@ func _on_action_1_pressed() -> void:
 
 
 func _on_action_2_pressed() -> void:
-	get_tree().change_scene_to_file("res://root_balance_send.tscn")
-
-
-func _on_action_3_pressed() -> void:
-	get_tree().change_scene_to_file("res://root_balance_send.tscn")
+	Global.changeScene(Global.SCREEN.ROOT_BALACNE_SEND)
