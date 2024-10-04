@@ -74,6 +74,27 @@ func newWeight(id: String):
 	
 	return weightLineEdit
 
+func deleteWallet(uuid:String,addressBoxContainer):
+	var addresssesVBoxContainer = get_node("HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer")
+	walletsSelected.erase(uuid)
+	weightSelected.erase(uuid)
+	addresssesVBoxContainer.remove_child(addressBoxContainer)
+	renderListAddress()
+
+func newDeleteBtn(id: String,addressBoxContainer):
+	var hbox= HBoxContainer.new()
+	hbox.alignment = BoxContainer.ALIGNMENT_END
+	hbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	
+	var delTextureButton = TextureButton.new()
+	var buttonCopy: Texture2D = load("res://icons/trash.svg")
+	delTextureButton.texture_normal = buttonCopy
+	delTextureButton.connect("pressed", func(): deleteWallet(id,addressBoxContainer))
+
+	hbox.add_child(delTextureButton)
+	
+	return hbox
+
 func addMoreWallet():
 	var uuid = uuid_generator.generate_uuid_v4()
 	var addresssesVBoxContainer = get_node("HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer")
@@ -90,11 +111,13 @@ func addMoreWallet():
 	weightLabel.add_theme_font_size_override("font_size", 12)
 
 	var weightLineEdit = newWeight(uuid)
+	var deleteBtn = newDeleteBtn(uuid,addressBoxContainer)
 
 	addressBoxContainer.add_child(walletLabel)
 	addressBoxContainer.add_child(walletsOption)
 	addressBoxContainer.add_child(weightLabel)
 	addressBoxContainer.add_child(weightLineEdit)
+	addressBoxContainer.add_child(deleteBtn)
 	
 	addresssesVBoxContainer.add_child(addressBoxContainer)
 	walletsSelected[uuid] = ""
