@@ -104,10 +104,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_a7unm")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_m11gy")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_qgjj2")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_ckcq8")
-current_tab = 2
+current_tab = 0
 
 [node name="Wallet" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 clip_tabs = false
 max_tab_width = 200
@@ -261,6 +260,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 20
 
 [node name="NFT" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("4_ngr5i")
 metadata/_tab_index = 2
