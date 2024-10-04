@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="sui_demo"
-run/main_scene="res://root.tscn"
+run/main_scene="res://scenes/root.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://icons/icon.svg"
 
 [autoload]
 
-Global="*res://global.gd"
+Global="*res://scripts/global.gd"
 ToastParty="*res://addons/toastparty/toast-autoload.gd"
 
 [display]

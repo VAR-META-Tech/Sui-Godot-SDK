@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b8ornriwv6j0t"]
 
-[ext_resource type="Texture2D" uid="uid://kgwxw3xpfgkx" path="res://icons/copy.svg" id="1_s4jri"]
-[ext_resource type="Script" path="res://root_nft_transfer.gd" id="1_wbl0n"]
+[ext_resource type="Script" path="res://scripts/root_nft_transfer.gd" id="1_px0sq"]
+[ext_resource type="Texture2D" uid="uid://kgwxw3xpfgkx" path="res://icons/copy.svg" id="2_ejerm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpbni"]
 bg_color = Color(0.0117647, 0.0823529, 0.145098, 1)
@@ -21,7 +21,7 @@ bg_color = Color(0.278431, 0.32549, 0.396078, 1)
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
 
 [node name="RootNftTransfer" type="Node2D"]
-script = ExtResource("1_wbl0n")
+script = ExtResource("1_px0sq")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -207,7 +207,7 @@ layout_mode = 2
 
 [node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer/HBoxContainer"]
 position = Vector2(124, 14)
-texture = ExtResource("1_s4jri")
+texture = ExtResource("2_ejerm")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
 layout_mode = 2
@@ -221,7 +221,7 @@ layout_mode = 2
 
 [node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer2"]
 position = Vector2(196, 14)
-texture = ExtResource("1_s4jri")
+texture = ExtResource("2_ejerm")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
 layout_mode = 2
@@ -235,7 +235,7 @@ layout_mode = 2
 
 [node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer3"]
 position = Vector2(196, 14)
-texture = ExtResource("1_s4jri")
+texture = ExtResource("2_ejerm")
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
 layout_mode = 2
@@ -249,7 +249,7 @@ layout_mode = 2
 
 [node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer4"]
 position = Vector2(196, 14)
-texture = ExtResource("1_s4jri")
+texture = ExtResource("2_ejerm")
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
 layout_mode = 2
@@ -263,7 +263,7 @@ layout_mode = 2
 
 [node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer5"]
 position = Vector2(196, 14)
-texture = ExtResource("1_s4jri")
+texture = ExtResource("2_ejerm")
 
 [connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/mint" to="." method="_on_mint_pressed"]
