@@ -16,17 +16,9 @@ bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1rig"]
 bg_color = Color(0.278431, 0.32549, 0.396078, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kulu4"]
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [node name="RootNftTransfer" type="Node2D"]
 script = ExtResource("1_wbl0n")
