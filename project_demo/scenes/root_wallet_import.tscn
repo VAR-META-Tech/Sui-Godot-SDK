@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://blk7e0cs2rqsg"]
+[gd_scene load_steps=12 format=3 uid="uid://blk7e0cs2rqsg"]
 
 [ext_resource type="Script" path="res://scripts/root_wallet_import.gd" id="1_qco45"]
 [ext_resource type="Texture2D" uid="uid://kgwxw3xpfgkx" path="res://icons/copy.svg" id="2_6pe4t"]
@@ -10,18 +10,27 @@ bg_color = Color(0.0117647, 0.0823529, 0.145098, 1)
 content_margin_left = 8.0
 bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ucqe8"]
+bg_color = Color(0.278431, 0.32549, 0.396078, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5os1"]
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8wxm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfu54"]
 content_margin_left = 8.0
 bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_r5jwf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kin4j"]
+content_margin_left = 8.0
+texture = SubResource("CanvasTexture_r5jwf")
+modulate_color = Color(0.168627, 0.231373, 0.352941, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cq4ej"]
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ucqe8"]
-bg_color = Color(0.278431, 0.32549, 0.396078, 1)
 
 [node name="RootWalletImport" type="Node2D"]
 script = ExtResource("1_qco45")
@@ -54,7 +63,7 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Import Wallet"
+text = "Import wallet from private key"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
@@ -64,7 +73,7 @@ theme_override_constants/separation = 10
 [node name="Label" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Import from private key"
+text = "Private key"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -78,17 +87,39 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_g22my")
 placeholder_text = "Enter the private key of wallet"
 
-[node name="importPrivateKeyButton" type="Button" parent="Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(120, 40)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_e5os1")
-text = "Import"
-
 [node name="privateKeyError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
 theme_override_font_sizes/font_size = 12
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ucqe8")
+text = "Cancel"
+
+[node name="importPrivateKeyButton" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_e5os1")
+text = "Import"
+
+[node name="Panel" type="Panel" parent="Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v8wxm")
+
+[node name="Label2" type="Label" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Import wallet from mnemonic"
+horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2
@@ -97,13 +128,9 @@ theme_override_constants/separation = 10
 [node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Import from mnemonic"
+text = "Mnemonic"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="LineEdit" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="mnemonic" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -111,13 +138,57 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_dfu54")
 placeholder_text = "Enter the mnemonic of wallet"
 
-[node name="importMnemonicButton" type="Button" parent="Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(120, 40)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_cq4ej")
-text = "Import"
-
 [node name="mnemonicError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Scheme"
+
+[node name="scheme" type="OptionButton" parent="Control/Panel/VBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(500, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxTexture_kin4j")
+item_count = 3
+popup/item_0/text = "ED25519"
+popup/item_1/text = "Secp256k1"
+popup/item_1/id = 1
+popup/item_2/text = "Secp256r1"
+popup/item_2/id = 2
+
+[node name="schemeError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer3"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Alias"
+
+[node name="alias" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer4"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_dfu54")
+placeholder_text = "Enter the alias of wallet"
+
+[node name="aliasError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer4"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
@@ -133,6 +204,12 @@ custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ucqe8")
 text = "Cancel"
+
+[node name="importMnemonicButton" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cq4ej")
+text = "Import"
 
 [node name="panelResult" type="Panel" parent="Control/Panel"]
 visible = false
@@ -247,6 +324,7 @@ layout_mode = 2
 position = Vector2(196, 14)
 texture = ExtResource("2_6pe4t")
 
-[connection signal="pressed" from="Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/importPrivateKeyButton" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer/importMnemonicButton" to="." method="_on_import_mnemonic_button_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer2/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer2/importPrivateKeyButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/importMnemonicButton" to="." method="_on_import_mnemonic_button_pressed"]

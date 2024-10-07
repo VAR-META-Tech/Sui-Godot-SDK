@@ -11,6 +11,7 @@ public:
 	String signTransaction(String sender, String recipient, unsigned long long int amount);
 	String programmableTransactionAllowSponser(String sender_address, String recipient_address, unsigned long long int amount, String sponser_address);
 	String requestTokensFromFaucet(String address_str);
+	String programmableTransactionBuilder(String sender, String recipient, unsigned long long int amount);
 };
 
 #endif

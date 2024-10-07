@@ -48,6 +48,7 @@ void SuiSDK::_bind_methods()
 	 * Transaction
 	 */
 	ClassDB::bind_method(D_METHOD("signTransaction", "sender_address", "recipient_address", "amount"), &SuiSDK::signTransaction);
+	ClassDB::bind_method(D_METHOD("programmableTransactionBuilder", "sender_address", "recipient_address", "amount"), &SuiSDK::programmableTransactionBuilder);
 	ClassDB::bind_method(D_METHOD("programmableTransactionAllowSponser", "sender_address", "recipient_address", "amount", "sponser_address"), &SuiSDK::programmableTransactionAllowSponser);
 	ClassDB::bind_method(D_METHOD("requestTokensFromFaucet", "address"), &SuiSDK::requestTokensFromFaucet);
 
@@ -59,7 +60,7 @@ void SuiSDK::_bind_methods()
 	ClassDB::bind_method(D_METHOD("generateAndAddKey"), &SuiSDK::generateAndAddKey);
 	ClassDB::bind_method(D_METHOD("getWalletFromAddress", "address"), &SuiSDK::getWalletFromAddress);
 	ClassDB::bind_method(D_METHOD("importFromPrivateKey", "key_base64"), &SuiSDK::importFromPrivateKey);
-	ClassDB::bind_method(D_METHOD("importFromMnemonic", "mnemonic"), &SuiSDK::importFromMnemonic);
+	ClassDB::bind_method(D_METHOD("importFromMnemonic", "mnemonic", "scheme", "alias"), &SuiSDK::importFromMnemonic);
 
 	// ClassDB::bind_method(D_METHOD("set_amplitude", "p_amplitude"), &GDExample::set_amplitude);
 	// ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "amplitude"), "set_amplitude", "get_amplitude");

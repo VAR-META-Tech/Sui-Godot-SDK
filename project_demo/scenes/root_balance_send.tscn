@@ -14,11 +14,11 @@ bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 content_margin_left = 8.0
 bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0m428"]
-bg_color = Color(0.278431, 0.32549, 0.396078, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jug3o"]
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0m428"]
+bg_color = Color(0.278431, 0.32549, 0.396078, 1)
 
 [node name="RootBalanceSend" type="Node2D"]
 script = ExtResource("1_lkn84")
@@ -140,12 +140,6 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_0m428")
-text = "Cancel"
-
 [node name="send" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -158,6 +152,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_jug3o")
 text = "Send with sponsor"
+
+[node name="sendTxBuilder" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_jug3o")
+text = "Send by tx builder"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_0m428")
+text = "Cancel"
 
 [node name="panelResult" type="Panel" parent="Control/Panel"]
 visible = false
@@ -272,6 +282,7 @@ layout_mode = 2
 position = Vector2(196, 14)
 texture = ExtResource("2_3f8mt")
 
-[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/send" to="." method="_on_send_pressed"]
 [connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/sendWithSponsor" to="." method="_on_send_with_sponsor_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/sendTxBuilder" to="." method="_on_send_tx_builder_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer2/cancel" to="." method="_on_cancel_pressed"]

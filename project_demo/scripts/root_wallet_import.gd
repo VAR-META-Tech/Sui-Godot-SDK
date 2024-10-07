@@ -25,14 +25,32 @@ func _on_button_pressed() -> void:
 		privateKeyError.text = ""
 		privateKeyError.visible = false
 	
-	suiSDK.importFromPrivateKey(privateKey.text)
-	Global.showToast("Import wallet successfully")
-	backToWallet()
-
+	var importResult = suiSDK.importFromPrivateKey(privateKey.text)
+	if importResult.get_status() == 0:
+		Global.showToast("Import wallet " + importResult.get_address() + " successfully")
+		backToWallet()
+	else:
+		Global.showToast(importResult.get_error())
 
 func _on_import_mnemonic_button_pressed() -> void:
-	var mnemonic: LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit")
+	var mnemonic: LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/mnemonic")
 	var mnemonicError: Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/mnemonicError")
+	var scheme: OptionButton = get_node("Control/Panel/VBoxContainer/VBoxContainer3/scheme")
+	var schemeIndex = scheme.get_selected_id()
+	var schemeError: Label = get_node("Control/Panel/VBoxContainer/VBoxContainer3/schemeError")
+	var alias: LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer4/alias")
+	var aliasError: Label = get_node("Control/Panel/VBoxContainer/VBoxContainer4/aliasError")
+	
+	var isError = false
+
+	if schemeIndex == -1:
+		schemeError.text = "Scheme is requred"
+		schemeError.visible = true
+		isError = true
+	else:
+		schemeError.text = ""
+		schemeError.visible = false
+	
 	if mnemonic.text.length() == 0:
 		mnemonicError.text = "Mnemonic is requred"
 		mnemonicError.visible = true
@@ -40,11 +58,31 @@ func _on_import_mnemonic_button_pressed() -> void:
 	else:
 		mnemonicError.text = ""
 		mnemonicError.visible = false
-
-	suiSDK.importFromMnemonic(mnemonic.text)
-	Global.showToast("Import wallet successfully")
-	backToWallet()
-
+	
+	if alias.text.length() == 0:
+		aliasError.text = "Alias wallet is requred"
+		aliasError.visible = true
+		return
+	else:
+		aliasError.text = ""
+		aliasError.visible = false
+		
+	if isError == true:
+		return
+		
+	var schemeValue = scheme.get_item_text(schemeIndex)
+	
+	print(mnemonic.text)
+	print(schemeValue)
+	print(alias.text)
+	
+	var importResult = suiSDK.importFromMnemonic(mnemonic.text, schemeValue, alias.text)
+	
+	if importResult.get_status() == 0:
+		Global.showToast("Import wallet " + importResult.get_address() + " successfully")
+		backToWallet()
+	else:
+		Global.showToast(importResult.get_error())
 
 func _on_cancel_pressed() -> void:
 	backToWallet()

@@ -105,10 +105,7 @@ Ref<ImportResultWrapper> SuiWallet::importFromPrivateKey(String key_base64)
 
 Ref<ImportResultWrapper> SuiWallet::importFromMnemonic(String mnemonic, String sig_scheme, String alias)
 {
-	const char *mnemonic_argument = mnemonic.utf8().get_data();
-	const char *sig_scheme_argument = sig_scheme.utf8().get_data();
-	const char *alias_argument = alias.utf8().get_data();
-	ImportResult *result = import_from_mnemonic(mnemonic_argument, sig_scheme_argument, alias_argument);
+	ImportResult *result = import_from_mnemonic(mnemonic.utf8().get_data(), sig_scheme.utf8().get_data(), alias.utf8().get_data());
 
 	return _makeImportResultStruct(result);
 }
