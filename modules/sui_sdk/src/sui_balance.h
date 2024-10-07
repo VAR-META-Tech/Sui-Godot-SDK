@@ -7,13 +7,15 @@
 #include "core/object/ref_counted.h"
 #include "core/variant/typed_array.h"
 
-struct BalanceStruct {
+struct BalanceStruct
+{
 	String coin_type;
 	long long coin_object_count;
 	String total_balance;
 };
 
-struct CCoinStruct {
+struct CCoinStruct
+{
 	String coin_type;
 	String coin_object_id;
 	String version;
@@ -22,7 +24,8 @@ struct CCoinStruct {
 	String previous_transaction;
 };
 
-class BalanceWrapper : public RefCounted {
+class BalanceWrapper : public RefCounted
+{
 	GDCLASS(BalanceWrapper, RefCounted);
 
 public:
@@ -30,30 +33,37 @@ public:
 	long long coin_object_count;
 	String total_balance;
 
-	void set_coin_type(String p_coin_type) {
+	void set_coin_type(String p_coin_type)
+	{
 		coin_type = p_coin_type;
 	}
-	String get_coin_type() const {
+	String get_coin_type() const
+	{
 		return coin_type;
 	}
 
-	void set_coin_object_count(long long p_coin_object_count) {
+	void set_coin_object_count(long long p_coin_object_count)
+	{
 		coin_object_count = p_coin_object_count;
 	}
 
-	long long get_coin_object_count() const {
+	long long get_coin_object_count() const
+	{
 		return coin_object_count;
 	}
 
-	void set_total_balance(String p_total_balance) {
+	void set_total_balance(String p_total_balance)
+	{
 		total_balance = p_total_balance;
 	}
 
-	String get_total_balance() const {
+	String get_total_balance() const
+	{
 		return total_balance;
 	}
 
-	static void _bind_methods() {
+	static void _bind_methods()
+	{
 		ClassDB::bind_method(D_METHOD("set_coin_type", "coin_type"), &BalanceWrapper::set_coin_type);
 		ClassDB::bind_method(D_METHOD("get_coin_type"), &BalanceWrapper::get_coin_type);
 		ClassDB::bind_method(D_METHOD("set_coin_object_count", "coin_object_count"), &BalanceWrapper::set_coin_object_count);
@@ -63,7 +73,8 @@ public:
 	}
 };
 
-class CoinWrapper : public RefCounted {
+class CoinWrapper : public RefCounted
+{
 	GDCLASS(CoinWrapper, RefCounted);
 
 public:
@@ -97,7 +108,8 @@ public:
 
 	String get_previous_transaction() const { return previous_transaction; }
 
-	static void _bind_methods() {
+	static void _bind_methods()
+	{
 		ClassDB::bind_method(D_METHOD("set_coin_type", "coin_type"), &CoinWrapper::set_coin_type);
 		ClassDB::bind_method(D_METHOD("get_coin_type"), &CoinWrapper::get_coin_type);
 		ClassDB::bind_method(D_METHOD("set_coin_object_id", "coin_object_id"), &CoinWrapper::set_coin_object_id);
@@ -113,7 +125,8 @@ public:
 	}
 };
 
-class SuiBalance {
+class SuiBalance
+{
 public:
 	TypedArray<BalanceWrapper> getBalances(String address);
 	TypedArray<BalanceWrapper> getAllBalancesSync(String address);

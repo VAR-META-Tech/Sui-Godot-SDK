@@ -82,8 +82,11 @@ namespace godot
 		Ref<WalletWrapper> generateWallet(String key_scheme, String word_length) { return SuiWallet::generateWallet(key_scheme, word_length); };
 		Ref<WalletWrapper> generateAndAddKey() { return SuiWallet::generateAndAddKey(); };
 		Ref<WalletWrapper> getWalletFromAddress(String address) { return SuiWallet::getWalletFromAddress(address); };
-		void importFromPrivateKey(String key_base64) { SuiWallet::importFromPrivateKey(key_base64); };
-		String importFromMnemonic(String mnemonic) { return SuiWallet::importFromMnemonic(mnemonic); };
+		Ref<ImportResultWrapper> importFromPrivateKey(String key_base64) { return SuiWallet::importFromPrivateKey(key_base64); };
+		Ref<ImportResultWrapper> importFromMnemonic(String mnemonic, String sig_scheme, String alias)
+		{
+			return SuiWallet::importFromMnemonic(mnemonic, sig_scheme, alias);
+		};
 
 		SuiSDK();
 	};

@@ -1,6 +1,6 @@
 #include "sui_nfts.h"
 
-Ref<WalletObjectWrapper> toWalletObjectWrapper(const WalletObjectStruct &wallet_struct)
+Ref<WalletObjectWrapper> _toWalletObjectWrapper(const WalletObjectStruct &wallet_struct)
 {
 	Ref<WalletObjectWrapper> wrapper = memnew(WalletObjectWrapper);
 	wrapper->set_object_id(wallet_struct.object_id);
@@ -17,7 +17,7 @@ Ref<WalletObjectWrapper> toWalletObjectWrapper(const WalletObjectStruct &wallet_
 	return wrapper;
 }
 
-Ref<WalletObjectWrapper> makeWalletObjectStruct(CSuiObjectData *walletObject)
+Ref<WalletObjectWrapper> _makeWalletObjectStruct(CSuiObjectData *walletObject)
 {
 	WalletObjectStruct walletStructItem;
 	walletStructItem.object_id = walletObject->object_id;
@@ -31,8 +31,12 @@ Ref<WalletObjectWrapper> makeWalletObjectStruct(CSuiObjectData *walletObject)
 	walletStructItem.content = walletObject->content;
 	walletStructItem.bcs = walletObject->bcs;
 
-	return toWalletObjectWrapper(walletStructItem);
+	return _toWalletObjectWrapper(walletStructItem);
 }
+
+/**
+ * Main function
+ */
 
 TypedArray<WalletObjectWrapper> SuiNfts::getWalletObjects(String address, String object_type)
 {
@@ -46,7 +50,7 @@ TypedArray<WalletObjectWrapper> SuiNfts::getWalletObjects(String address, String
 	for (int i = 0; i < wallet_objects.len; i++)
 	{
 		CSuiObjectData *walletObject = &wallet_objects.data[i];
-		walletObjects.append(makeWalletObjectStruct(walletObject));
+		walletObjects.append(_makeWalletObjectStruct(walletObject));
 	}
 
 	freeSuiObjectDataList(wallet_objects);
@@ -65,7 +69,7 @@ String SuiNfts::mintNft(
 		String description,
 		String uri)
 {
-	char *message = mint_nft(
+	const char *message = mint_nft(
 			package_id.utf8().get_data(),
 			sender_address.utf8().get_data(),
 			name.utf8().get_data(),
@@ -80,7 +84,7 @@ String SuiNfts::transferNft(
 		String nft_id,
 		String recipient_address)
 {
-	char *message = transfer_nft(
+	const char *message = transfer_nft(
 			package_id.utf8().get_data(),
 			sender_address.utf8().get_data(),
 			nft_id.utf8().get_data(),

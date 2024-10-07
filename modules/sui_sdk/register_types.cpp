@@ -13,6 +13,7 @@ void initialize_sui_sdk_module(ModuleInitializationLevel p_level)
 
 	ClassDB::register_class<SuiSDK>();
 	ClassDB::register_class<WalletWrapper>();
+	ClassDB::register_class<ImportResultWrapper>();
 	ClassDB::register_class<BalanceWrapper>();
 	ClassDB::register_class<CoinWrapper>();
 	ClassDB::register_class<WalletObjectWrapper>();

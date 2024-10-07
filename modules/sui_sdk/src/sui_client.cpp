@@ -1,8 +1,12 @@
 #include "sui_client.h"
 
+/**
+ * Main function
+ */
+
 String SuiClient::apiVersion()
 {
-	char *version = api_version();
+	const char *version = api_version();
 	return version;
 };
 
@@ -22,9 +26,15 @@ void SuiClient::freeStrings(CStringArray array)
 
 int SuiClient::buildDevNetwork(void)
 {
-	return buildDevnet();
+	return build_devnet();
 }
+
 int SuiClient::buildTestNetwork(void)
 {
-	return buildTestnet();
+	return build_testnet();
+}
+
+int SuiClient::buildMainNetNetwork(void)
+{
+	return build_mainnet();
 }
