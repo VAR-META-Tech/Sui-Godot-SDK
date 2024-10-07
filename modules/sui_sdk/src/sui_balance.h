@@ -9,7 +9,7 @@
 
 struct BalanceStruct {
 	String coin_type;
-	long long coin_object_count;
+	uint32_t coin_object_count;
 	String total_balance;
 };
 
@@ -27,7 +27,7 @@ class BalanceWrapper : public RefCounted {
 
 public:
 	String coin_type;
-	long long coin_object_count;
+	uint32_t coin_object_count;
 	String total_balance;
 
 	void set_coin_type(String p_coin_type) {
@@ -37,11 +37,11 @@ public:
 		return coin_type;
 	}
 
-	void set_coin_object_count(long long p_coin_object_count) {
+	void set_coin_object_count(uint32_t p_coin_object_count) {
 		coin_object_count = p_coin_object_count;
 	}
 
-	long long get_coin_object_count() const {
+	uint32_t get_coin_object_count() const {
 		return coin_object_count;
 	}
 
