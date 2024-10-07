@@ -128,5 +128,5 @@ func _on_send_tx_builder_pressed() -> void:
 		return
 		
 	suiSDK.programmableTransactionBuilder(from.text, receive.text, float(amount.text)*10**9)
-	Global.showToast("Create tx successfully")
+	Global.showToast("Executing the transaction successfully")
 	returnRoot()

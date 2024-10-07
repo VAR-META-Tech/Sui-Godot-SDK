@@ -68,6 +68,22 @@ namespace TestSuiTransactionSDK
     CHECK(result == "Transaction completed successfully");
   }
 
+  TEST_CASE("Sign Transaction Builder")
+  {
+    SuiSDK suiSDK;
+    TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
+    if (wallets.size() < 2)
+    {
+      CHECK(false);
+    }
+
+    Ref<WalletWrapper> sender = wallets[0];
+    Ref<WalletWrapper> recipient = wallets[1];
+    unsigned long long amount = 10000000;
+
+    String result = suiSDK.programmableTransactionBuilder(sender->get_address(), recipient->get_address(), amount);
+    CHECK(result != "");
+  }
 }
 
 #endif

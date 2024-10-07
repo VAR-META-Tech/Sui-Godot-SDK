@@ -133,15 +133,20 @@ namespace TestSuiWalletSDK
   {
     SuiSDK suiSDK;
     String private_key = "ANP7YuU7I0NnwHMJGlRraQ7hcW3XekCecvEysqUTC8Ue";
-    suiSDK.importFromPrivateKey(private_key);
+    Ref<ImportResultWrapper> importResult = suiSDK.importFromPrivateKey(private_key);
+    CHECK(importResult->status == 0);
+    CHECK(importResult->address == "0x552ae47bb91c3eae96e41bfab4aea7b4ca3d1722158d11e5cc8188f8182401e3");
   }
 
   TEST_CASE("Import Wallet from Mnemonic")
   {
     SuiSDK suiSDK;
     String mnemonic = "naive sheriff vehicle hold latin network menu track sniff salon train moon";
-    String address = suiSDK.importFromMnemonic(mnemonic);
-    CHECK(address == "0x552ae47bb91c3eae96e41bfab4aea7b4ca3d1722158d11e5cc8188f8182401e3");
+    const char *scheme = "ED25519";
+    const char *alias = "test";
+    Ref<ImportResultWrapper> importResult = suiSDK.importFromMnemonic(mnemonic, scheme, alias);
+    CHECK(importResult->status == 0);
+    CHECK(importResult->address == "0xfee0108a2467a551f50f3f7c2dc77128406ae314ef4515030dc62accb0c15bcc");
   }
 
   TEST_CASE("Get Wallet From Address")

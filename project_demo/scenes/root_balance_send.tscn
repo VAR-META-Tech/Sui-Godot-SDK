@@ -147,14 +147,12 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_jug3o")
 text = "Send"
 
 [node name="sendWithSponsor" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_jug3o")
 text = "Send with sponsor"
 
 [node name="sendTxBuilder" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_jug3o")
@@ -164,6 +162,7 @@ text = "Send by tx builder"
 layout_mode = 2
 
 [node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_0m428")

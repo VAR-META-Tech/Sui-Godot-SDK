@@ -27,7 +27,7 @@ String SuiTransaction::programmableTransactionBuilder(String sender, String reci
 	CArguments *coin = create_arguments();
 	add_argument_gas_coin(coin);
 	CArguments *amount = create_arguments();
-	make_pure(builder, amount, bsc_basic("u64", std::to_string(amountArg).c_str()));
+	make_pure(builder, amount, bsc_basic("u64", String::num_uint64(amountArg).utf8().get_data()));
 
 	add_split_coins_command(builder, coin, amount);
 
