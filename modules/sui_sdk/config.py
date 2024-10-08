@@ -24,19 +24,19 @@ def configure(env):
     elif env["platform"] == "windows":       
         env.Append(LIBPATH=["#../modules/sui_sdk/libs"])
         if env["use_mingw"]:
-            env.Append(LIBS=["libsui_rust_sdk"])
+            env.Append(LIBS=["sui_rust_sdk"])
         else:
-            env.Append(LINKFLAGS=["libsui_rust_sdk.dll.lib"])
+            env.Append(LINKFLAGS=["sui_rust_sdk.lib"])
         
     elif env["platform"] == "osx" or env["platform"] == "macos":
         print("here!!!")
         env.Append(LIBPATH=["#../modules/sui_sdk/libs"])
-        env.Append(LIBS=["libsui_rust_sdk.dylib"])
+        env.Append(LIBS=["sui_rust_sdk.dylib"])
         env.Append(RPATH=["."])
     elif env["platform"] == "linuxbsd":
         print("here!!!")
         env.Append(LIBPATH=["#../modules/sui_sdk/libs"])
-        env.Append(LIBS=["libsui_rust_sdk.so"])
+        env.Append(LIBS=["sui_rust_sdk.so"])
         env.Append(RPATH=["."])
 
 
