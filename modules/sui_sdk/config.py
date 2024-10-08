@@ -19,7 +19,7 @@ def configure(env):
     elif env["platform"] == "linuxbsd":
         print("build for linux!!!")
         env.Append(LIBPATH=["#../modules/sui_sdk/libs"])
-        env.Append(LIBS=["sui_rust_sdk.so"])
+        env.Append(LIBS=["libsui_rust_sdk.so"])
         env.Append(RPATH=["."])
 
 
