@@ -71,10 +71,10 @@ namespace godot
 		/**
 		 * Transaction
 		 */
-		String signTransaction(String sender, String recipient, unsigned long long int amount) { return SuiTransaction::signTransaction(sender, recipient, amount); };
-		String programmableTransactionBuilder(String sender, String recipient, unsigned long long int amount) { return SuiTransaction::programmableTransactionBuilder(sender, recipient, amount); };
-		String programmableTransactionAllowSponser(String sender_address, String recipient_address, unsigned long long int amount, String sponser_address) { return SuiTransaction::programmableTransactionAllowSponser(sender_address, recipient_address, amount, sponser_address); };
+		String signTransaction(String sender, String recipient, uint64_t amount) { return SuiTransaction::signTransaction(sender, recipient, amount); };
+		String programmableTransactionAllowSponser(String sender_address, String recipient_address, uint64_t amount, String sponser_address) { return SuiTransaction::programmableTransactionAllowSponser(sender_address, recipient_address, amount, sponser_address); };
 		String requestTokensFromFaucet(String address_str) { return SuiTransaction::requestTokensFromFaucet(address_str); };
+		String programmableTransactionBuilder(String sender, String recipient, uint64_t amount) { return SuiTransaction::programmableTransactionBuilder(sender, recipient, amount); };
 
 		/**
 		 * Wallet

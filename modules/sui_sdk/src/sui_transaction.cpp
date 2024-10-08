@@ -6,12 +6,12 @@
  * Main function
  */
 
-String SuiTransaction::signTransaction(String sender, String recipient, unsigned long long int amount)
+String SuiTransaction::signTransaction(String sender, String recipient, uint64_t amount)
 {
 	return programmable_transaction(sender.utf8().get_data(), recipient.utf8().get_data(), amount);
 }
 
-String SuiTransaction::programmableTransactionAllowSponser(String sender_address, String recipient_address, unsigned long long int amount, String sponser_address)
+String SuiTransaction::programmableTransactionAllowSponser(String sender_address, String recipient_address, uint64_t amount, String sponser_address)
 {
 	return programmable_transaction_allow_sponser(sender_address.utf8().get_data(), recipient_address.utf8().get_data(), amount, sponser_address.utf8().get_data());
 }
@@ -21,7 +21,7 @@ String SuiTransaction::requestTokensFromFaucet(String address_str)
 	return request_tokens_from_faucet(address_str.utf8().get_data());
 }
 
-String SuiTransaction::programmableTransactionBuilder(String sender, String recipientAddress, unsigned long long int amountArg)
+String SuiTransaction::programmableTransactionBuilder(String sender, String recipientAddress, uint64_t amountArg)
 {
 	CProgrammableTransactionBuilder *builder = create_builder();
 	CArguments *coin = create_arguments();

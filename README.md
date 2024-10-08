@@ -114,7 +114,7 @@ You can custom your `project_demo` and run below built file in directory to chec
 ```
 
 Note \*:
-If you are running on Windows system. Please copy file `sui_rust_sdk.dll` at `modules/sui_sdk/libs` into `godot/bin`
+If you are running on Windows system. Please copy file `sui_rust_sdk.dll` at folder `modules/sui_sdk/libs` into folder `godot/bin`
 
 ### License
 
