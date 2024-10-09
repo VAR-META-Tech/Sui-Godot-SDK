@@ -4,78 +4,116 @@
 #include "tests/test_macros.h"
 #include "tests/test_tools.h"
 #include "utils.h"
+#include <iostream>
 
 #include "modules/sui_sdk/sui_sdk.h"
 using namespace godot;
 namespace TestSuiTransactionSDK
 {
+  SuiSDK suiSDK;
 
   TEST_CASE("Sign Transaction")
   {
-    SuiSDK suiSDK;
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
-    if (wallets.size() < 2)
+    while (wallets.size() < 2)
     {
-      CHECK(false);
+      suiSDK.generateAndAddKey();
+      wallets = suiSDK.getWallets();
     }
 
     Ref<WalletWrapper> sender = wallets[0];
     Ref<WalletWrapper> recipient = wallets[1];
-    unsigned long long amount = 10000000;
+    uint64_t amount = pow(10, 9);
+    uint64_t gas = pow(0.005, 9);
 
-    String result = suiSDK.signTransaction(sender->get_address(), recipient->get_address(), amount);
+    bool enoughAmount;
+    do
+    {
+      suiSDK.requestTokensFromFaucet(sender->address);
+      sleep(5);
+      Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(sender->address);
+      enoughAmount = stoull(balance->total_balance.utf8().get_data()) >= amount + gas;
+    } while (enoughAmount == false);
+
+    String result = suiSDK.signTransaction(sender->address, recipient->address, amount);
     CHECK(result == "Transaction completed successfully");
   }
 
-  TEST_CASE("Sign Transaction Faucet")
+  TEST_CASE("Request Transaction Faucet")
   {
-    SuiSDK suiSDK;
+    Ref<WalletWrapper> wallet;
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
-    if (wallets.size() < 1)
+    if (wallets.size() == 0)
     {
-      CHECK(false);
+      wallet = suiSDK.generateAndAddKey();
     }
-    Ref<WalletWrapper> sponser = wallets[0];
-    suiSDK.requestTokensFromFaucet(sponser->get_address());
+    else
+    {
+      wallet = wallets[0];
+    }
+    Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(wallet->address);
+    suiSDK.requestTokensFromFaucet(wallet->address);
     sleep(5);
+    Ref<BalanceWrapper> newBalance = suiSDK.getBalanceSync(wallet->address);
+    CHECK(balance->total_balance != newBalance->total_balance);
   }
 
-  TEST_CASE("Sign Transaction Allow Sponser")
+  TEST_CASE("Sign Transaction Allow Sponsor")
   {
-    SuiSDK suiSDK;
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
-    if (wallets.size() < 3)
+    while (wallets.size() < 3)
     {
-      CHECK(false);
+      suiSDK.generateAndAddKey();
+      wallets = suiSDK.getWallets();
     }
 
-    Ref<WalletWrapper> sponser = wallets[0];
+    Ref<WalletWrapper> sponsor = wallets[0];
     Ref<WalletWrapper> sender = wallets[1];
     Ref<WalletWrapper> recipient = wallets[2];
-    unsigned long long amount = 10000000;
+    uint64_t amount = pow(10, 9);
+    uint64_t gas = pow(0.005, 9);
+
+    bool enoughAmount;
+    do
+    {
+      suiSDK.requestTokensFromFaucet(sponsor->address);
+      sleep(5);
+      Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(sponsor->address);
+      enoughAmount = stoull(balance->total_balance.utf8().get_data()) >= amount + gas;
+    } while (enoughAmount == false);
 
     String result = suiSDK.programmableTransactionAllowSponser(
-        sender->get_address(),
-        recipient->get_address(),
+        sender->address,
+        recipient->address,
         amount,
-        sponser->get_address());
+        sponsor->address);
     CHECK(result == "Transaction completed successfully");
   }
 
   TEST_CASE("Sign Transaction Builder")
   {
-    SuiSDK suiSDK;
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
-    if (wallets.size() < 2)
+    while (wallets.size() < 2)
     {
-      CHECK(false);
+      suiSDK.generateAndAddKey();
+      wallets = suiSDK.getWallets();
     }
 
     Ref<WalletWrapper> sender = wallets[0];
     Ref<WalletWrapper> recipient = wallets[1];
-    unsigned long long amount = 10000000;
+    uint64_t amount = pow(10, 9);
+    uint64_t gas = pow(0.005, 9);
 
-    String result = suiSDK.programmableTransactionBuilder(sender->get_address(), recipient->get_address(), amount);
+    bool enoughAmount;
+    do
+    {
+      suiSDK.requestTokensFromFaucet(sender->address);
+      sleep(5);
+      Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(sender->address);
+      enoughAmount = stoull(balance->total_balance.utf8().get_data()) >= amount + gas;
+    } while (enoughAmount == false);
+
+    String result = suiSDK.programmableTransactionBuilder(sender->address, recipient->address, amount);
     CHECK(result != "");
   }
 }
