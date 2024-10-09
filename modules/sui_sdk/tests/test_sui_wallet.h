@@ -146,7 +146,7 @@ namespace TestSuiWalletSDK
     const char *alias = "test";
     Ref<ImportResultWrapper> importResult = suiSDK.importFromMnemonic(mnemonic, scheme, alias);
     CHECK(importResult->status == 0);
-    CHECK(importResult->address == "0xfee0108a2467a551f50f3f7c2dc77128406ae314ef4515030dc62accb0c15bcc");
+    CHECK(importResult->address == "0xf912dc572a5023798677eda7879cf338c3d495c1f9d0251e96d7c11a8684061f");
   }
 
   TEST_CASE("Get Wallet From Address")

@@ -6,6 +6,7 @@
 #include "modules/sui_sdk/sui_sdk.h"
 #include <iostream>
 #include <string>
+#include "utils.h"
 using namespace std;
 using namespace godot;
 
@@ -38,14 +39,14 @@ namespace TestSuiWalletSDK
     if (stoull(balance->get_total_balance().utf8().get_data()) < oneCoin)
     {
       suiSDK.requestTokensFromFaucet(sender_address);
-      SLEEP(3);
+      sleep(3);
       balance = suiSDK.getBalanceSync(sender_address);
     }
 
     while (stoull(balance->get_total_balance().utf8().get_data()) < oneCoin)
     {
       balance = suiSDK.getBalanceSync(sender_address);
-      SLEEP(1);
+      sleep(1);
     }
 
     String messageMint = suiSDK.mintNft(package_id, sender_address, name, description, uri);

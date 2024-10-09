@@ -3,13 +3,7 @@
 
 #include "tests/test_macros.h"
 #include "tests/test_tools.h"
-#ifdef _WIN32
-#include <windows.h>
-#define SLEEP(milliseconds) Sleep(milliseconds * 1000)
-#else
-#include <unistd.h>
-#define SLEEP(seconds) sleep(seconds)
-#endif
+#include "utils.h"
 
 #include "modules/sui_sdk/sui_sdk.h"
 using namespace godot;
@@ -43,7 +37,7 @@ namespace TestSuiTransactionSDK
     }
     Ref<WalletWrapper> sponser = wallets[0];
     suiSDK.requestTokensFromFaucet(sponser->get_address());
-    SLEEP(5);
+    sleep(5);
   }
 
   TEST_CASE("Sign Transaction Allow Sponser")
