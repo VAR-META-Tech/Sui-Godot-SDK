@@ -18,7 +18,7 @@ namespace TestSuiWalletSDK
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
     while (wallets.size() <= 1)
     {
-      suiSDK.generateWallet("ed25519", "word12");
+      suiSDK.generateAndAddKey();
       wallets = suiSDK.getWallets();
     }
     CHECK(wallets.size() > 1);
@@ -28,25 +28,19 @@ namespace TestSuiWalletSDK
 
     String package_id = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321";
     String object_type = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321::nft::NFT";
-    String sender_address = walletSender->get_address();
-    String recipient_address = walletReceipt->get_address();
+    String sender_address = walletSender->address;
+    String recipient_address = walletReceipt->address;
     String name = "Unit test mint nft";
     String description = "This is a unit test mint nft";
     String uri = "";
 
     Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(sender_address);
     int oneCoin = pow(10, 9);
-    if (stoull(balance->get_total_balance().utf8().get_data()) < oneCoin)
+    while (stoull(balance->total_balance.utf8().get_data()) < oneCoin)
     {
       suiSDK.requestTokensFromFaucet(sender_address);
       sleep(3);
       balance = suiSDK.getBalanceSync(sender_address);
-    }
-
-    while (stoull(balance->get_total_balance().utf8().get_data()) < oneCoin)
-    {
-      balance = suiSDK.getBalanceSync(sender_address);
-      sleep(1);
     }
 
     String messageMint = suiSDK.mintNft(package_id, sender_address, name, description, uri);

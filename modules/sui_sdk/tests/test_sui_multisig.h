@@ -16,7 +16,7 @@ namespace TestSuiMultisigSDK
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
     while (wallets.size() <= 3)
     {
-      suiSDK.generateWallet("ed25519", "word12");
+      suiSDK.generateAndAddKey();
       wallets = suiSDK.getWallets();
     }
 
@@ -52,7 +52,7 @@ namespace TestSuiMultisigSDK
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
     while (wallets.size() <= 3)
     {
-      suiSDK.generateWallet("ed25519", "word12");
+      suiSDK.generateAndAddKey();
       wallets = suiSDK.getWallets();
     }
     CHECK(wallets.size() > 3);
@@ -90,7 +90,7 @@ namespace TestSuiMultisigSDK
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
     while (wallets.size() <= 4)
     {
-      suiSDK.generateWallet("ed25519", "word12");
+      suiSDK.generateAndAddKey();
       wallets = suiSDK.getWallets();
     }
 
