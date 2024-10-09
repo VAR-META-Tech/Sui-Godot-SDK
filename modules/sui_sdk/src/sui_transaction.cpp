@@ -31,11 +31,11 @@ String SuiTransaction::programmableTransactionBuilder(String sender, String reci
 
 	add_split_coins_command(builder, coin, amount);
 
-	CArguments *agrument = create_arguments();
-	add_argument_result(agrument, 0);
+	CArguments *argument = create_arguments();
+	add_argument_result(argument, 0);
 	CArguments *recipient = create_arguments();
 	make_pure(builder, recipient, bsc_basic("address", recipientAddress.utf8().get_data()));
-	add_transfer_object_command(builder, agrument, recipient);
+	add_transfer_object_command(builder, argument, recipient);
 
 	const char *result = execute_transaction(builder, sender.utf8().get_data(), 5000000);
 	return result;
