@@ -15,7 +15,7 @@ namespace TestSuiBalanceSDK
 	{
 		SuiSDK suiSdk;
 		Ref<BalanceWrapper> balance = suiSdk.getBalanceSync(wallet);
-		CHECK(balance->get_total_balance() != "");
+		CHECK(balance->get_total_balance() != "0");
 	}
 
 	TEST_CASE("Get balances")
@@ -43,7 +43,7 @@ namespace TestSuiBalanceSDK
 	{
 		SuiSDK suiSdk;
 		String totalSupply = suiSdk.getTotalSupplySync();
-		CHECK(totalSupply != "");
+		CHECK(totalSupply != "0");
 	}
 } // namespace TestSuiBalanceSDK
 

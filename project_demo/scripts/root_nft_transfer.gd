@@ -1,7 +1,7 @@
 extends Node2D
 
 var suiSDK = SuiSDK.new()
-var packageId = "0x48a557eb090729457000b7303796c4447abea2362b009988b3ab7445b60ed6a3"
+var packageId = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

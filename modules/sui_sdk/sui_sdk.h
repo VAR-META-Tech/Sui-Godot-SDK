@@ -35,6 +35,9 @@ namespace godot
 		 */
 		String apiVersion() { return SuiClient::apiVersion(); };
 		int checkApiVersion() { return SuiClient::checkApiVersion(); };
+		int buildDevNetwork() { return SuiClient::buildDevNetwork(); };
+		int buildTestNetwork() { return SuiClient::buildTestNetwork(); };
+		int buildMainNetNetwork() { return SuiClient::buildMainNetNetwork(); };
 
 		/**
 		 * Multisig

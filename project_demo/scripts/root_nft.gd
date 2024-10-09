@@ -2,7 +2,7 @@ extends TabBar
 
 var wallets = []
 var suiSDK = SuiSDK.new()
-var objectType = "0x48a557eb090729457000b7303796c4447abea2362b009988b3ab7445b60ed6a3::nft::NFT"
+var objectType = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321::nft::NFT"
 
 func _http_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray, image: Image):
 	var headersString: String = " ".join(headers)

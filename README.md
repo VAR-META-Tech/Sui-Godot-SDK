@@ -55,7 +55,7 @@ Run follow command to setting Envỉroment befor testing:
    ```sh
    Sui client envs
    ```
-   **NOTE:If you dont have DevNet Please Run CMD :**
+   **NOTE:If you don't have DevNet, please run CMD :**
 
 ```sh
     sui client new-env --alias devnet --rpc https://fullnode.devnet.sui.io:443
@@ -113,8 +113,7 @@ You can custom your `project_demo` and run below built file in directory to chec
   ./godot/bin/godot.${your system name}
 ```
 
-Note \*:
-If you are running on Windows system. Please copy file `sui_rust_sdk.dll` at folder `modules/sui_sdk/libs` into folder `godot/bin`
+**NOTE: If you are running on Windows system, please copy file `sui_rust_sdk.dll` at folder `modules/sui_sdk/libs` into folder `godot/bin`**
 
 ### License
 

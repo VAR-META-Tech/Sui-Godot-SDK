@@ -29,6 +29,9 @@ void SuiSDK::_bind_methods()
 	 */
 	ClassDB::bind_method(D_METHOD("apiVersion"), &SuiSDK::apiVersion);
 	ClassDB::bind_method(D_METHOD("checkApiVersion"), &SuiSDK::checkApiVersion);
+	ClassDB::bind_method(D_METHOD("buildDevNetwork"), &SuiSDK::buildDevNetwork);
+	ClassDB::bind_method(D_METHOD("buildTestNetwork"), &SuiSDK::buildTestNetwork);
+	ClassDB::bind_method(D_METHOD("buildMainNetNetwork"), &SuiSDK::buildMainNetNetwork);
 
 	/**
 	 * Multisig
