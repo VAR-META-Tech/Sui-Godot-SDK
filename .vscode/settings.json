@@ -80,6 +80,9 @@
     "istream": "cpp",
     "optional": "cpp",
     "shared_mutex": "cpp",
-    "filesystem": "cpp"
+    "filesystem": "cpp",
+    "expected": "cpp",
+    "thread": "cpp",
+    "xlocale": "cpp"
   }
 }

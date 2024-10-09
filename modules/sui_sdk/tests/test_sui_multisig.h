@@ -10,9 +10,9 @@
 using namespace godot;
 namespace TestSuiMultisigSDK
 {
+  SuiSDK suiSDK;
   TEST_CASE("Sign multisig successfully")
   {
-    SuiSDK suiSDK;
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
     while (wallets.size() <= 3)
     {

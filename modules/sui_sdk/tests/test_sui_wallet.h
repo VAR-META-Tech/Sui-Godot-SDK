@@ -127,7 +127,7 @@ namespace TestSuiWalletSDK
     Ref<WalletWrapper> wallet = suiSDK.generateWallet("ed25519", "word12");
     String mnemonic = wallet->mnemonic;
     String scheme = wallet->key_scheme;
-    String alias = "test";
+    String alias = "test" + wallet->address;
     Ref<ImportResultWrapper> importResult = suiSDK.importFromMnemonic(mnemonic, scheme, alias);
     CHECK(importResult->status == 0);
     CHECK(importResult->address == wallet->address);
@@ -135,10 +135,19 @@ namespace TestSuiWalletSDK
 
   TEST_CASE("Get Wallet From Address")
   {
-    Ref<WalletWrapper> wallet = suiSDK.generateWallet("ed25519", "word12");
-    String address = wallet->address;
-    Ref<WalletWrapper> walletResult = suiSDK.getWalletFromAddress(address);
-    CHECK(walletResult->address == address);
+    Ref<WalletWrapper> wallet;
+    TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
+    if (wallets.size() == 0)
+    {
+      wallet = suiSDK.generateAndAddKey();
+    }
+    else
+    {
+      wallet = wallets[0];
+    }
+
+    Ref<WalletWrapper> walletResult = suiSDK.getWalletFromAddress(wallet->address);
+    CHECK(wallet->address == walletResult->address);
   }
 
 }
