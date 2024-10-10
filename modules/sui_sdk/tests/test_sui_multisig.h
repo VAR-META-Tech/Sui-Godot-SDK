@@ -209,38 +209,38 @@ namespace TestSuiMultisigSDK
     CHECK(message != "Sign and execute transaction success");
   }
 
-  // TEST_CASE("Don't enough amount")
-  // {
-  //   TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
-  //   while (wallets.size() <= 3)
-  //   {
-  //     suiSDK.generateAndAddKey();
-  //     wallets = suiSDK.getWallets();
-  //   }
+  TEST_CASE("Don't enough amount")
+  {
+    TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
+    while (wallets.size() <= 3)
+    {
+      suiSDK.generateAndAddKey();
+      wallets = suiSDK.getWallets();
+    }
 
-  //   CHECK(wallets.size() > 3);
+    CHECK(wallets.size() > 3);
 
-  //   TypedArray<String> addresses;
-  //   for (size_t i = 0; i < 3; i++)
-  //   {
-  //     Ref<WalletWrapper> wallet = wallets[i];
-  //     addresses.append(wallet->address);
-  //   }
+    TypedArray<String> addresses;
+    for (size_t i = 0; i < 3; i++)
+    {
+      Ref<WalletWrapper> wallet = wallets[i];
+      addresses.append(wallet->address);
+    }
 
-  //   TypedArray<uint8_t> weights;
-  //   for (uint8_t i = 0; i < 3; i++)
-  //   {
-  //     weights.append(i + 1);
-  //   }
+    TypedArray<uint8_t> weights;
+    for (uint8_t i = 0; i < 3; i++)
+    {
+      weights.append(i + 1);
+    }
 
-  //   uint16_t threshold = 1;
-  //   uint64_t amount = 9999 * pow(10, 9);
+    uint16_t threshold = 1;
+    uint64_t amount = 9999 * pow(10, 9);
 
-  //   Ref<MulSigWrapper> multisig = suiSDK.getOrCreateMultisig(addresses, weights, threshold);
-  //   TypedArray<uint8_t> tx = suiSDK.createTransaction(multisig->address, addresses[2], amount);
-  //   String message = suiSDK.signAndExecuteTransaction(multisig, tx, addresses);
-  //   CHECK(message != "Sign and execute transaction success");
-  // }
+    Ref<MulSigWrapper> multisig = suiSDK.getOrCreateMultisig(addresses, weights, threshold);
+    TypedArray<uint8_t> tx = suiSDK.createTransaction(multisig->address, addresses[2], amount);
+    String message = suiSDK.signAndExecuteTransaction(multisig, tx, addresses);
+    CHECK(message == "Transaction failed");
+  }
 }
 
 #endif
