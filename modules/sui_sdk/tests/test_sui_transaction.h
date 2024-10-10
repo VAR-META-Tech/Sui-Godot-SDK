@@ -5,9 +5,11 @@
 #include "tests/test_tools.h"
 #include "utils.h"
 #include <iostream>
-
+#include <string>
 #include "modules/sui_sdk/sui_sdk.h"
 using namespace godot;
+using namespace std;
+
 namespace TestSuiTransactionSDK
 {
   SuiSDK suiSDK;
