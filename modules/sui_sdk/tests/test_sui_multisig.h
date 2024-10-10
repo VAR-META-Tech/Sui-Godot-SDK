@@ -209,7 +209,7 @@ namespace TestSuiMultisigSDK
     CHECK(message != "Sign and execute transaction success");
   }
 
-  // TEST_CASE("Don't enough gas")
+  // TEST_CASE("Don't enough amount")
   // {
   //   TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
   //   while (wallets.size() <= 3)

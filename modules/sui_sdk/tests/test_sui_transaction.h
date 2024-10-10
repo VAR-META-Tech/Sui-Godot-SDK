@@ -14,7 +14,7 @@ namespace TestSuiTransactionSDK
 {
   SuiSDK suiSDK;
 
-  TEST_CASE("Sign Transaction")
+  TEST_CASE("Sign transaction")
   {
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
     while (wallets.size() < 2)
@@ -44,7 +44,7 @@ namespace TestSuiTransactionSDK
     CHECK(result == "Transaction completed successfully");
   }
 
-  TEST_CASE("Request Transaction Faucet")
+  TEST_CASE("Request transaction faucet")
   {
     Ref<WalletWrapper> wallet;
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
@@ -63,7 +63,7 @@ namespace TestSuiTransactionSDK
     CHECK(balance->total_balance != newBalance->total_balance);
   }
 
-  TEST_CASE("Sign Transaction Allow Sponsor")
+  TEST_CASE("Sign transaction allow sponsor")
   {
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
     while (wallets.size() < 3)
@@ -98,7 +98,7 @@ namespace TestSuiTransactionSDK
     CHECK(result == "Transaction completed successfully");
   }
 
-  TEST_CASE("Sign Transaction Builder")
+  TEST_CASE("Sign transaction builder")
   {
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
     while (wallets.size() < 2)
@@ -126,6 +126,23 @@ namespace TestSuiTransactionSDK
 
     String result = suiSDK.programmableTransactionBuilder(sender->address, recipient->address, amount);
     CHECK(result != "");
+  }
+
+  TEST_CASE("Sign transaction don't have enough balance")
+  {
+    TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
+    while (wallets.size() < 2)
+    {
+      suiSDK.generateAndAddKey();
+      wallets = suiSDK.getWallets();
+    }
+
+    Ref<WalletWrapper> sender = wallets[0];
+    Ref<WalletWrapper> recipient = wallets[1];
+    Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(sender->address);
+    uint64_t amount = stoull(balance->total_balance.utf8().get_data()) + 500 * pow(10, 9);
+    String result = suiSDK.signTransaction(sender->address, recipient->address, amount);
+    CHECK(result == "Error: Transaction failed");
   }
 }
 

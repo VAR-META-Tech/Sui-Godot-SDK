@@ -350,6 +350,8 @@ func _on_sign_and_execute_tx_pressed() -> void:
 	#multiSig.set_address(multiSigAddress)
 	#multiSig.set_bytes(multiSigBytes)
 	
+	print(multiSig)
+	
 	var message = suiSDK.signAndExecuteTransaction(multiSig, txBytes, addressConfirm)
 	print(message)
 	Global.showToast(message)

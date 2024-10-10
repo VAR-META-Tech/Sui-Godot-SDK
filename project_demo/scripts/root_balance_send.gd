@@ -1,18 +1,31 @@
 extends Node2D
 
 var suiSDK = SuiSDK.new()
+var wallets = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if Global.currentWallet not in "":
 		var from: LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/from")
 		from.text = Global.currentWallet
-	pass # Replace with function body.
+	getWallets()
+	addWalletsToPopup()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+func addWalletsToPopup():
+	var walletsOption: OptionButton = get_node("Control/Panel/VBoxContainer/VBoxContainer2/walletsOption")
+	walletsOption.clear()
+	for i in wallets.size():
+		var wallet = wallets[i]
+		walletsOption.add_item(wallet.get_address(), i)
+	walletsOption.select(-1)
+	
+func getWallets():
+	wallets = suiSDK.getWallets()
 
 func returnRoot():
 	Global.changeScene(Global.SCREEN.ROOT)
@@ -54,8 +67,10 @@ func _on_send_pressed() -> void:
 		return
 		
 	var message = suiSDK.signTransaction(from.text, receive.text, float(amount.text)*10**9)
+	print(message)
 	Global.showToast(message)
-	returnRoot()	
+	if message == "Transaction completed successfully":
+		returnRoot()
 
 
 func _on_send_with_sponsor_pressed() -> void:
@@ -65,6 +80,8 @@ func _on_send_with_sponsor_pressed() -> void:
 	var receiveError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/receiveError")
 	var amount:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer/amount")
 	var amountError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/amountError")
+	var walletsOption: OptionButton = get_node("Control/Panel/VBoxContainer/VBoxContainer2/walletsOption")
+	var sponserError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/sponserError")
 	
 	if from.text == "":
 		fromError.visible = true
@@ -87,12 +104,22 @@ func _on_send_with_sponsor_pressed() -> void:
 		amountError.visible = false
 		amountError.text = ""
 		
-	if from.text == "" || receive.text == "" || amount.text == "":
+	if walletsOption.text == "":
+		sponserError.visible = true
+		sponserError.text = "Sponsor address is required"
+	else:
+		sponserError.visible = false
+		sponserError.text = ""
+	
+		
+	if from.text == "" || receive.text == "" || amount.text == "" || walletsOption.text == "":
 		return
 		
-	var message = suiSDK.programmableTransactionAllowSponser(from.text, receive.text, float(amount.text)*10**9, from.text)
+	var message = suiSDK.programmableTransactionAllowSponser(from.text, receive.text, float(amount.text)*10**9, walletsOption.text)
+	print(message)
 	Global.showToast(message)
-	returnRoot()
+	if message == "Transaction completed successfully":
+		returnRoot()
 
 
 func _on_send_tx_builder_pressed() -> void:
@@ -127,6 +154,7 @@ func _on_send_tx_builder_pressed() -> void:
 	if from.text == "" || receive.text == "" || amount.text == "":
 		return
 		
-	suiSDK.programmableTransactionBuilder(from.text, receive.text, float(amount.text)*10**9)
+	var message = suiSDK.programmableTransactionBuilder(from.text, receive.text, float(amount.text)*10**9)
+	print(message)
 	Global.showToast("Executing the transaction successfully")
 	returnRoot()

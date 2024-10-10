@@ -55,10 +55,10 @@ bg_color = Color(0.141176, 0.168627, 0.25098, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmdjs"]
 bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_q7ye8"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_3l3ai"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d3vt6"]
-texture = SubResource("CanvasTexture_q7ye8")
+texture = SubResource("CanvasTexture_3l3ai")
 texture_margin_left = 8.0
 modulate_color = Color(0.168627, 0.231373, 0.352941, 1)
 
@@ -88,10 +88,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_a7unm")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_m11gy")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_qgjj2")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_ckcq8")
-current_tab = 3
+current_tab = 0
 
 [node name="Wallet" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 clip_tabs = false
 max_tab_width = 200
@@ -318,6 +317,7 @@ theme_override_constants/v_separation = 10
 columns = 4
 
 [node name="MultiSig" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("5_kknck")
 metadata/_tab_index = 3

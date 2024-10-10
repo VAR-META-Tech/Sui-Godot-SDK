@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bd56lj38il7kx"]
+[gd_scene load_steps=10 format=3 uid="uid://bd56lj38il7kx"]
 
 [ext_resource type="Script" path="res://scripts/root_balance_send.gd" id="1_lkn84"]
 [ext_resource type="Texture2D" uid="uid://kgwxw3xpfgkx" path="res://icons/copy.svg" id="2_3f8mt"]
@@ -13,6 +13,13 @@ bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0axb"]
 content_margin_left = 8.0
 bg_color = Color(0.168627, 0.231373, 0.352941, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q7ye8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rrv6a"]
+texture = SubResource("CanvasTexture_q7ye8")
+texture_margin_left = 8.0
+modulate_color = Color(0.168627, 0.231373, 0.352941, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jug3o"]
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
@@ -130,6 +137,25 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_n0axb")
 placeholder_text = "Enter the amount"
 
 [node name="amountError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="Label3" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Sponser
+"
+
+[node name="walletsOption" type="OptionButton" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxTexture_rrv6a")
+
+[node name="sponserError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
