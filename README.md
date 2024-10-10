@@ -113,7 +113,12 @@ You can custom your `project_demo` and run below built file in directory to chec
   ./godot/bin/godot.${your system name}
 ```
 
-**NOTE: If you are running on Windows system, please copy file `sui_rust_sdk.dll` at folder `modules/sui_sdk/libs` into folder `godot/bin`**
+**NOTE**: 
+- **If you are running on Windows system, please copy file `sui_rust_sdk.dll` at folder `modules/sui_sdk/libs` into folder `godot/bin`**
+- **If you are running on Lunix system, please run cmd below to set environment variable:**
+```bash 
+source ./.bashrc
+```
 
 ### License
 
