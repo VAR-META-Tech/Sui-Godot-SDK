@@ -88,7 +88,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_a7unm")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_m11gy")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_qgjj2")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_ckcq8")
-current_tab = 0
+current_tab = 3
 
 [node name="Wallet" type="TabBar" parent="TabContainer"]
 visible = false
@@ -166,6 +166,7 @@ allow_search = false
 hide_root = true
 
 [node name="Balance" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("3_avm4g")
 metadata/_tab_index = 1
@@ -317,7 +318,6 @@ theme_override_constants/v_separation = 10
 columns = 4
 
 [node name="MultiSig" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 script = ExtResource("5_kknck")
 metadata/_tab_index = 3

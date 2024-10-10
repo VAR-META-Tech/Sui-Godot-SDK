@@ -24,15 +24,18 @@ namespace TestSuiTransactionSDK
     Ref<WalletWrapper> sender = wallets[0];
     Ref<WalletWrapper> recipient = wallets[1];
     uint64_t amount = pow(10, 9);
-    uint64_t gas = pow(0.005, 9);
+    uint64_t gas = 0.005 * pow(10, 9);
 
-    bool enoughAmount;
+    bool enoughAmount = false;
     do
     {
-      suiSDK.requestTokensFromFaucet(sender->address);
-      sleep(5);
       Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(sender->address);
       enoughAmount = stoull(balance->total_balance.utf8().get_data()) >= amount + gas;
+      if (!enoughAmount)
+      {
+        suiSDK.requestTokensFromFaucet(sender->address);
+      }
+      sleep(5);
     } while (enoughAmount == false);
 
     String result = suiSDK.signTransaction(sender->address, recipient->address, amount);
@@ -71,15 +74,18 @@ namespace TestSuiTransactionSDK
     Ref<WalletWrapper> sender = wallets[1];
     Ref<WalletWrapper> recipient = wallets[2];
     uint64_t amount = pow(10, 9);
-    uint64_t gas = pow(0.005, 9);
+    uint64_t gas = 0.005 * pow(10, 9);
 
-    bool enoughAmount;
+    bool enoughAmount = false;
     do
     {
-      suiSDK.requestTokensFromFaucet(sponsor->address);
-      sleep(5);
       Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(sponsor->address);
       enoughAmount = stoull(balance->total_balance.utf8().get_data()) >= amount + gas;
+      if (!enoughAmount)
+      {
+        suiSDK.requestTokensFromFaucet(sponsor->address);
+      }
+      sleep(5);
     } while (enoughAmount == false);
 
     String result = suiSDK.programmableTransactionAllowSponser(
@@ -102,15 +108,18 @@ namespace TestSuiTransactionSDK
     Ref<WalletWrapper> sender = wallets[0];
     Ref<WalletWrapper> recipient = wallets[1];
     uint64_t amount = pow(10, 9);
-    uint64_t gas = pow(0.005, 9);
+    uint64_t gas = 0.005 * pow(10, 9);
 
-    bool enoughAmount;
+    bool enoughAmount = false;
     do
     {
-      suiSDK.requestTokensFromFaucet(sender->address);
-      sleep(5);
       Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(sender->address);
       enoughAmount = stoull(balance->total_balance.utf8().get_data()) >= amount + gas;
+      if (!enoughAmount)
+      {
+        suiSDK.requestTokensFromFaucet(sender->address);
+      }
+      sleep(5);
     } while (enoughAmount == false);
 
     String result = suiSDK.programmableTransactionBuilder(sender->address, recipient->address, amount);
