@@ -176,6 +176,7 @@ func parseWeight():
 	return weights
 
 func _on_get_sig_pressed() -> void:
+	addressConfirm = []
 	var passCheckWallet = checkRequireWallet()
 	if passCheckWallet == false: return
 	var passCheckWeight = checkRequireWeight()
@@ -204,11 +205,12 @@ func _on_add_wallet_pressed() -> void:
 	addMoreWallet()
 	
 func handleSelectAddressConfirm(isChecked: bool, address: String):
-	if isChecked == true:
+	var index = addressConfirm.find(address, 0)
+
+	if isChecked == false && index > -1:
+		addressConfirm.remove_at(index)
+	elif isChecked == true && index == -1:
 		addressConfirm.append(address)
-	else:
-		var index = addressConfirm.find(address, 0)
-		if index > -1: addressConfirm.remove_at(index)
 
 func clearListAddress():
 	var listAddress: VBoxContainer = get_node("HBoxContainer/VBoxContainer2/ScrollContainerListAddress/VBoxContainerListAddress")
@@ -351,7 +353,9 @@ func _on_sign_and_execute_tx_pressed() -> void:
 	#multiSig.set_bytes(multiSigBytes)
 	
 	print(multiSig)
-	
+	print(txBytes)
+	print(addressConfirm)
+
 	var message = suiSDK.signAndExecuteTransaction(multiSig, txBytes, addressConfirm)
 	print(message)
 	Global.showToast(message)
