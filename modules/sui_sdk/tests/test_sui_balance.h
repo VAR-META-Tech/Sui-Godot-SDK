@@ -26,7 +26,7 @@ namespace TestSuiBalanceSDK
 		CHECK(balances.size() == emptySize);
 	}
 
-	TEST_CASE("Get All balance sync")
+	TEST_CASE("Get all balance sync")
 	{
 		Ref<WalletWrapper> wallet = suiSDK.generateWallet("ed25519", "word12");
 		TypedArray<BalanceWrapper> balances = suiSDK.getAllBalancesSync(wallet->address);
