@@ -11,6 +11,8 @@ func _http_request_completed(result: int, response_code: int, headers: PackedStr
 		image.load_png_from_buffer(body)
 	elif "image/jpeg" in headersString || "image/jpg" in headersString:
 		image.load_jpg_from_buffer(body)
+	elif "image/webp" in headersString :
+		image.load_webp_from_buffer(body)
 
 func handleCopyNftId(nftId: String):
 	DisplayServer.clipboard_set(nftId)

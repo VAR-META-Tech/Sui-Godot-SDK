@@ -32,7 +32,7 @@ namespace TestSuiWalletSDK
     String recipient_address = walletReceipt->address;
     String name = "Unit test mint nft";
     String description = "This is a unit test mint nft";
-    String uri = "";
+    String uri = "https://i.ibb.co/SN2bQ5P/hand-drawn-nft-style-ape-illustration-23-2149622021.jpg";
 
     Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(sender_address);
     int oneCoin = pow(10, 9);
