@@ -447,12 +447,6 @@ theme_override_font_sizes/font_size = 12
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="faucet" type="Button" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 30)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
-text = "Faucet"
-
 [node name="copySigAddress" type="Button" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
@@ -485,6 +479,35 @@ custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
 text = "Copy"
+
+[node name="HBoxbalance" type="HBoxContainer" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxbalance"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Total balance:"
+
+[node name="totalBalance" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxbalance"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "N/A"
+
+[node name="symbol" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxbalance"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "SUI"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="faucet" type="Button" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxbalance"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f3ng2")
+text = "Faucet"
 
 [node name="multiSigError" type="Label" parent="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer"]
 visible = false
@@ -673,9 +696,9 @@ text = "Sign & execute transaction"
 [connection signal="item_selected" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer/AddressBoxContainer/walletsOption" to="TabContainer/NFT" method="_on_wallets_option_item_selected"]
 [connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer/HBoxContainer/addWallet" to="TabContainer/MultiSig" method="_on_add_wallet_pressed"]
 [connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer/HBoxContainer2/getSig" to="TabContainer/MultiSig" method="_on_get_sig_pressed"]
-[connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/faucet" to="TabContainer/MultiSig" method="_on_faucet_pressed"]
 [connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/copySigAddress" to="TabContainer/MultiSig" method="_on_copy_sig_address_pressed"]
 [connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/copySigBytes" to="TabContainer/MultiSig" method="_on_copy_sig_bytes_pressed"]
+[connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxbalance/faucet" to="TabContainer/MultiSig" method="_on_faucet_pressed"]
 [connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2/VBoxContainer2/button" to="TabContainer/MultiSig" method="_on_button_pressed"]
 [connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/HBoxContainer4/copyTxBytes" to="TabContainer/MultiSig" method="_on_copy_tx_bytes_pressed"]
 [connection signal="pressed" from="TabContainer/MultiSig/HBoxContainer/VBoxContainer2/signAndExecuteTx" to="TabContainer/MultiSig" method="_on_sign_and_execute_tx_pressed"]

@@ -22,6 +22,16 @@ func _ready() -> void:
 	setWalletAddress()
 	pass # Replace with function body.
 
+func number_format(num):
+	var parts = str(num).split(".")
+	var integer = parts[0]
+	var decimal =  parts[1] if parts.size() > 1 else ""
+	var formatted_integer = ""
+	for i in range(integer.length()):
+		if i > 0 and (integer.length() - i) % 3 == 0:
+			formatted_integer += ","
+		formatted_integer += integer[i]    
+	return formatted_integer + (("." + decimal) if decimal else "")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -200,6 +210,7 @@ func _on_get_sig_pressed() -> void:
 	multiSigBytesText.text = "".join(multiSigBytes)
 	
 	Global.showToast("Get multi-sig successfully")
+	load_balance()
 
 func _on_add_wallet_pressed() -> void:
 	addMoreWallet()
@@ -359,7 +370,15 @@ func _on_sign_and_execute_tx_pressed() -> void:
 	var message = suiSDK.signAndExecuteTransaction(multiSig, txBytes, addressConfirm)
 	print(message)
 	Global.showToast(message)
+	load_balance()
 
+func load_balance()->void:
+	var balanceBox :Label= get_node('HBoxContainer/VBoxContainer2/VBoxContainer/HBoxbalance/totalBalance')
+	if multiSigAddress == "":
+		balanceBox.text = "N/A"
+	else:
+		var balance = suiSDK.getBalanceSync(multiSigAddress)
+		balanceBox.text = str(number_format(float(balance.get_total_balance())/10**9))
 
 func _on_faucet_pressed() -> void:
 	var multiSigError = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/multiSigError")
@@ -372,3 +391,4 @@ func _on_faucet_pressed() -> void:
 		multiSigError.text = ""
 	var message = suiSDK.requestTokensFromFaucet(multiSigAddress)
 	Global.showToast(message)
+	load_balance()
