@@ -17,6 +17,7 @@ extern "C"
 		int checkApiVersion();
 		int buildDevNetwork();
 		int buildTestNetwork();
+		int buildMainNetNetwork();
 	};
 }
 

@@ -6,7 +6,10 @@ def configure(env):
     if env["platform"] == "windows":   
         print ("build for windows!!!")    
         env.Append(LIBPATH=["#../modules/sui_sdk/libs"])
-        env.Append(LINKFLAGS=["libsui_rust_sdk.dll.lib"])
+        if env["use_mingw"]:
+            env.Append(LIBS=["sui_rust_sdk"])
+        else:
+            env.Append(LINKFLAGS=["libsui_rust_sdk.lib"])
         
     elif env["platform"] == "osx" or env["platform"] == "macos":
         print("build for macos!!!")

@@ -95,6 +95,9 @@ func _on_wallet_tree_button_clicked(item: TreeItem, column: int, id: int, mouse_
 func _on_button_pressed() -> void:
 	if wallet == null:
 		return
-	suiSDK.importFromMnemonic(wallet.get_mnemonic())
-	Global.showToast("Import wallet " + wallet.get_address() + " successfully")
-	_on_cancel_pressed()
+	var importResult = suiSDK.importFromMnemonic(wallet.get_mnemonic(), wallet.get_key_scheme(), wallet.get_key_scheme())
+	if importResult.get_status() == 0:
+		Global.showToast("Import wallet " + importResult.get_address() + " successfully")
+		_on_cancel_pressed()
+	else:
+		Global.showToast(importResult.get_error())

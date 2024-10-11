@@ -7,7 +7,42 @@
 #include "core/object/ref_counted.h"
 #include "core/variant/typed_array.h"
 
-struct WalletStruct {
+struct ImportResultStruct
+{
+	int status;
+	String address;
+	String error;
+};
+
+class ImportResultWrapper : public RefCounted
+{
+	GDCLASS(ImportResultWrapper, RefCounted);
+
+public:
+	int status;
+	String address;
+	String error;
+
+	void set_status(int p_status) { status = p_status; }
+	int get_status() const { return status; }
+	void set_address(String p_address) { address = p_address; }
+	String get_address() { return address; }
+	void set_error(String p_error) { error = p_error; }
+	String get_error() { return error; }
+
+	static void _bind_methods()
+	{
+		ClassDB::bind_method(D_METHOD("get_status"), &ImportResultWrapper::get_status);
+		ClassDB::bind_method(D_METHOD("set_status", "status"), &ImportResultWrapper::set_status);
+		ClassDB::bind_method(D_METHOD("get_address"), &ImportResultWrapper::get_address);
+		ClassDB::bind_method(D_METHOD("set_address", "address"), &ImportResultWrapper::set_address);
+		ClassDB::bind_method(D_METHOD("get_error"), &ImportResultWrapper::get_error);
+		ClassDB::bind_method(D_METHOD("set_error", "error"), &ImportResultWrapper::set_error);
+	}
+};
+
+struct WalletStruct
+{
 	String address;
 	String mnemonic;
 	String public_base64_key;
@@ -15,7 +50,8 @@ struct WalletStruct {
 	String key_scheme;
 };
 
-class WalletWrapper : public RefCounted {
+class WalletWrapper : public RefCounted
+{
 	GDCLASS(WalletWrapper, RefCounted);
 
 public:
@@ -36,7 +72,8 @@ public:
 	void set_key_scheme(String p_key_scheme) { key_scheme = p_key_scheme; }
 	String get_key_scheme() { return key_scheme; }
 
-	static void _bind_methods() {
+	static void _bind_methods()
+	{
 		ClassDB::bind_method(D_METHOD("get_address"), &WalletWrapper::get_address);
 		ClassDB::bind_method(D_METHOD("set_address", "address"), &WalletWrapper::set_address);
 		ClassDB::bind_method(D_METHOD("get_mnemonic"), &WalletWrapper::get_mnemonic);
@@ -50,7 +87,8 @@ public:
 	}
 };
 
-class SuiWallet {
+class SuiWallet
+{
 public:
 	TypedArray<WalletWrapper> getWallets();
 	void freeWalletList(WalletList wallet_list);
@@ -58,8 +96,8 @@ public:
 	Ref<WalletWrapper> generateAndAddKey();
 	Ref<WalletWrapper> getWalletFromAddress(String address);
 	void freeWallet(Wallet *wallet);
-	void importFromPrivateKey(String key_base64);
-	String importFromMnemonic(String mnemonic);
+	Ref<ImportResultWrapper> importFromPrivateKey(String key_base64);
+	Ref<ImportResultWrapper> importFromMnemonic(String mnemonic, String sig_scheme, String alias);
 };
 
 #endif

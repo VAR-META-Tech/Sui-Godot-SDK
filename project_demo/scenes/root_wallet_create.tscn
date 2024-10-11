@@ -5,19 +5,19 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ihey"]
 bg_color = Color(0.0117647, 0.0823529, 0.145098, 1)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_r5jwf"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_sawda"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eiv5c"]
 content_margin_left = 8.0
-texture = SubResource("CanvasTexture_r5jwf")
-modulate_color = Color(0.141176, 0.168627, 0.25098, 1)
+texture = SubResource("CanvasTexture_sawda")
+modulate_color = Color(0.168627, 0.231373, 0.352941, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_63tgd"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0ybmx"]
 content_margin_left = 8.0
 texture = SubResource("CanvasTexture_63tgd")
-modulate_color = Color(0.141176, 0.168627, 0.25098, 1)
+modulate_color = Color(0.168627, 0.231373, 0.352941, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6bqi"]
 bg_color = Color(0.278431, 0.32549, 0.396078, 1)

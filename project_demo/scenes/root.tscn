@@ -55,10 +55,10 @@ bg_color = Color(0.141176, 0.168627, 0.25098, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmdjs"]
 bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_q7ye8"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_3l3ai"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d3vt6"]
-texture = SubResource("CanvasTexture_q7ye8")
+texture = SubResource("CanvasTexture_3l3ai")
 texture_margin_left = 8.0
 modulate_color = Color(0.168627, 0.231373, 0.352941, 1)
 

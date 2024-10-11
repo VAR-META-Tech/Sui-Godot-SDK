@@ -176,6 +176,7 @@ func parseWeight():
 	return weights
 
 func _on_get_sig_pressed() -> void:
+	addressConfirm = []
 	var passCheckWallet = checkRequireWallet()
 	if passCheckWallet == false: return
 	var passCheckWeight = checkRequireWeight()
@@ -204,11 +205,12 @@ func _on_add_wallet_pressed() -> void:
 	addMoreWallet()
 	
 func handleSelectAddressConfirm(isChecked: bool, address: String):
-	if isChecked == true:
+	var index = addressConfirm.find(address, 0)
+
+	if isChecked == false && index > -1:
+		addressConfirm.remove_at(index)
+	elif isChecked == true && index == -1:
 		addressConfirm.append(address)
-	else:
-		var index = addressConfirm.find(address, 0)
-		if index > -1: addressConfirm.remove_at(index)
 
 func clearListAddress():
 	var listAddress: VBoxContainer = get_node("HBoxContainer/VBoxContainer2/ScrollContainerListAddress/VBoxContainerListAddress")
@@ -234,12 +236,30 @@ func handleWeightChange(id: String, value: String):
 	renderListAddress()
 
 func _on_copy_sig_address_pressed() -> void:
+	var multiSigError = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/multiSigError")
+	if multiSigAddress == "":
+		multiSigError.text = "Multi signature is required"
+		multiSigError.visible = true
+		return
+	else:
+		multiSigError.visible = false
+		multiSigError.text = ""
+
 	var multiSigAddressText: Label = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/multiSigAddress")
 	DisplayServer.clipboard_set(multiSigAddressText.text)
 	Global.showToast("Copied")
 
 
 func _on_copy_sig_bytes_pressed() -> void:
+	var multiSigError = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/multiSigError")
+	if multiSigAddress == "":
+		multiSigError.text = "Multi signature is required"
+		multiSigError.visible = true
+		return
+	else:
+		multiSigError.visible = false
+		multiSigError.text = ""
+
 	var multiSigBytesText: Label = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/multiSigBytes")
 	DisplayServer.clipboard_set(multiSigBytesText.text)
 	Global.showToast("Copied")
@@ -281,6 +301,17 @@ func _on_button_pressed() -> void:
 
 
 func _on_copy_tx_bytes_pressed() -> void:
+	var multiSigError = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/multiSigError")
+	var txError = get_node("HBoxContainer/VBoxContainer2/txError")
+	var notHaveTx = txBytes.size() == 0
+
+	if notHaveTx:
+		txError.text = "Transaction is required"
+		txError.visible = true
+	else:
+		txError.visible = false
+		txError.text = ""
+
 	var txBytesText: Label = get_node("HBoxContainer/VBoxContainer2/HBoxContainer4/txBytes")
 	DisplayServer.clipboard_set(txBytesText.text)
 	Global.showToast("Copied")
@@ -321,7 +352,12 @@ func _on_sign_and_execute_tx_pressed() -> void:
 	#multiSig.set_address(multiSigAddress)
 	#multiSig.set_bytes(multiSigBytes)
 	
+	print(multiSig)
+	print(txBytes)
+	print(addressConfirm)
+
 	var message = suiSDK.signAndExecuteTransaction(multiSig, txBytes, addressConfirm)
+	print(message)
 	Global.showToast(message)
 
 

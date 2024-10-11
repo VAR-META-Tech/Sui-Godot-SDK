@@ -35,6 +35,9 @@ namespace godot
 		 */
 		String apiVersion() { return SuiClient::apiVersion(); };
 		int checkApiVersion() { return SuiClient::checkApiVersion(); };
+		int buildDevNetwork() { return SuiClient::buildDevNetwork(); };
+		int buildTestNetwork() { return SuiClient::buildTestNetwork(); };
+		int buildMainNetNetwork() { return SuiClient::buildMainNetNetwork(); };
 
 		/**
 		 * Multisig
@@ -74,6 +77,7 @@ namespace godot
 		String signTransaction(String sender, String recipient, uint64_t amount) { return SuiTransaction::signTransaction(sender, recipient, amount); };
 		String programmableTransactionAllowSponser(String sender_address, String recipient_address, uint64_t amount, String sponser_address) { return SuiTransaction::programmableTransactionAllowSponser(sender_address, recipient_address, amount, sponser_address); };
 		String requestTokensFromFaucet(String address_str) { return SuiTransaction::requestTokensFromFaucet(address_str); };
+		String programmableTransactionBuilder(String sender, String recipient, uint64_t amount) { return SuiTransaction::programmableTransactionBuilder(sender, recipient, amount); };
 
 		/**
 		 * Wallet
@@ -82,8 +86,11 @@ namespace godot
 		Ref<WalletWrapper> generateWallet(String key_scheme, String word_length) { return SuiWallet::generateWallet(key_scheme, word_length); };
 		Ref<WalletWrapper> generateAndAddKey() { return SuiWallet::generateAndAddKey(); };
 		Ref<WalletWrapper> getWalletFromAddress(String address) { return SuiWallet::getWalletFromAddress(address); };
-		void importFromPrivateKey(String key_base64) { SuiWallet::importFromPrivateKey(key_base64); };
-		String importFromMnemonic(String mnemonic) { return SuiWallet::importFromMnemonic(mnemonic); };
+		Ref<ImportResultWrapper> importFromPrivateKey(String key_base64) { return SuiWallet::importFromPrivateKey(key_base64); };
+		Ref<ImportResultWrapper> importFromMnemonic(String mnemonic, String sig_scheme, String alias)
+		{
+			return SuiWallet::importFromMnemonic(mnemonic, sig_scheme, alias);
+		};
 
 		SuiSDK();
 	};

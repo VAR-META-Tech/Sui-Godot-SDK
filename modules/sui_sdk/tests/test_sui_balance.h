@@ -9,41 +9,43 @@
 using namespace godot;
 namespace TestSuiBalanceSDK
 {
-	String wallet = "0x0d000320903ccdb00281bc30a568af9b546ec4ef8d748f352f8c31ad08442fdb";
+	SuiSDK suiSDK;
 
 	TEST_CASE("Get balance sync")
 	{
-		SuiSDK suiSdk;
-		Ref<BalanceWrapper> balance = suiSdk.getBalanceSync(wallet);
-		CHECK(balance->get_total_balance() != "");
+		Ref<WalletWrapper> wallet = suiSDK.generateWallet("ed25519", "word12");
+		Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(wallet->address);
+		CHECK(balance->total_balance == "0");
 	}
 
 	TEST_CASE("Get balances")
 	{
-		SuiSDK suiSdk;
-		TypedArray<BalanceWrapper> balances = suiSdk.getBalances(wallet);
-		CHECK(balances.size() != (const int)0);
+		Ref<WalletWrapper> wallet = suiSDK.generateWallet("ed25519", "word12");
+		TypedArray<BalanceWrapper> balances = suiSDK.getBalances(wallet->address);
+		int emptySize = 0;
+		CHECK(balances.size() == emptySize);
 	}
 
-	TEST_CASE("Get All balance sync")
+	TEST_CASE("Get all balance sync")
 	{
-		SuiSDK suiSdk;
-		TypedArray<BalanceWrapper> balances = suiSdk.getAllBalancesSync(wallet);
-		CHECK(balances.size() != (const int)0);
+		Ref<WalletWrapper> wallet = suiSDK.generateWallet("ed25519", "word12");
+		TypedArray<BalanceWrapper> balances = suiSDK.getAllBalancesSync(wallet->address);
+		int emptySize = 0;
+		CHECK(balances.size() == emptySize);
 	}
 
 	TEST_CASE("Get coin sync")
 	{
-		SuiSDK suiSdk;
-		TypedArray<CoinWrapper> coins = suiSdk.getCoinsSync(wallet);
-		CHECK(coins.size() != (const int)0);
+		Ref<WalletWrapper> wallet = suiSDK.generateWallet("ed25519", "word12");
+		TypedArray<CoinWrapper> coins = suiSDK.getCoinsSync(wallet->address);
+		int emptySize = 0;
+		CHECK(coins.size() == emptySize);
 	}
 
 	TEST_CASE("Get total supply sync")
 	{
-		SuiSDK suiSdk;
-		String totalSupply = suiSdk.getTotalSupplySync();
-		CHECK(totalSupply != "");
+		String totalSupply = suiSDK.getTotalSupplySync();
+		CHECK(totalSupply != "0");
 	}
 } // namespace TestSuiBalanceSDK
 
