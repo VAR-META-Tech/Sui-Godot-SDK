@@ -170,9 +170,9 @@ func _on_send_tx_builder_pressed() -> void:
 	recipientBscBasic.BSCBasic("address", receive.text)
 	suiSDK.makePure(builder, recipient, recipientBscBasic)
 	suiSDK.addTransferObjectCommand(builder, argument, recipient)
-	var message = suiSDK.executeTransaction(builder, from.text, 0.005*10**9)
+	suiSDK.executeTransaction(builder, from.text, 0.005*10**9)
 	
 	#var message = suiSDK.programmableTransactionBuilder(from.text, receive.text, float(amount.text)*10**9)
-	print(message)
+	#print(message)
 	Global.showToast("Executing the transaction successfully")
 	returnRoot()

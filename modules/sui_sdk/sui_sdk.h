@@ -10,11 +10,12 @@
 #include "src/sui_transaction.h"
 #include "src/sui_wallet.h"
 #include "src/sui_builder.h"
+// #include "src/sui_utility.h"
 
 namespace godot
 {
 
-	class SuiSDK : public SuiBalance, public SuiWallet, public SuiBuilder, public SuiMultisig, public SuiNfts, public SuiClient, public SuiTransaction, public Object
+	class SuiSDK : public SuiBalance, public SuiWallet, public SuiBuilder, public SuiMultisig, public SuiNfts, public SuiClient, public SuiTransaction, public SuiUtility, public Object
 	{
 		GDCLASS(SuiSDK, Object);
 
@@ -78,7 +79,6 @@ namespace godot
 		String signTransaction(String sender, String recipient, uint64_t amount) { return SuiTransaction::signTransaction(sender, recipient, amount); };
 		String programmableTransactionAllowSponser(String sender_address, String recipient_address, uint64_t amount, String sponser_address) { return SuiTransaction::programmableTransactionAllowSponser(sender_address, recipient_address, amount, sponser_address); };
 		String requestTokensFromFaucet(String address_str) { return SuiTransaction::requestTokensFromFaucet(address_str); };
-		String programmableTransactionBuilder(String sender, String recipient, uint64_t amount) { return SuiTransaction::programmableTransactionBuilder(sender, recipient, amount); };
 
 		/**
 		 * Wallet
@@ -126,6 +126,11 @@ namespace godot
 		{
 			return SuiBuilder::executeTransactionAllowSponser(builder, sender, gas_budget, sponser);
 		};
+
+		// /**
+		//  * Utility
+		//  */
+		// void connectLocalnet() { return SuiUtility::connectLocalnet(); };
 
 		SuiSDK();
 	};

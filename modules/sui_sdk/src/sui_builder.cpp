@@ -29,11 +29,6 @@ void SuiBuilder::addTypeTag(SuiTypeTags *type_tags, String tag)
   add_type_tag(type_tags->type_tags, tag.utf8().get_data());
 }
 
-void SuiBSCBasic::_bind_methods()
-{
-  ClassDB::bind_method(D_METHOD("BSCBasic", "type", "data"), &SuiBSCBasic::BSCBasic);
-}
-
 void SuiBuilder::addArgumentGasCoin(SuiArguments *arguments)
 {
   add_argument_gas_coin(arguments->arguments);
@@ -72,4 +67,13 @@ String SuiBuilder::executeTransactionAllowSponser(SuiProgrammableTransactionBuil
                                            sender.utf8().get_data(),
                                            gas_budget,
                                            sponser.utf8().get_data());
+}
+
+/**
+ * Bind methods
+ */
+
+void SuiBSCBasic::_bind_methods()
+{
+  ClassDB::bind_method(D_METHOD("BSCBasic", "type", "data"), &SuiBSCBasic::BSCBasic);
 }

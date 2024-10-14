@@ -15,7 +15,6 @@ public:
   CArguments *arguments;
 
   SuiArguments() { arguments = create_arguments(); }
-  ~SuiArguments() { destroy_arguments(arguments); }
 };
 
 class SuiProgrammableTransactionBuilder : public RefCounted
@@ -26,7 +25,6 @@ public:
   CProgrammableTransactionBuilder *builder;
 
   SuiProgrammableTransactionBuilder() { builder = create_builder(); }
-  ~SuiProgrammableTransactionBuilder() { destroy_builder(builder); }
 };
 
 class SuiTypeTags : public RefCounted
@@ -36,7 +34,6 @@ class SuiTypeTags : public RefCounted
 public:
   CTypeTags *type_tags;
   SuiTypeTags() { type_tags = create_type_tags(); }
-  ~SuiTypeTags() { destroy_type_tags(type_tags); }
 };
 
 class SuiBSCBasic : public RefCounted

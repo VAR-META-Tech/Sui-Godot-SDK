@@ -124,6 +124,7 @@ namespace TestSuiTransactionSDK
       sleep(5);
     } while (enoughAmount == false);
 
+    
     String result = suiSDK.programmableTransactionBuilder(sender->address, recipient->address, amount);
     CHECK(result != "");
   }
