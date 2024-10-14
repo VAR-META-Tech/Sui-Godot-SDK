@@ -9,6 +9,7 @@
 #include "src/sui_nfts.h"
 #include "src/sui_transaction.h"
 #include "src/sui_wallet.h"
+#include "src/sui_builder.h"
 
 namespace godot
 {

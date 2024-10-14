@@ -6,6 +6,7 @@
 #include "modules/sui_sdk/src/sui_nfts.cpp"
 #include "modules/sui_sdk/src/sui_transaction.cpp"
 #include "modules/sui_sdk/src/sui_wallet.cpp"
+#include "modules/sui_sdk/src/sui_builder.cpp"
 
 using namespace godot;
 
