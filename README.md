@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="./resources/sui_logo.png" alt="Unreal-Sui-SDKLogo" width="256" height="128" />
+ <img src="./resources/sui_logo.png" alt="Unreal-Sui-SDKLogo" width="256" height="128" />
 </p>
 
 # Sui-Godot-SDK
@@ -23,8 +23,41 @@ Sui-Godot-SDK is a package to help developers integrate Sui blockchain technolog
 
 ### Features
 
-- [x] Compatibility with main, dev, and test networks.
-- [x] Comprehensive Unit and Integration Test coverage.
+#### General
+
+- Compatibility with main, dev, and test networks.
+- Integration with Sui blockchain using native libraries.
+- Cross-platform support (macOS, Windows, Linux).
+
+#### Sui NFT
+
+- Mint new NFTs.
+- Transfer NFTs to other addresses.
+- Retrieve wallet objects related to NFTs.
+- Conversion between raw and managed data structures for NFT objects.
+
+#### Sui Multisig
+
+- Create and manage multisig wallets.
+- Create transactions from multisig wallets.
+- Sign and execute transactions using multisig wallets.
+- Handling of multisig data structures and transaction results.
+
+#### Sui Transaction
+
+- Create and manage transaction builders.
+- Add various types of commands to transactions (e.g., move call, transfer object, split coins, merge coins).
+- Execute transactions with or without a sponsor.
+
+#### Sui Wallet
+
+- Singleton pattern for easy access to wallet functionalities.
+- Generate new wallets with specified key schemes and word lengths.
+- Import wallets from private keys.
+- Import wallets from mnemonics.
+- List all wallets.
+- Display wallet details.
+- Generate and add new keys to the wallet.
 
 ### Requirements
 
@@ -34,7 +67,7 @@ Sui-Godot-SDK is a package to help developers integrate Sui blockchain technolog
 
 ### Dependencies
 
-- https://github.com/VAR-META-Tech/Rust2C-Sui-SDK
+- <https://github.com/VAR-META-Tech/Rust2C-Sui-SDK>
 
 ### Installation
 
@@ -45,16 +78,18 @@ This guide provides step-by-step instructions for installing and setting up on m
 ## Prerequisites
 
 - **Visual Studio Code** with C++ development environment
-- **Install Sui** Follow this guide to install Sui https://docs.sui.io/guides/developer/getting-started/sui-install
+- **Install Sui** Follow this guide to install Sui <https://docs.sui.io/guides/developer/getting-started/sui-install>
 
 ## Project Setup
 
 Run follow command to setting Envỉroment befor testing:
 
 1. Check Sui Client Environment:
+
    ```sh
    Sui client envs
    ```
+
    **NOTE:If you don't have DevNet, please run CMD :**
 
 ```sh
@@ -62,9 +97,11 @@ Run follow command to setting Envỉroment befor testing:
 ```
 
 2. Switch to devnet network:
+
    ```sh
    sui client switch --env devnet
    ```
+
 3. Check current network:
 
    ```sh
@@ -74,9 +111,11 @@ Run follow command to setting Envỉroment befor testing:
    **NOTE: The return should be devnet**
 
 4. Get the active address:
+
    ```sh
    sui client active-address
    ```
+
 5. Request token:
 
    ```sh
@@ -86,19 +125,26 @@ Run follow command to setting Envỉroment befor testing:
    **NOTE: Wait for 60s to get the tokens**
 
 6. Check the gas coin objects for the active address:
+
    ```sh
    sui client gas
    ```
+
 7. Build Project:
    - In Sui-Godot-SDK directory run cmd:
+
    ```sh
     git clone -b 4.3 https://github.com/godotengine/godot
    ```
+
    - Change working directory to godot:
+
    ```sh
     cd godot
    ```
+
    - Build project cmd:
+
    ```sh
    scons custom_modules=../modules
    ```
@@ -113,12 +159,18 @@ You can custom your `project_demo` and run below built file in directory to chec
   ./godot/bin/godot.${your system name}
 ```
 
-**NOTE**: 
+**NOTE**:
+
 - **If you are running on Windows system, please copy file `sui_rust_sdk.dll` at folder `modules/sui_sdk/libs` into folder `godot/bin`**
 - **If you are running on Lunix system, please run cmd below to set environment variable:**
-```bash 
+
+```bash
 source ./.bashrc
 ```
+
+### Examples
+
+The SDK comes with several examples that show how to leverage the Rust2C-Sui-SDK to its full potential. The examples include Wallet Creation and Management, Token Transfers,  NFT Minting, Account Funding, and Multi-signature.
 
 ### License
 
