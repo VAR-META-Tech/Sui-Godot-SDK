@@ -63,22 +63,45 @@ public:
   String executeTransaction(SuiProgrammableTransactionBuilder *builder, String senderAddress, uint64_t gasLimit);
   void addTypeTag(SuiTypeTags *type_tags, String tag);
 
-  // void add_argument_gas_coin(struct CArguments *arguments);
+  void addArgumentGasCoin(SuiArguments *arguments)
+  {
+    add_argument_gas_coin(arguments->arguments);
+  };
 
-  // void add_argument_result(struct CArguments *arguments, uint16_t value);
+  void addArgumentResult(SuiArguments *arguments, uint16_t value)
+  {
+    add_argument_result(arguments->arguments, value);
+  };
 
-  // void add_argument_input(struct CArguments *arguments, uint16_t value);
+  void addArgumentInput(SuiArguments *arguments, uint16_t value)
+  {
+    add_argument_input(arguments->arguments, value);
+  }
 
-  // void add_argument_nested_result(struct CArguments *arguments, uint16_t value1, uint16_t value2);
+  void addArgumentNestedResult(SuiArguments *arguments, uint16_t value1, uint16_t value2)
+  {
+    add_argument_nested_result(arguments->arguments, value1, value2);
+  }
 
-  // void add_merge_coins_command(struct CProgrammableTransactionBuilder *builder,
-  //                              struct CArguments *coin,
-  //                              struct CArguments *agreements);
+  void addMergeCoinsCommand(SuiProgrammableTransactionBuilder *builder,
+                            SuiArguments *coin,
+                            SuiArguments *agreements)
+  {
+    add_merge_coins_command(builder->builder,
+                            coin->arguments,
+                            agreements->arguments);
+  }
 
-  // char *execute_transaction_allow_sponser(struct CProgrammableTransactionBuilder *builder,
-  //                                         const char *sender,
-  //                                         unsigned long long gas_budget,
-  //                                         const char *sponser);
+  char *executeTransactionAllowSponser(SuiProgrammableTransactionBuilder *builder,
+                                       String sender,
+                                       uint64_t gas_budget,
+                                       String sponser)
+  {
+    execute_transaction_allow_sponser(builder->builder,
+                                      sender.utf8().get_data(),
+                                      gas_budget,
+                                      sponser.utf8().get_data());
+  }
 };
 
 #endif
