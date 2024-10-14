@@ -153,8 +153,26 @@ func _on_send_tx_builder_pressed() -> void:
 		
 	if from.text == "" || receive.text == "" || amount.text == "":
 		return
-		
-	var message = suiSDK.programmableTransactionBuilder(from.text, receive.text, float(amount.text)*10**9)
+	
+	var builder = SuiProgrammableTransactionBuilder.new()
+	var coin = SuiArguments.new()
+	suiSDK.addArgumentGasCoin(coin)
+	var amountArg = SuiArguments.new()
+	var amountBscBasic = SuiBSCBasic.new()
+	amountBscBasic.BSCBasic("u64", str(int(amount.text)*10**9))
+	suiSDK.makePure(builder, amountArg, amountBscBasic)
+	suiSDK.addSplitCoinsCommand(builder, coin , amountArg)
+	
+	var argument = SuiArguments.new()
+	suiSDK.addArgumentResult(argument, 0)
+	var recipient = SuiArguments.new()
+	var recipientBscBasic = SuiBSCBasic.new()
+	recipientBscBasic.BSCBasic("address", receive.text)
+	suiSDK.makePure(builder, recipient, recipientBscBasic)
+	suiSDK.addTransferObjectCommand(builder, argument, recipient)
+	var message = suiSDK.executeTransaction(builder, from.text, 0.005*10**9)
+	
+	#var message = suiSDK.programmableTransactionBuilder(from.text, receive.text, float(amount.text)*10**9)
 	print(message)
 	Global.showToast("Executing the transaction successfully")
 	returnRoot()

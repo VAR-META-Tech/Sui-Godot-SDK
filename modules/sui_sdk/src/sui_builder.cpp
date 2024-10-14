@@ -28,3 +28,48 @@ void SuiBuilder::addTypeTag(SuiTypeTags *type_tags, String tag)
 {
   add_type_tag(type_tags->type_tags, tag.utf8().get_data());
 }
+
+void SuiBSCBasic::_bind_methods()
+{
+  ClassDB::bind_method(D_METHOD("BSCBasic", "type", "data"), &SuiBSCBasic::BSCBasic);
+}
+
+void SuiBuilder::addArgumentGasCoin(SuiArguments *arguments)
+{
+  add_argument_gas_coin(arguments->arguments);
+};
+
+void SuiBuilder::addArgumentResult(SuiArguments *arguments, uint16_t value)
+{
+  add_argument_result(arguments->arguments, value);
+};
+
+void SuiBuilder::addArgumentInput(SuiArguments *arguments, uint16_t value)
+{
+  add_argument_input(arguments->arguments, value);
+}
+
+void SuiBuilder::addArgumentNestedResult(SuiArguments *arguments, uint16_t value1, uint16_t value2)
+{
+  add_argument_nested_result(arguments->arguments, value1, value2);
+}
+
+void SuiBuilder::addMergeCoinsCommand(SuiProgrammableTransactionBuilder *builder,
+                                      SuiArguments *coin,
+                                      SuiArguments *agreements)
+{
+  add_merge_coins_command(builder->builder,
+                          coin->arguments,
+                          agreements->arguments);
+}
+
+String SuiBuilder::executeTransactionAllowSponser(SuiProgrammableTransactionBuilder *builder,
+                                                  String sender,
+                                                  uint64_t gas_budget,
+                                                  String sponser)
+{
+  return execute_transaction_allow_sponser(builder->builder,
+                                           sender.utf8().get_data(),
+                                           gas_budget,
+                                           sponser.utf8().get_data());
+}

@@ -73,8 +73,16 @@ void SuiSDK::_bind_methods()
 	ClassDB::bind_method(D_METHOD("addSplitCoinsCommand", "builder", "coin", "amount"), &SuiSDK::addSplitCoinsCommand);
 	ClassDB::bind_method(D_METHOD("addTransferObjectCommand", "builder", "arguments", "recipient"), &SuiSDK::addTransferObjectCommand);
 	ClassDB::bind_method(D_METHOD("addMoveCallCommand", "builder", "package", "module", "function", "type_arguments", "arguments"), &SuiSDK::addMoveCallCommand);
-	ClassDB::bind_method(D_METHOD("addTypeTag", "type_tags", "tag"), &SuiSDK::addTypeTag);
 	ClassDB::bind_method(D_METHOD("executeTransaction", "builder", "sender_address", "gas_limit"), &SuiSDK::executeTransaction);
+	ClassDB::bind_method(D_METHOD("addTypeTag", "type_tags", "tag"), &SuiSDK::addTypeTag);
+
+	ClassDB::bind_method(D_METHOD("addArgumentGasCoin", "arguments"), &SuiSDK::addArgumentGasCoin);
+	ClassDB::bind_method(D_METHOD("addArgumentResult", "arguments", "value"), &SuiSDK::addArgumentResult);
+	ClassDB::bind_method(D_METHOD("addArgumentInput", "arguments", "value"), &SuiSDK::addArgumentInput);
+	ClassDB::bind_method(D_METHOD("addArgumentNestedResult", "arguments", "value1", "value2"), &SuiSDK::addArgumentNestedResult);
+	ClassDB::bind_method(D_METHOD("addMergeCoinsCommand", "builder", "coin", "agreements"), &SuiSDK::addMergeCoinsCommand);
+	ClassDB::bind_method(D_METHOD("executeTransactionAllowSponser", "builder", "sender", "gas_budget", "sponser"), &SuiSDK::executeTransactionAllowSponser);
+
 	// ClassDB::bind_method(D_METHOD("set_amplitude", "p_amplitude"), &GDExample::set_amplitude);
 	// ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "amplitude"), "set_amplitude", "get_amplitude");
 }

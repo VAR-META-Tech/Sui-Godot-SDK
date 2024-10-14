@@ -100,8 +100,32 @@ namespace godot
 		void addSplitCoinsCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *coin, SuiArguments *amount) { return SuiBuilder::addSplitCoinsCommand(builder, coin, amount); };
 		void addTransferObjectCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiArguments *recipient) { return SuiBuilder::addTransferObjectCommand(builder, arguments, recipient); };
 		void addMoveCallCommand(SuiProgrammableTransactionBuilder *builder, String package, String module, String function, SuiTypeTags *type_arguments, SuiArguments *arguments) { return SuiBuilder::addMoveCallCommand(builder, package, module, function, type_arguments, arguments); };
-		String executeTransaction(SuiProgrammableTransactionBuilder *builder, String senderAddress, uint64_t gasLimit) { return SuiBuilder::executeTransaction(builder, senderAddress, gasLimit); };
+		String executeTransaction(SuiProgrammableTransactionBuilder *builder, String senderAddress, uint64_t gasLimit)
+		{
+			return SuiBuilder::executeTransaction(builder, senderAddress, gasLimit);
+		};
 		void addTypeTag(SuiTypeTags *type_tags, String tag) { return SuiBuilder::addTypeTag(type_tags, tag); };
+
+		void addArgumentGasCoin(SuiArguments *arguments) { return SuiBuilder::addArgumentGasCoin(arguments); };
+		void addArgumentResult(SuiArguments *arguments, uint16_t value) { return SuiBuilder::addArgumentResult(arguments, value); };
+		void addArgumentInput(SuiArguments *arguments, uint16_t value) { return SuiBuilder::addArgumentInput(arguments, value); };
+		void addArgumentNestedResult(SuiArguments *arguments, uint16_t value1, uint16_t value2)
+		{
+			return SuiBuilder::addArgumentNestedResult(arguments, value1, value2);
+		};
+		void addMergeCoinsCommand(SuiProgrammableTransactionBuilder *builder,
+															SuiArguments *coin,
+															SuiArguments *agreements)
+		{
+			return SuiBuilder::addMergeCoinsCommand(builder, coin, agreements);
+		};
+		String executeTransactionAllowSponser(SuiProgrammableTransactionBuilder *builder,
+																					String sender,
+																					uint64_t gas_budget,
+																					String sponser)
+		{
+			return SuiBuilder::executeTransactionAllowSponser(builder, sender, gas_budget, sponser);
+		};
 
 		SuiSDK();
 	};
