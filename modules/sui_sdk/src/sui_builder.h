@@ -43,30 +43,25 @@ class SuiBSCBasic : public RefCounted
 {
   GDCLASS(SuiBSCBasic, RefCounted);
 
+protected:
+  static void _bind_methods();
+
 public:
   CPure *pure;
   SuiBSCBasic() {};
   void BSCBasic(String type, String data) { pure = bsc_basic(type.utf8().get_data(), data.utf8().get_data()); }
 };
 
-class SuiBuilder : public RefCounted
+class SuiBuilder
 {
-  GDCLASS(SuiBuilder, RefCounted);
-
-protected:
-  static void _bind_methods();
 
 public:
-  void makePure(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiBSCBasic *pure)
-  {
-    make_pure(builder->builder, arguments->arguments, pure->pure);
-  }
-  // void addSplitCoinsCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, uint64_t amount);
-  // void addTransferObjectCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, String recipientAddress);
-  // void addMoveCallCommand(SuiProgrammableTransactionBuilder *builder, String package, String module, String function, Array type_arguments, Array arguments);
-  // String executeTransaction(SuiProgrammableTransactionBuilder *builder, String senderAddress, uint64_t gasLimit);
-
-  // void addTypeTag(SuiTypeTags *type_tags, String tag);
+  void makePure(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiBSCBasic *pure);
+  void addSplitCoinsCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *coin, SuiArguments *amount);
+  void addTransferObjectCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiArguments *recipient);
+  void addMoveCallCommand(SuiProgrammableTransactionBuilder *builder, String package, String module, String function, SuiTypeTags *type_arguments, SuiArguments *arguments);
+  String executeTransaction(SuiProgrammableTransactionBuilder *builder, String senderAddress, uint64_t gasLimit);
+  void addTypeTag(SuiTypeTags *type_tags, String tag);
 
   // void add_argument_gas_coin(struct CArguments *arguments);
 

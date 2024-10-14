@@ -14,7 +14,7 @@
 namespace godot
 {
 
-	class SuiSDK : public SuiBalance, public SuiWallet, public SuiMultisig, public SuiNfts, public SuiClient, public SuiTransaction, public Object
+	class SuiSDK : public SuiBalance, public SuiWallet, public SuiBuilder, public SuiMultisig, public SuiNfts, public SuiClient, public SuiTransaction, public Object
 	{
 		GDCLASS(SuiSDK, Object);
 
@@ -92,6 +92,16 @@ namespace godot
 		{
 			return SuiWallet::importFromMnemonic(mnemonic, sig_scheme, alias);
 		};
+
+		/**
+		 * Transaction builder
+		 */
+		void makePure(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiBSCBasic *pure) { return SuiBuilder::makePure(builder, arguments, pure); };
+		void addSplitCoinsCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *coin, SuiArguments *amount) { return SuiBuilder::addSplitCoinsCommand(builder, coin, amount); };
+		void addTransferObjectCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiArguments *recipient) { return SuiBuilder::addTransferObjectCommand(builder, arguments, recipient); };
+		void addMoveCallCommand(SuiProgrammableTransactionBuilder *builder, String package, String module, String function, SuiTypeTags *type_arguments, SuiArguments *arguments) { return SuiBuilder::addMoveCallCommand(builder, package, module, function, type_arguments, arguments); };
+		String executeTransaction(SuiProgrammableTransactionBuilder *builder, String senderAddress, uint64_t gasLimit) { return SuiBuilder::executeTransaction(builder, senderAddress, gasLimit); };
+		void addTypeTag(SuiTypeTags *type_tags, String tag) { return SuiBuilder::addTypeTag(type_tags, tag); };
 
 		SuiSDK();
 	};

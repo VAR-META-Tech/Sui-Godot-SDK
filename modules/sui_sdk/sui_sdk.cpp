@@ -66,6 +66,15 @@ void SuiSDK::_bind_methods()
 	ClassDB::bind_method(D_METHOD("importFromPrivateKey", "key_base64"), &SuiSDK::importFromPrivateKey);
 	ClassDB::bind_method(D_METHOD("importFromMnemonic", "mnemonic", "scheme", "alias"), &SuiSDK::importFromMnemonic);
 
+	/**
+	 * Transaction builder
+	 */
+	ClassDB::bind_method(D_METHOD("makePure", "builder", "arguments"), &SuiSDK::makePure);
+	ClassDB::bind_method(D_METHOD("addSplitCoinsCommand", "builder", "coin", "amount"), &SuiSDK::addSplitCoinsCommand);
+	ClassDB::bind_method(D_METHOD("addTransferObjectCommand", "builder", "arguments", "recipient"), &SuiSDK::addTransferObjectCommand);
+	ClassDB::bind_method(D_METHOD("addMoveCallCommand", "builder", "package", "module", "function", "type_arguments", "arguments"), &SuiSDK::addMoveCallCommand);
+	ClassDB::bind_method(D_METHOD("addTypeTag", "type_tags", "tag"), &SuiSDK::addTypeTag);
+	ClassDB::bind_method(D_METHOD("executeTransaction", "builder", "sender_address", "gas_limit"), &SuiSDK::executeTransaction);
 	// ClassDB::bind_method(D_METHOD("set_amplitude", "p_amplitude"), &GDExample::set_amplitude);
 	// ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "amplitude"), "set_amplitude", "get_amplitude");
 }

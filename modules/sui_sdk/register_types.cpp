@@ -19,7 +19,6 @@ void initialize_sui_sdk_module(ModuleInitializationLevel p_level)
 	ClassDB::register_class<WalletObjectWrapper>();
 	ClassDB::register_class<MulSigWrapper>();
 	ClassDB::register_class<SuiArguments>();
-	ClassDB::register_class<SuiBuilder>();
 	ClassDB::register_class<SuiBSCBasic>();
 	ClassDB::register_class<SuiProgrammableTransactionBuilder>();
 	ClassDB::register_class<SuiTypeTags>();
