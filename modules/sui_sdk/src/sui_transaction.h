@@ -2,7 +2,6 @@
 #define GODOT_SUI_TRANSACTION_H
 
 #include "../header/sui_lib.h"
-#include "core/object/class_db.h"
 
 class SuiTransaction
 {

@@ -10,7 +10,7 @@
 #include "src/sui_transaction.h"
 #include "src/sui_wallet.h"
 #include "src/sui_builder.h"
-// #include "src/sui_utility.h"
+#include "src/sui_utility.h"
 
 namespace godot
 {
@@ -127,10 +127,14 @@ namespace godot
 			return SuiBuilder::executeTransactionAllowSponser(builder, sender, gas_budget, sponser);
 		};
 
-		// /**
-		//  * Utility
-		//  */
-		// void connectLocalnet() { return SuiUtility::connectLocalnet(); };
+		/**
+		 * Utility
+		 */
+		void connectLocalnet() { SuiUtility::connectLocalnet(); };
+		void connectDevnet() { SuiUtility::connectDevnet(); };
+		void connectTestnet() { SuiUtility::connectTestnet(); };
+		TypedArray<String> availableSubscription() { return SuiUtility::availableSubscription(); };
+		TypedArray<String> availableRPCMethods() { return SuiUtility::availableRPCMethods(); };
 
 		SuiSDK();
 	};
