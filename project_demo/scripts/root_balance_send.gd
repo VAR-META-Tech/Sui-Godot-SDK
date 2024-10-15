@@ -3,10 +3,18 @@ extends Node2D
 var suiSDK = SuiSDK.new()
 var wallets = []
 
+@onready var from:LineEdit = $Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/from
+@onready var fromError:Label = $Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer/fromError
+@onready var receive:LineEdit = $Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/receive
+@onready var receiveError:Label = $Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2/receiveError
+@onready var amount:LineEdit = $Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer/amount
+@onready var amountError:Label = $Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer3/amountError
+@onready var walletsOption: OptionButton = $Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2/walletsOption
+@onready var sponserError:Label = $Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2/sponserError
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if Global.currentWallet not in "":
-		var from: LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/from")
 		from.text = Global.currentWallet
 	getWallets()
 	addWalletsToPopup()
@@ -17,7 +25,6 @@ func _process(delta: float) -> void:
 	pass
 	
 func addWalletsToPopup():
-	var walletsOption: OptionButton = get_node("Control/Panel/VBoxContainer/VBoxContainer2/walletsOption")
 	walletsOption.clear()
 	for i in wallets.size():
 		var wallet = wallets[i]
@@ -35,13 +42,6 @@ func _on_cancel_pressed() -> void:
 
 
 func _on_send_pressed() -> void:
-	var from:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/from")
-	var fromError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer/fromError")
-	var receive:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer/receive")
-	var receiveError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/receiveError")
-	var amount:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer/amount")
-	var amountError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/amountError")
-	
 	if from.text == "":
 		fromError.visible = true
 		fromError.text = "From address is required"
@@ -74,15 +74,6 @@ func _on_send_pressed() -> void:
 
 
 func _on_send_with_sponsor_pressed() -> void:
-	var from:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/from")
-	var fromError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer/fromError")
-	var receive:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer/receive")
-	var receiveError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/receiveError")
-	var amount:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer/amount")
-	var amountError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/amountError")
-	var walletsOption: OptionButton = get_node("Control/Panel/VBoxContainer/VBoxContainer2/walletsOption")
-	var sponserError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/sponserError")
-	
 	if from.text == "":
 		fromError.visible = true
 		fromError.text = "From address is required"
@@ -123,13 +114,57 @@ func _on_send_with_sponsor_pressed() -> void:
 
 
 func _on_send_tx_builder_pressed() -> void:
-	var from:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/from")
-	var fromError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer/fromError")
-	var receive:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer/receive")
-	var receiveError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/receiveError")
-	var amount:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer/amount")
-	var amountError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/amountError")
+	if from.text == "":
+		fromError.visible = true
+		fromError.text = "From address is required"
+	else:
+		fromError.visible = false
+		fromError.text = ""
+		
+	if receive.text == "":
+		receiveError.visible = true
+		receiveError.text = "Receive address is required"
+	else:
+		receiveError.visible = false
+		receiveError.text = ""
+
+	if amount.text == "":
+		amountError.visible = true
+		amountError.text = "Amount address is required"
+	else:
+		amountError.visible = false
+		amountError.text = ""
 	
+		
+	if from.text == "" || receive.text == "" || amount.text == "":
+		return
+	
+	var gas = 0.005 * pow(10, 9);
+	var builder = SuiProgrammableTransactionBuilder.new()
+	var coin = SuiArguments.new()
+	suiSDK.addArgumentGasCoin(coin)
+	var amountArg = SuiArguments.new()
+	var amountBscBasic = SuiBSCBasic.new()
+	amountBscBasic.BSCBasic("u64", str(int(amount.text)*10**9))
+	suiSDK.makePure(builder, amountArg, amountBscBasic)
+	suiSDK.addSplitCoinsCommand(builder, coin , amountArg)
+	
+	var argument = SuiArguments.new()
+	suiSDK.addArgumentResult(argument, 0)
+	var recipient = SuiArguments.new()
+	var recipientBscBasic = SuiBSCBasic.new()
+	recipientBscBasic.BSCBasic("address", receive.text)
+	suiSDK.makePure(builder, recipient, recipientBscBasic)
+	suiSDK.addTransferObjectCommand(builder, argument, recipient)
+	suiSDK.executeTransaction(builder, from.text, gas)
+	
+	#var message = suiSDK.programmableTransactionBuilder(from.text, receive.text, float(amount.text)*10**9)
+	#print(message)
+	Global.showToast("Executing the transaction successfully")
+	returnRoot()
+
+
+func _on_send_tx_builder_2_pressed() -> void:
 	if from.text == "":
 		fromError.visible = true
 		fromError.text = "From address is required"
@@ -151,9 +186,17 @@ func _on_send_tx_builder_pressed() -> void:
 		amountError.visible = false
 		amountError.text = ""
 		
-	if from.text == "" || receive.text == "" || amount.text == "":
+	if walletsOption.text == "":
+		sponserError.visible = true
+		sponserError.text = "Sponsor address is required"
+	else:
+		sponserError.visible = false
+		sponserError.text = ""
+		
+	if from.text == "" || receive.text == "" || amount.text == "" || walletsOption.text == "":
 		return
 	
+	var gas = 0.005 * pow(10, 9);
 	var builder = SuiProgrammableTransactionBuilder.new()
 	var coin = SuiArguments.new()
 	suiSDK.addArgumentGasCoin(coin)
@@ -170,9 +213,9 @@ func _on_send_tx_builder_pressed() -> void:
 	recipientBscBasic.BSCBasic("address", receive.text)
 	suiSDK.makePure(builder, recipient, recipientBscBasic)
 	suiSDK.addTransferObjectCommand(builder, argument, recipient)
-	suiSDK.executeTransaction(builder, from.text, 0.005*10**9)
-	
+
+	var message = suiSDK.executeTransactionAllowSponser(builder, from.text, gas, walletsOption.text)
 	#var message = suiSDK.programmableTransactionBuilder(from.text, receive.text, float(amount.text)*10**9)
-	#print(message)
+	print(message)
 	Global.showToast("Executing the transaction successfully")
 	returnRoot()
