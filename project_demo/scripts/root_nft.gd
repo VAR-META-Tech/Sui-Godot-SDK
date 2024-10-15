@@ -4,6 +4,9 @@ var wallets = []
 var suiSDK = SuiSDK.new()
 var objectType = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321::nft::NFT"
 
+@onready var walletsOption: OptionButton = $VBoxContainer/VBoxContainer2/walletsOption
+@onready var nftsList = $VBoxContainer/ScrollContainer/nftsList
+
 func _http_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray, image: Image):
 	var headersString: String = " ".join(headers)
 	print(headersString)
@@ -20,7 +23,6 @@ func handleCopyNftId(nftId: String):
 
 func getListNfts():
 	if Global.currentWallet != "":
-		var nftsList = get_node("VBoxContainer/ScrollContainer/nftsList")
 		for nft in nftsList.get_children():
 			nftsList.remove_child(nft)
 
@@ -88,7 +90,6 @@ func getWallets():
 	return wallets
 	
 func addWalletsToPopup():
-	var walletsOption: OptionButton = get_node("VBoxContainer/VBoxContainer2/walletsOption")
 	walletsOption.clear()
 	for i in wallets.size():
 		var wallet = wallets[i]
@@ -96,7 +97,6 @@ func addWalletsToPopup():
 	walletsOption.select(-1)
 
 func setCurrentWallet(address):
-	var walletsOption: OptionButton = get_node("VBoxContainer/VBoxContainer2/walletsOption")
 	var walletIndex = -1
 	for id in wallets.size():
 		if wallets[id].get_address() == address:
@@ -112,13 +112,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	var walletsOption: OptionButton = get_node("VBoxContainer/VBoxContainer2/walletsOption")
 	if Global.currentWallet != "" && walletsOption.text != Global.currentWallet:
 		setCurrentWallet(Global.currentWallet)
 
 
 func _on_wallets_option_item_selected(index: int) -> void:
-	var walletsOption: OptionButton = get_node("VBoxContainer/VBoxContainer2/walletsOption")
 	var walletAddress = walletsOption.text
 	Global.currentWallet = walletAddress
 	getListNfts()

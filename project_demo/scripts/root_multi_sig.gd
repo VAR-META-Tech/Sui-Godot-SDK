@@ -2,10 +2,28 @@ extends TabBar
 
 var uuid_generator = preload("res://utils/uuid_generator.gd").new()
 
+@onready var addresssesVBoxContainer = $HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer
+@onready var balanceBox :Label= $HBoxContainer/VBoxContainer2/VBoxContainer/HBoxbalance/totalBalance
+@onready var multiSigError = $HBoxContainer/VBoxContainer2/VBoxContainer/multiSigError
+@onready var txError = $HBoxContainer/VBoxContainer2/txError
+@onready var confirmAddressError = $HBoxContainer/VBoxContainer2/confirmAddressError
+@onready var txBytesText: Label = $HBoxContainer/VBoxContainer2/HBoxContainer4/txBytes
+@onready var fromWallet: LineEdit = $HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer/fromWallet
+@onready var fromWalletError: Label = $HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer/fromWalletError
+@onready var toWallet: LineEdit = $HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer2/toWallet
+@onready var toWalletError: Label = $HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer2/toWalletError
+@onready var amount: LineEdit = $HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2/VBoxContainer/amount
+@onready var amountError: Label = $HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2/VBoxContainer/amountError
+@onready var multiSigBytesText: Label = $HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/multiSigBytes
+@onready var multiSigAddressText: Label = $HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/multiSigAddress
+@onready var listAddress = $HBoxContainer/VBoxContainer2/ScrollContainerListAddress/VBoxContainerListAddress
+@onready var addressesError: Label = $HBoxContainer/VBoxContainer/addressesError
+@onready var thresholdError: Label = $HBoxContainer/VBoxContainer/HBoxContainer2/VBoxContainer/thresholdError
+@onready var thresholdLineEdit: LineEdit = $HBoxContainer/VBoxContainer/HBoxContainer2/VBoxContainer/thresholdLineEdit
+
 class WalletSig:
 	var id: int
 	var address: String
-	
 
 var suiSDK = SuiSDK.new()
 var wallets: Array[WalletWrapper] = []
@@ -85,7 +103,6 @@ func newWeight(id: String):
 	return weightLineEdit
 
 func deleteWallet(uuid:String,addressBoxContainer):
-	var addresssesVBoxContainer = get_node("HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer")
 	walletsSelected.erase(uuid)
 	weightSelected.erase(uuid)
 	addresssesVBoxContainer.remove_child(addressBoxContainer)
@@ -107,7 +124,6 @@ func newDeleteBtn(id: String,addressBoxContainer):
 
 func addMoreWallet():
 	var uuid = uuid_generator.generate_uuid_v4()
-	var addresssesVBoxContainer = get_node("HBoxContainer/VBoxContainer/ScrollContainer/AddresssesVBoxContainer")
 	var addressBoxContainer = VBoxContainer.new()
 
 	var walletLabel = Label.new()
@@ -138,7 +154,6 @@ func setWalletAddress():
 	addMoreWallet()
 
 func checkRequireWallet():
-	var addressesError: Label = get_node("HBoxContainer/VBoxContainer/addressesError")
 	for wallet in walletsSelected:
 		if walletsSelected[wallet] == "":
 			addressesError.text = "Wallet address is required"
@@ -150,7 +165,6 @@ func checkRequireWallet():
 	return true
 
 func checkRequireWeight():
-	var addressesError: Label = get_node("HBoxContainer/VBoxContainer/addressesError")
 	for weight in weightSelected:
 		if weightSelected[weight] == "":
 			addressesError.text = "Weight is required"
@@ -162,8 +176,6 @@ func checkRequireWeight():
 	return true
 
 func checkRequireThreshold():
-	var thresholdError: Label = get_node("HBoxContainer/VBoxContainer/HBoxContainer2/VBoxContainer/thresholdError")
-	var thresholdLineEdit: LineEdit = get_node("HBoxContainer/VBoxContainer/HBoxContainer2/VBoxContainer/thresholdLineEdit")
 	if thresholdLineEdit.text == "":
 		thresholdError.text = "Threshold is required"
 		thresholdError.visible = true
@@ -193,8 +205,6 @@ func _on_get_sig_pressed() -> void:
 	if passCheckWeight == false: return
 	var passThreshold = checkRequireThreshold()
 	if passThreshold == false: return
-	
-	var thresholdLineEdit: LineEdit = get_node("HBoxContainer/VBoxContainer/HBoxContainer2/VBoxContainer/thresholdLineEdit")
 
 	var addresses = parseAddresses()
 	var weights = parseWeight()
@@ -203,9 +213,7 @@ func _on_get_sig_pressed() -> void:
 	multiSig = suiSDK.getOrCreateMultisig(addresses, weights, threshold)
 	multiSigAddress = multiSig.get_address()
 	multiSigBytes = multiSig.get_bytes()
-	
-	var multiSigAddressText: Label = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/multiSigAddress")
-	var multiSigBytesText: Label = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/multiSigBytes")
+
 	multiSigAddressText.text = multiSigAddress
 	multiSigBytesText.text = "".join(multiSigBytes)
 	
@@ -224,12 +232,10 @@ func handleSelectAddressConfirm(isChecked: bool, address: String):
 		addressConfirm.append(address)
 
 func clearListAddress():
-	var listAddress: VBoxContainer = get_node("HBoxContainer/VBoxContainer2/ScrollContainerListAddress/VBoxContainerListAddress")
 	for child in listAddress.get_children():
 		listAddress.remove_child(child)
 
 func renderListAddress():
-	var listAddress = get_node("HBoxContainer/VBoxContainer2/ScrollContainerListAddress/VBoxContainerListAddress")
 	clearListAddress()
 	for address in walletsSelected:
 		if walletsSelected[address] != "":
@@ -247,7 +253,6 @@ func handleWeightChange(id: String, value: String):
 	renderListAddress()
 
 func _on_copy_sig_address_pressed() -> void:
-	var multiSigError = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/multiSigError")
 	if multiSigAddress == "":
 		multiSigError.text = "Multi signature is required"
 		multiSigError.visible = true
@@ -256,13 +261,11 @@ func _on_copy_sig_address_pressed() -> void:
 		multiSigError.visible = false
 		multiSigError.text = ""
 
-	var multiSigAddressText: Label = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/multiSigAddress")
 	DisplayServer.clipboard_set(multiSigAddressText.text)
 	Global.showToast("Copied")
 
 
 func _on_copy_sig_bytes_pressed() -> void:
-	var multiSigError = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/multiSigError")
 	if multiSigAddress == "":
 		multiSigError.text = "Multi signature is required"
 		multiSigError.visible = true
@@ -271,19 +274,10 @@ func _on_copy_sig_bytes_pressed() -> void:
 		multiSigError.visible = false
 		multiSigError.text = ""
 
-	var multiSigBytesText: Label = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/multiSigBytes")
 	DisplayServer.clipboard_set(multiSigBytesText.text)
 	Global.showToast("Copied")
 
 func _on_button_pressed() -> void:
-	var fromWallet: LineEdit = get_node("HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer/fromWallet")
-	var fromWalletError: Label = get_node("HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer/fromWalletError")
-	var toWallet: LineEdit = get_node("HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer2/toWallet")
-	var toWalletError: Label = get_node("HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer/VBoxContainer2/toWalletError")
-	var amount: LineEdit = get_node("HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2/VBoxContainer/amount")
-	var amountError: Label = get_node("HBoxContainer/VBoxContainer2/HBoxContainer3/HBoxContainer2/VBoxContainer/amountError")
-	var txBytesText: Label = get_node("HBoxContainer/VBoxContainer2/HBoxContainer4/txBytes")
-	
 	if fromWallet.text == "":
 		fromWalletError.text = "From wallet is required"
 		fromWalletError.visible = true
@@ -312,8 +306,6 @@ func _on_button_pressed() -> void:
 
 
 func _on_copy_tx_bytes_pressed() -> void:
-	var multiSigError = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/multiSigError")
-	var txError = get_node("HBoxContainer/VBoxContainer2/txError")
 	var notHaveTx = txBytes.size() == 0
 
 	if notHaveTx:
@@ -323,14 +315,11 @@ func _on_copy_tx_bytes_pressed() -> void:
 		txError.visible = false
 		txError.text = ""
 
-	var txBytesText: Label = get_node("HBoxContainer/VBoxContainer2/HBoxContainer4/txBytes")
 	DisplayServer.clipboard_set(txBytesText.text)
 	Global.showToast("Copied")
 
 func _on_sign_and_execute_tx_pressed() -> void:
-	var multiSigError = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/multiSigError")
-	var txError = get_node("HBoxContainer/VBoxContainer2/txError")
-	var confirmAddressError = get_node("HBoxContainer/VBoxContainer2/confirmAddressError")
+	
 	var notHaveMultiSig = multiSigBytes.size() == 0
 	var notHaveTx = txBytes.size() == 0
 	var notHaveAddressConfirm = addressConfirm.size() == 0
@@ -373,7 +362,6 @@ func _on_sign_and_execute_tx_pressed() -> void:
 	load_balance()
 
 func load_balance()->void:
-	var balanceBox :Label= get_node('HBoxContainer/VBoxContainer2/VBoxContainer/HBoxbalance/totalBalance')
 	if multiSigAddress == "":
 		balanceBox.text = "N/A"
 	else:
@@ -381,7 +369,6 @@ func load_balance()->void:
 		balanceBox.text = str(number_format(float(balance.get_total_balance())/10**9))
 
 func _on_faucet_pressed() -> void:
-	var multiSigError = get_node("HBoxContainer/VBoxContainer2/VBoxContainer/multiSigError")
 	if multiSigAddress == "":
 		multiSigError.text = "Multi signature is required"
 		multiSigError.visible = true

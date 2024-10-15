@@ -2,6 +2,8 @@ extends TabBar
 
 var sdk = SuiSDK.new()
 
+@onready var tree: Tree = $VBoxContainer/listWalletsTree
+
 func makeHeaderTree (tree: Tree):
 	tree.hide_root = true
 	tree.set_column_title(0, 'No')
@@ -28,7 +30,6 @@ func genRowTree(row, index, wallet):
 
 func loadWallets():
 	var wallets = sdk.getWallets()
-	var tree: Tree = get_node("VBoxContainer/listWalletsTree")
 	tree.clear()
 	var root = tree.create_item()
 	
@@ -57,7 +58,6 @@ func _on_create_wallet_pressed() -> void:
 
 func _on_line_edit_text_changed(new_text: String) -> void:
 	if new_text.length() == 66:
-		var tree: Tree = get_node("VBoxContainer/listWalletsTree")
 		tree.clear()
 
 		var root = tree.create_item()

@@ -3,10 +3,16 @@ extends Node2D
 var suiSDK = SuiSDK.new()
 var packageId = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321"
 
+@onready var from:LineEdit = $Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/sender
+@onready var fromError:Label = $Control/Panel/VBoxContainer/VBoxContainer/senderError
+@onready var to:LineEdit = $Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer/to
+@onready var toError:Label = $Control/Panel/VBoxContainer/VBoxContainer2/toError
+@onready var nftId:LineEdit = $Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer/nftId
+@onready var nftIdError:Label = $Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/nftIdError
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if Global.currentWallet not in "":
-		var from:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/sender")
 		from.text = Global.currentWallet
 
 
@@ -18,12 +24,7 @@ func returnRoot():
 	Global.changeScene(Global.SCREEN.ROOT)
 
 func _on_mint_pressed() -> void:
-	var from:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/sender")
-	var fromError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer/senderError")
-	var to:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer/to")
-	var toError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/toError")
-	var nftId:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer/nftId")
-	var nftIdError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/nftIdError")
+	
 	
 	if from.text == "":
 		fromError.visible = true
