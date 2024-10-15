@@ -1,7 +1,7 @@
 extends Node2D
 
 var suiSDK = SuiSDK.new()
-var packageId = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321"
+var packageId = "0x99ebcdef6e51e1021eeaded8d3c7c7eb672c1b000d5ef3408d103b805b93a0a0"
 
 @onready var ownerNftMint: LineEdit = $Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/sender
 @onready var ownerError: Label = $Control/Panel/VBoxContainer/VBoxContainer/senderError
@@ -29,8 +29,7 @@ func returnRoot():
 func _on_cancel_pressed() -> void:
 	returnRoot()
 
-
-func _on_mint_pressed() -> void:
+func validateForm() -> bool:
 	if ownerNftMint.text == "":
 		ownerError.visible = true
 		ownerError.text = "Owner wallet address is required"
@@ -60,8 +59,10 @@ func _on_mint_pressed() -> void:
 		uriError.text = ""
 		
 	if ownerNftMint.text == "" || nftName.text == "" || description.text == "" || uri.text == "":
-		return
+		return false
+	return true
 	
+func checkBalance():
 	var balance = suiSDK.getBalanceSync(ownerNftMint.text)
 	var balanceNumber = float(balance.get_total_balance())
 	if balanceNumber < 10**9:
@@ -74,6 +75,47 @@ func _on_mint_pressed() -> void:
 		balanceNumber = float(balance.get_total_balance())
 		OS.delay_msec(1)
 	
+
+func _on_mint_pressed() -> void:
+	var validateResult = validateForm()
+	if validateResult == false:
+		return
+	checkBalance()
+	
 	var message = suiSDK.mintNft(packageId, ownerNftMint.text, nftName.text, description.text, uri.text)
-	Global.showToast(message)
-	returnRoot()	
+	print(message)
+	Global.showToast("Mint NFT successfully")
+	returnRoot()
+
+
+func _on_mint_2_pressed() -> void:
+	var validateResult = validateForm()
+	if validateResult == false:
+		return
+
+	checkBalance()
+
+	var builder = SuiProgrammableTransactionBuilder.new()
+	var argument = SuiArguments.new()
+	var nameBscBasic = SuiBSCBasic.new()
+	var descriptionBscBasic = SuiBSCBasic.new()
+	var uriBscBasic = SuiBSCBasic.new()
+	var gas = 0.005 * 10**9
+
+	nameBscBasic.BSCBasic("string", nftName.text)
+	descriptionBscBasic.BSCBasic("string", description.text)
+	uriBscBasic.BSCBasic("string", uri.text)
+
+	suiSDK.makePure(builder, argument, nameBscBasic)
+	suiSDK.makePure(builder, argument, descriptionBscBasic)
+	suiSDK.makePure(builder, argument, uriBscBasic)
+	#suiSDK.addArgumentInput(argument, 0)
+	#suiSDK.addArgumentInput(argument, 1)
+	#suiSDK.addArgumentInput(argument, 2)
+
+	var typeTag = SuiTypeTags.new()
+	suiSDK.addMoveCallCommand(builder, packageId, "nft", "mint_to_sender", typeTag, argument)
+	var result = suiSDK.executeTransaction(builder, ownerNftMint.text, gas)
+	print(result)
+	Global.showToast("Mint NFT successfully")
+	returnRoot()

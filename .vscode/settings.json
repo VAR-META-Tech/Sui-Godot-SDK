@@ -83,6 +83,8 @@
     "filesystem": "cpp",
     "expected": "cpp",
     "thread": "cpp",
-    "xlocale": "cpp"
+    "xlocale": "cpp",
+    "typeindex": "cpp",
+    "*.inc": "cpp"
   }
 }

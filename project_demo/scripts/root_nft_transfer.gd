@@ -1,7 +1,7 @@
 extends Node2D
 
 var suiSDK = SuiSDK.new()
-var packageId = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321"
+var packageId = "0x99ebcdef6e51e1021eeaded8d3c7c7eb672c1b000d5ef3408d103b805b93a0a0"
 
 @onready var from:LineEdit = $Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/sender
 @onready var fromError:Label = $Control/Panel/VBoxContainer/VBoxContainer/senderError

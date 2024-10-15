@@ -2,7 +2,7 @@ extends TabBar
 
 var wallets = []
 var suiSDK = SuiSDK.new()
-var objectType = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321::nft::NFT"
+var objectType = "0x99ebcdef6e51e1021eeaded8d3c7c7eb672c1b000d5ef3408d103b805b93a0a0::nft::NFT"
 
 @onready var walletsOption: OptionButton = $VBoxContainer/VBoxContainer2/walletsOption
 @onready var nftsList = $VBoxContainer/ScrollContainer/nftsList

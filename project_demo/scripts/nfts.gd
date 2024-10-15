@@ -2,8 +2,8 @@ extends TabBar
 
 var sdk = SuiSDK.new()
 var wallets = []
-const NFT_PACKAGE_ID = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321";
-const NFT_OBJECT_TYPE = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321::nft::NFT";
+const NFT_PACKAGE_ID = "0x99ebcdef6e51e1021eeaded8d3c7c7eb672c1b000d5ef3408d103b805b93a0a0";
+const NFT_OBJECT_TYPE = "0x99ebcdef6e51e1021eeaded8d3c7c7eb672c1b000d5ef3408d103b805b93a0a0::nft::NFT";
 
 func _ready():
 	self.load_wallets()

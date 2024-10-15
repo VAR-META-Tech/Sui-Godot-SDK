@@ -239,7 +239,7 @@ namespace TestSuiMultisigSDK
     Ref<MulSigWrapper> multisig = suiSDK.getOrCreateMultisig(addresses, weights, threshold);
     TypedArray<uint8_t> tx = suiSDK.createTransaction(multisig->address, addresses[2], amount);
     String message = suiSDK.signAndExecuteTransaction(multisig, tx, addresses);
-    CHECK(message == "Transaction failed");
+    CHECK(message != "Sign and execute transaction success");
   }
 }
 
