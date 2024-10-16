@@ -283,7 +283,11 @@ To add a transfer object command to the transaction:
 
 ```gdscript
 var agreements = SuiArguments.new()
+suiSDK.addArgumentResult(agreements, 0)
 var recipient = SuiArguments.new()
+var recipientBscBasic = SuiBSCBasic.new()
+recipientBscBasic.BSCBasic("address", "recipient_address")
+
 suiSDK.addTransferObjectCommand(builder, agreements, recipient)
 ```
 
@@ -342,9 +346,6 @@ var txBytes = suiSDK.createTransaction("wallet_address", "wallet_address", amoun
 To sign and execute a transaction using a multisig wallet:
 
 ```gdscript
-string result = multisigWallet.SignAndExecuteTransaction(transactionBuilder, "signer_address");
-Debug.Log(result);
-
 var address1 = "wallet_address_1"
 var address2 = "wallet_address_2"
 var address3 = "wallet_address_3"
