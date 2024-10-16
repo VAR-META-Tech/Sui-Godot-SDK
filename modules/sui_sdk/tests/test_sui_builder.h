@@ -131,7 +131,7 @@ namespace TestSuiBuilderSDK
     CHECK(result != "");
   }
 
-  TEST_CASE("Sign transaction builder mint NFT")
+  TEST_CASE("Sign transaction builder mint & transfer NFT")
   {
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
     while (wallets.size() < 2)
@@ -140,10 +140,9 @@ namespace TestSuiBuilderSDK
       wallets = suiSDK.getWallets();
     }
 
+    /** Test Mint NFT */
     Ref<WalletWrapper> sender = wallets[0];
-    // Ref<WalletWrapper> recipient = wallets[1];
-    // uint64_t amount = pow(10, 9);
-    // uint64_t gas = 0.005 * pow(10, 9);
+    Ref<WalletWrapper> recipient = wallets[1];
     String nftName = "Unit test mint nft";
     String nftDescription = "This is a unit test mint nft";
     String nftUri = "https://i.ibb.co/SN2bQ5P/hand-drawn-nft-style-ape-illustration-23-2149622021.jpg";
@@ -158,8 +157,8 @@ namespace TestSuiBuilderSDK
       balance = suiSDK.getBalanceSync(sender->address);
     }
 
-    SuiProgrammableTransactionBuilder *builder = memnew(SuiProgrammableTransactionBuilder);
-    SuiArguments *argument = memnew(SuiArguments);
+    SuiProgrammableTransactionBuilder *builderMintNFT = memnew(SuiProgrammableTransactionBuilder);
+    SuiArguments *argumentMintNFT = memnew(SuiArguments);
     SuiBSCBasic *nameBscBasic = memnew(SuiBSCBasic);
     SuiBSCBasic *descriptionBscBasic = memnew(SuiBSCBasic);
     SuiBSCBasic *uriBscBasic = memnew(SuiBSCBasic);
@@ -168,20 +167,39 @@ namespace TestSuiBuilderSDK
     descriptionBscBasic->BSCBasic("string", nftDescription);
     uriBscBasic->BSCBasic("string", nftUri);
 
-    suiSDK.makePure(builder, argument, nameBscBasic);
-    suiSDK.makePure(builder, argument, descriptionBscBasic);
-    suiSDK.makePure(builder, argument, uriBscBasic);
-    suiSDK.addArgumentInput(argument, 0);
-    suiSDK.addArgumentInput(argument, 1);
-    suiSDK.addArgumentInput(argument, 2);
+    suiSDK.makePure(builderMintNFT, argumentMintNFT, nameBscBasic);
+    suiSDK.makePure(builderMintNFT, argumentMintNFT, descriptionBscBasic);
+    suiSDK.makePure(builderMintNFT, argumentMintNFT, uriBscBasic);
 
     SuiTypeTags *typeTag = memnew(SuiTypeTags);
-    suiSDK.addMoveCallCommand(builder, package_id, "nft", "mint_to_sender", typeTag, argument);
-    String result = suiSDK.executeTransaction(builder, sender->address, gas);
-    memdelete(builder);
-    memdelete(argument);
+    suiSDK.addMoveCallCommand(builderMintNFT, package_id, "nft", "mint_to_sender", typeTag, argumentMintNFT);
+    String minNFTResult = suiSDK.executeTransaction(builderMintNFT, sender->address, gas);
+    memdelete(builderMintNFT);
+    memdelete(argumentMintNFT);
 
-    CHECK(result != "");
+    CHECK(minNFTResult != "");
+
+    SuiProgrammableTransactionBuilder *builderTransferNFT = memnew(SuiProgrammableTransactionBuilder);
+    /** Test transfer NFT */
+    TypedArray<WalletObjectWrapper> walletNFTObjects = suiSDK.getWalletObjects(sender->address, object_type);
+    CHECK(walletNFTObjects.size() > 0);
+
+    Ref<WalletObjectWrapper> nft = walletNFTObjects[0];
+    SuiArguments *argumentTransferNFT = memnew(SuiArguments);
+    SuiBSCBasic *recipientBscBasic = memnew(SuiBSCBasic);
+
+    recipientBscBasic->BSCBasic("string", recipient->address);
+
+    suiSDK.makeObjectImmOrOwned(builderTransferNFT, argumentTransferNFT, nft->get_object_id(), sender->address);
+    suiSDK.makePure(builderTransferNFT, argumentTransferNFT, recipientBscBasic);
+
+    suiSDK.addMoveCallCommand(builderTransferNFT, package_id, "nft", "transfer", typeTag, argumentTransferNFT);
+    String transferNFTResult = suiSDK.executeTransaction(builderTransferNFT, sender->address, gas);
+    memdelete(builderTransferNFT);
+    memdelete(argumentTransferNFT);
+    memdelete(recipientBscBasic);
+
+    CHECK(transferNFTResult != "");
   }
 }
 

@@ -22,10 +22,8 @@ func _process(delta: float) -> void:
 	
 func returnRoot():
 	Global.changeScene(Global.SCREEN.ROOT)
-
-func _on_mint_pressed() -> void:
 	
-	
+func validateForm():
 	if from.text == "":
 		fromError.visible = true
 		fromError.text = "From wallet address is required"
@@ -48,12 +46,61 @@ func _on_mint_pressed() -> void:
 		nftIdError.text = ""
 
 	if from.text == "" || to.text == "" || nftId.text == "":
+		return false
+	return true
+
+func checkBalance():
+	var balance = suiSDK.getBalanceSync(from.text)
+	var balanceNumber = float(balance.get_total_balance())
+	if balanceNumber < 10**9:
+		suiSDK.requestTokensFromFaucet(from.text)
+		OS.delay_msec(3)
+		balance = suiSDK.getBalanceSync(from.text)
+		balanceNumber = float(balance.get_total_balance())
+	while balanceNumber < 10**9:
+		balance = suiSDK.getBalanceSync(from.text)
+		balanceNumber = float(balance.get_total_balance())
+		OS.delay_msec(1)
+
+func _on_transfer_pressed() -> void:
+	var validateResult = validateForm()
+	if validateResult == false:
 		return
 		
+	checkBalance()
+
 	var message = suiSDK.transferNft(packageId, from.text, nftId.text, to.text)
 	Global.showToast(message)
-	returnRoot()	
+	returnRoot()
 
 
 func _on_cancel_pressed() -> void:
 	returnRoot()
+
+
+func _on_transfer_2_pressed() -> void:
+	var validateResult = validateForm()
+	if validateResult == false:
+		return
+
+	checkBalance()
+
+	var builder = SuiProgrammableTransactionBuilder.new()
+	var argument = SuiArguments.new()
+	var nftIdBscBasic = SuiBSCBasic.new()
+	var recipientBscBasic = SuiBSCBasic.new()
+	var gas = 0.005 * 10**9
+
+	nftIdBscBasic.BSCBasic("address", nftId.text)
+	recipientBscBasic.BSCBasic("address", to.text)
+
+	suiSDK.makeObjectImmOrOwned(builder, argument, nftId.text, from.text)
+	suiSDK.makePure(builder, argument, recipientBscBasic)
+
+	var typeTag = SuiTypeTags.new()
+	suiSDK.addMoveCallCommand(builder, packageId, "nft", "transfer", typeTag, argument)
+	var result = suiSDK.executeTransaction(builder, from.text, gas)
+	print(result)
+	Global.showToast("Transfer NFT successfully")
+	returnRoot()
+	pass

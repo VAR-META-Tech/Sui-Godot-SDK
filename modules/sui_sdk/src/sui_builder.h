@@ -54,6 +54,7 @@ class SuiBuilder
 
 public:
   void makePure(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiBSCBasic *pure);
+  void makeObjectImmOrOwned(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, String nftId, String sender);
   void addSplitCoinsCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *coin, SuiArguments *amount);
   void addTransferObjectCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiArguments *recipient);
   void addMoveCallCommand(SuiProgrammableTransactionBuilder *builder, String package, String module, String function, SuiTypeTags *type_arguments, SuiArguments *arguments);

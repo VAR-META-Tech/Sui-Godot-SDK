@@ -69,7 +69,8 @@ void SuiSDK::_bind_methods()
 	/**
 	 * Transaction builder
 	 */
-	ClassDB::bind_method(D_METHOD("makePure", "builder", "arguments"), &SuiSDK::makePure);
+	ClassDB::bind_method(D_METHOD("makePure", "builder", "arguments", "value"), &SuiSDK::makePure);
+	ClassDB::bind_method(D_METHOD("makeObjectImmOrOwned", "builder", "arguments", "nft_id", "sender_address"), &SuiSDK::makeObjectImmOrOwned);
 	ClassDB::bind_method(D_METHOD("addSplitCoinsCommand", "builder", "coin", "amount"), &SuiSDK::addSplitCoinsCommand);
 	ClassDB::bind_method(D_METHOD("addTransferObjectCommand", "builder", "arguments", "recipient"), &SuiSDK::addTransferObjectCommand);
 	ClassDB::bind_method(D_METHOD("addMoveCallCommand", "builder", "package", "module", "function", "type_arguments", "arguments"), &SuiSDK::addMoveCallCommand);

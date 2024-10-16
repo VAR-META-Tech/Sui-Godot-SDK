@@ -97,6 +97,9 @@ namespace godot
 		 * Transaction builder
 		 */
 		void makePure(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiBSCBasic *pure) { return SuiBuilder::makePure(builder, arguments, pure); };
+		void makeObjectImmOrOwned(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, String nftId, String sender) { 
+			return SuiBuilder::makeObjectImmOrOwned(builder, arguments, nftId, sender); 
+		};
 		void addSplitCoinsCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *coin, SuiArguments *amount) { return SuiBuilder::addSplitCoinsCommand(builder, coin, amount); };
 		void addTransferObjectCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiArguments *recipient) { return SuiBuilder::addTransferObjectCommand(builder, arguments, recipient); };
 		void addMoveCallCommand(SuiProgrammableTransactionBuilder *builder, String package, String module, String function, SuiTypeTags *type_arguments, SuiArguments *arguments) { return SuiBuilder::addMoveCallCommand(builder, package, module, function, type_arguments, arguments); };

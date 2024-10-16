@@ -14,11 +14,11 @@ bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 content_margin_left = 8.0
 bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1rig"]
-bg_color = Color(0.278431, 0.32549, 0.396078, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kulu4"]
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1rig"]
+bg_color = Color(0.278431, 0.32549, 0.396078, 1)
 
 [node name="RootNftTransfer" type="Node2D"]
 script = ExtResource("1_px0sq")
@@ -137,20 +137,31 @@ theme_override_font_sizes/font_size = 12
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 20
 
-[node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+[node name="transfer" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_g1rig")
-text = "Cancel"
-
-[node name="mint" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(130, 40)
-layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_kulu4")
 text = "Transfer"
+
+[node name="transfer2" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_kulu4")
+text = "Transfer by tx builder"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_g1rig")
+text = "Cancel"
 
 [node name="panelResult" type="Panel" parent="Control/Panel"]
 visible = false
@@ -265,5 +276,6 @@ layout_mode = 2
 position = Vector2(196, 14)
 texture = ExtResource("2_ejerm")
 
-[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/mint" to="." method="_on_mint_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/transfer" to="." method="_on_transfer_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/transfer2" to="." method="_on_transfer_2_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer2/cancel" to="." method="_on_cancel_pressed"]

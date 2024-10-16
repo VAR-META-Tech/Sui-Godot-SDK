@@ -5,6 +5,11 @@ void SuiBuilder::makePure(SuiProgrammableTransactionBuilder *builder, SuiArgumen
   make_pure(builder->builder, arguments->arguments, pure->pure);
 }
 
+void SuiBuilder::makeObjectImmOrOwned(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, String nftId, String sender)
+{
+  make_object_imm_or_owned(builder->builder, arguments->arguments, nftId.utf8().get_data(), sender.utf8().get_data());
+}
+
 void SuiBuilder::addSplitCoinsCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *coin, SuiArguments *amount)
 {
   add_split_coins_command(builder->builder, coin->arguments, amount->arguments);
