@@ -3,6 +3,13 @@ extends Node2D
 var suiSDK = SuiSDK.new()
 var wallet: WalletWrapper
 
+@onready var tree: Tree = $Control/Panel/VBoxContainer/panelResult/VBoxContainer/walletTree
+@onready var panelResult: Panel = $Control/Panel/VBoxContainer/panelResult
+@onready var schemeErrorLabel: Label = $Control/Panel/VBoxContainer/VBoxContainer/schemeError
+@onready var scheme: OptionButton = $Control/Panel/VBoxContainer/VBoxContainer/scheme
+@onready var wordErrorLabel: Label = $Control/Panel/VBoxContainer/VBoxContainer2/wordError
+@onready var word: OptionButton = $Control/Panel/VBoxContainer/VBoxContainer2/word
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -14,14 +21,8 @@ func _process(delta: float) -> void:
 
 
 func _on_generate_pressed() -> void:
-	var panelResult: Panel = get_node("Control/Panel/VBoxContainer/panelResult")
-
-	var schemeErrorLabel: Label = get_node("Control/Panel/VBoxContainer/VBoxContainer/schemeError")
-	var scheme: OptionButton = get_node("Control/Panel/VBoxContainer/VBoxContainer/scheme")
 	var schemeIndex = scheme.get_selected_id()
 	
-	var wordErrorLabel: Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/wordError")
-	var word: OptionButton = get_node("Control/Panel/VBoxContainer/VBoxContainer2/word")
 	var wordIndex = word.get_selected_id()
 	var isError = false
 	panelResult.visible = false
@@ -51,7 +52,6 @@ func _on_generate_pressed() -> void:
 	wallet = suiSDK.generateWallet(schemeValue, wordValue)
 	
 	var buttonCopy: Texture2D = load("res://icons/copy.svg")
-	var tree: Tree = get_node('Control/Panel/VBoxContainer/panelResult/VBoxContainer/walletTree')
 	var root = tree.create_item()
 	tree.hide_root = true
 	tree.set_column_title(0, 'Address')

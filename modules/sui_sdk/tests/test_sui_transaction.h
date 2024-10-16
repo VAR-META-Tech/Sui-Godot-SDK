@@ -98,36 +98,6 @@ namespace TestSuiTransactionSDK
     CHECK(result == "Transaction completed successfully");
   }
 
-  TEST_CASE("Sign transaction builder")
-  {
-    TypedArray<WalletWrapper> wallets = suiSDK.getWallets();
-    while (wallets.size() < 2)
-    {
-      suiSDK.generateAndAddKey();
-      wallets = suiSDK.getWallets();
-    }
-
-    Ref<WalletWrapper> sender = wallets[0];
-    Ref<WalletWrapper> recipient = wallets[1];
-    uint64_t amount = pow(10, 9);
-    uint64_t gas = 0.005 * pow(10, 9);
-
-    bool enoughAmount = false;
-    do
-    {
-      Ref<BalanceWrapper> balance = suiSDK.getBalanceSync(sender->address);
-      enoughAmount = stoull(balance->total_balance.utf8().get_data()) >= amount + gas;
-      if (!enoughAmount)
-      {
-        suiSDK.requestTokensFromFaucet(sender->address);
-      }
-      sleep(5);
-    } while (enoughAmount == false);
-
-    String result = suiSDK.programmableTransactionBuilder(sender->address, recipient->address, amount);
-    CHECK(result != "");
-  }
-
   TEST_CASE("Sign transaction don't have enough balance")
   {
     TypedArray<WalletWrapper> wallets = suiSDK.getWallets();

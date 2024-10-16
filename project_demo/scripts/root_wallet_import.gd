@@ -2,6 +2,15 @@ extends Node2D
 
 var suiSDK = SuiSDK.new()
 
+@onready var privateKey: LineEdit = $Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/privateKey
+@onready var privateKeyError: Label = $Control/Panel/VBoxContainer/VBoxContainer/privateKeyError
+@onready var mnemonic: LineEdit = $Control/Panel/VBoxContainer/VBoxContainer2/mnemonic
+@onready var mnemonicError: Label = $Control/Panel/VBoxContainer/VBoxContainer2/mnemonicError
+@onready var scheme: OptionButton = $Control/Panel/VBoxContainer/VBoxContainer3/scheme
+@onready var schemeError: Label = $Control/Panel/VBoxContainer/VBoxContainer3/schemeError
+@onready var alias: LineEdit = $Control/Panel/VBoxContainer/VBoxContainer4/alias
+@onready var aliasError: Label = $Control/Panel/VBoxContainer/VBoxContainer4/aliasError
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -15,8 +24,6 @@ func backToWallet():
 	Global.changeScene(Global.SCREEN.ROOT)
 
 func _on_button_pressed() -> void:
-	var privateKey: LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/privateKey")
-	var privateKeyError: Label = get_node("Control/Panel/VBoxContainer/VBoxContainer/privateKeyError")
 	if privateKey.text.length() == 0:
 		privateKeyError.text = "Private key is requred"
 		privateKeyError.visible = true
@@ -33,13 +40,7 @@ func _on_button_pressed() -> void:
 		Global.showToast(importResult.get_error())
 
 func _on_import_mnemonic_button_pressed() -> void:
-	var mnemonic: LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/mnemonic")
-	var mnemonicError: Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/mnemonicError")
-	var scheme: OptionButton = get_node("Control/Panel/VBoxContainer/VBoxContainer3/scheme")
 	var schemeIndex = scheme.get_selected_id()
-	var schemeError: Label = get_node("Control/Panel/VBoxContainer/VBoxContainer3/schemeError")
-	var alias: LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer4/alias")
-	var aliasError: Label = get_node("Control/Panel/VBoxContainer/VBoxContainer4/aliasError")
 	
 	var isError = false
 

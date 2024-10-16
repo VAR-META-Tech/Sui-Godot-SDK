@@ -240,6 +240,11 @@ extern "C"
                  struct CArguments *arguments,
                  struct CPure *value);
 
+  void make_object_imm_or_owned(struct CProgrammableTransactionBuilder *builder,
+                              struct CArguments *arguments,
+                              const char *nft_id,
+                              const char *sender);
+
   struct CProgrammableTransactionBuilder *create_builder(void);
 
   void destroy_builder(struct CProgrammableTransactionBuilder *builder);

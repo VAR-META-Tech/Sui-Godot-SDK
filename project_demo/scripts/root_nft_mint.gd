@@ -1,13 +1,21 @@
 extends Node2D
 
 var suiSDK = SuiSDK.new()
-var packageId = "0xe82276e2634220259709b827bf84828940cad87cdf061d396e6a569b9b4d9321"
+var packageId = "0x99ebcdef6e51e1021eeaded8d3c7c7eb672c1b000d5ef3408d103b805b93a0a0"
+
+@onready var ownerNftMint: LineEdit = $Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/sender
+@onready var ownerError: Label = $Control/Panel/VBoxContainer/VBoxContainer/senderError
+@onready var nftName: LineEdit = $Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer/name
+@onready var nameError: Label = $Control/Panel/VBoxContainer/VBoxContainer2/nameError
+@onready var description: LineEdit = $Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer/description
+@onready var descriptionError: Label = $Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/descriptionError
+@onready var uri: LineEdit = $Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer4/HBoxContainer/uri
+@onready var uriError: Label = $Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer4/uriError
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if Global.currentWallet not in "":
-		var owner:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/sender")
-		owner.text = Global.currentWallet
+		ownerNftMint.text = Global.currentWallet
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,25 +29,15 @@ func returnRoot():
 func _on_cancel_pressed() -> void:
 	returnRoot()
 
-
-func _on_mint_pressed() -> void:
-	var owner:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer/sender")
-	var ownerError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer/senderError")
-	var name:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer/name")
-	var nameError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/nameError")
-	var description:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer/description")
-	var descriptionError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/descriptionError")
-	var uri:LineEdit = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer4/HBoxContainer/uri")
-	var uriError:Label = get_node("Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer4/uriError")
-	
-	if owner.text == "":
+func validateForm() -> bool:
+	if ownerNftMint.text == "":
 		ownerError.visible = true
 		ownerError.text = "Owner wallet address is required"
 	else:
 		ownerError.visible = false
 		ownerError.text = ""
 		
-	if name.text == "":
+	if nftName.text == "":
 		nameError.visible = true
 		nameError.text = "Name NFT is required"
 	else:
@@ -60,21 +58,64 @@ func _on_mint_pressed() -> void:
 		uriError.visible = false
 		uriError.text = ""
 		
-	if owner.text == "" || name.text == "" || description.text == "" || uri.text == "":
-		return
+	if ownerNftMint.text == "" || nftName.text == "" || description.text == "" || uri.text == "":
+		return false
+	return true
 	
-	var balance = suiSDK.getBalanceSync(owner.text)
+func checkBalance():
+	var balance = suiSDK.getBalanceSync(ownerNftMint.text)
 	var balanceNumber = float(balance.get_total_balance())
 	if balanceNumber < 10**9:
-		suiSDK.requestTokensFromFaucet(owner.text)
+		suiSDK.requestTokensFromFaucet(ownerNftMint.text)
 		OS.delay_msec(3)
-		balance = suiSDK.getBalanceSync(owner.text)
+		balance = suiSDK.getBalanceSync(ownerNftMint.text)
 		balanceNumber = float(balance.get_total_balance())
 	while balanceNumber < 10**9:
-		balance = suiSDK.getBalanceSync(owner.text)
+		balance = suiSDK.getBalanceSync(ownerNftMint.text)
 		balanceNumber = float(balance.get_total_balance())
 		OS.delay_msec(1)
 	
-	var message = suiSDK.mintNft(packageId, owner.text, name.text, description.text, uri.text)
-	Global.showToast(message)
-	returnRoot()	
+
+func _on_mint_pressed() -> void:
+	var validateResult = validateForm()
+	if validateResult == false:
+		return
+	checkBalance()
+	
+	var message = suiSDK.mintNft(packageId, ownerNftMint.text, nftName.text, description.text, uri.text)
+	print(message)
+	Global.showToast("Mint NFT successfully")
+	returnRoot()
+
+
+func _on_mint_2_pressed() -> void:
+	var validateResult = validateForm()
+	if validateResult == false:
+		return
+
+	checkBalance()
+
+	var builder = SuiProgrammableTransactionBuilder.new()
+	var argument = SuiArguments.new()
+	var nameBscBasic = SuiBSCBasic.new()
+	var descriptionBscBasic = SuiBSCBasic.new()
+	var uriBscBasic = SuiBSCBasic.new()
+	var gas = 0.005 * 10**9
+
+	nameBscBasic.BSCBasic("string", nftName.text)
+	descriptionBscBasic.BSCBasic("string", description.text)
+	uriBscBasic.BSCBasic("string", uri.text)
+
+	suiSDK.makePure(builder, argument, nameBscBasic)
+	suiSDK.makePure(builder, argument, descriptionBscBasic)
+	suiSDK.makePure(builder, argument, uriBscBasic)
+	#suiSDK.addArgumentInput(argument, 0)
+	#suiSDK.addArgumentInput(argument, 1)
+	#suiSDK.addArgumentInput(argument, 2)
+
+	var typeTag = SuiTypeTags.new()
+	suiSDK.addMoveCallCommand(builder, packageId, "nft", "mint_to_sender", typeTag, argument)
+	var result = suiSDK.executeTransaction(builder, ownerNftMint.text, gas)
+	print(result)
+	Global.showToast("Mint NFT successfully")
+	returnRoot()

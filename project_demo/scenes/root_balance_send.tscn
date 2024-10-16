@@ -33,8 +33,6 @@ script = ExtResource("1_lkn84")
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="Panel" type="Panel" parent="Control"]
 layout_mode = 0
@@ -42,39 +40,49 @@ offset_right = 1152.0
 offset_bottom = 644.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_2l237")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
-custom_minimum_size = Vector2(0, 40)
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Panel"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -250.0
-offset_top = 40.0
-offset_right = 250.0
-offset_bottom = 437.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="Control/Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Send amount"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "From"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="from" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="from" type="LineEdit" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -82,26 +90,26 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_ulpst")
 placeholder_text = "Enter the from wallet address"
 
-[node name="fromError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer"]
+[node name="fromError" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
 theme_override_font_sizes/font_size = 12
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel/VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+[node name="Label2" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Receive"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="receive" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="receive" type="LineEdit" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -109,26 +117,26 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_n0axb")
 placeholder_text = "Enter the receive wallet address"
 
-[node name="receiveError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+[node name="receiveError" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
 theme_override_font_sizes/font_size = 12
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label2" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3"]
+[node name="Label2" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer3"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Amount"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer3"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="amount" type="LineEdit" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer"]
+[node name="amount" type="LineEdit" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -136,81 +144,81 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_n0axb")
 placeholder_text = "Enter the amount"
 
-[node name="amountError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2/VBoxContainer3"]
+[node name="amountError" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer3"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
 theme_override_font_sizes/font_size = 12
 
-[node name="Label3" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+[node name="Label3" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Sponser
 "
 
-[node name="walletsOption" type="OptionButton" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+[node name="walletsOption" type="OptionButton" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxTexture_rrv6a")
 
-[node name="sponserError" type="Label" parent="Control/Panel/VBoxContainer/VBoxContainer2"]
+[node name="sponserError" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/VBoxContainer2"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
 theme_override_font_sizes/font_size = 12
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="send" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+[node name="send" type="Button" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_jug3o")
 text = "Send"
 
-[node name="sendWithSponsor" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+[node name="sendWithSponsor" type="Button" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_jug3o")
-text = "Send with sponsor"
+text = "Send with sponser"
 
-[node name="sendTxBuilder" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="sendTxBuilder" type="Button" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_jug3o")
 text = "Send by tx builder"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+[node name="sendTxBuilder2" type="Button" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_jug3o")
+text = "Send w sponser by tx builder"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
+[node name="cancel" type="Button" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_0m428")
 text = "Cancel"
 
-[node name="panelResult" type="Panel" parent="Control/Panel"]
+[node name="panelResult" type="Panel" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(500, 0)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -356.0
-offset_top = -221.0
-offset_right = 357.0
-offset_bottom = -32.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 2
 
-[node name="walletTree" type="Tree" parent="Control/Panel/panelResult"]
+[node name="walletTree" type="Tree" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/panelResult"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -219,95 +227,87 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer"]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 229.5
-offset_top = 460.0
-offset_right = 209.5
-offset_bottom = 440.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 text = "Address"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer2/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
 clip_contents = true
 layout_mode = 2
 
-[node name="address_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer/HBoxContainer"]
+[node name="address_wallet" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer/HBoxContainer"]
+[node name="Copy" type="Sprite2D" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/HBoxContainer"]
 position = Vector2(124, 14)
 texture = ExtResource("2_3f8mt")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer2"]
+[node name="Label" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
 text = "Mnemonic"
 
-[node name="mnemonic_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer2"]
+[node name="mnemonic_wallet" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
 
-[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer2"]
+[node name="Copy" type="Sprite2D" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 position = Vector2(196, 14)
 texture = ExtResource("2_3f8mt")
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer3"]
+[node name="Label" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer3"]
 layout_mode = 2
 text = "Public key"
 
-[node name="public_base64_key_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer3"]
+[node name="public_base64_key_wallet" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer3"]
 layout_mode = 2
 
-[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer3"]
+[node name="Copy" type="Sprite2D" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer3"]
 position = Vector2(196, 14)
 texture = ExtResource("2_3f8mt")
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer4"]
+[node name="Label" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer4"]
 layout_mode = 2
 text = "Private key"
 
-[node name="private_key_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer4"]
+[node name="private_key_wallet" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer4"]
 layout_mode = 2
 
-[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer4"]
+[node name="Copy" type="Sprite2D" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer4"]
 position = Vector2(196, 14)
 texture = ExtResource("2_3f8mt")
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Control/Panel/VBoxContainer2"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer5"]
+[node name="Label" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer5"]
 layout_mode = 2
 text = "Scheme"
 
-[node name="scheme_wallet" type="Label" parent="Control/Panel/VBoxContainer2/HBoxContainer5"]
+[node name="scheme_wallet" type="Label" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer5"]
 layout_mode = 2
 
-[node name="Copy" type="Sprite2D" parent="Control/Panel/VBoxContainer2/HBoxContainer5"]
+[node name="Copy" type="Sprite2D" parent="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer5"]
 position = Vector2(196, 14)
 texture = ExtResource("2_3f8mt")
 
-[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/send" to="." method="_on_send_pressed"]
-[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/sendWithSponsor" to="." method="_on_send_with_sponsor_pressed"]
-[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/sendTxBuilder" to="." method="_on_send_tx_builder_pressed"]
-[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer2/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/send" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/sendWithSponsor" to="." method="_on_send_with_sponsor_pressed"]
+[connection signal="pressed" from="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer3/sendTxBuilder" to="." method="_on_send_tx_builder_pressed"]
+[connection signal="pressed" from="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer3/sendTxBuilder2" to="." method="_on_send_tx_builder_2_pressed"]
+[connection signal="pressed" from="Control/Panel/ScrollContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer2/cancel" to="." method="_on_cancel_pressed"]

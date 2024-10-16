@@ -14,11 +14,11 @@ bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 content_margin_left = 8.0
 bg_color = Color(0.168627, 0.231373, 0.352941, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn7q5"]
-bg_color = Color(0.278431, 0.32549, 0.396078, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agtqv"]
 bg_color = Color(0.270588, 0.6, 0.976471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn7q5"]
+bg_color = Color(0.278431, 0.32549, 0.396078, 1)
 
 [node name="RootNftMint" type="Node2D"]
 script = ExtResource("1_1ocbt")
@@ -161,22 +161,34 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.117647, 0, 1)
 theme_override_font_sizes/font_size = 12
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="mint" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_agtqv")
+text = "Mint"
+
+[node name="mint2" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_agtqv")
+text = "Mint by tx builder"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 20
 
 [node name="cancel" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_bn7q5")
 text = "Cancel"
-
-[node name="mint" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(130, 40)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_agtqv")
-text = "Mint"
 
 [node name="panelResult" type="Panel" parent="Control/Panel"]
 visible = false
@@ -291,5 +303,6 @@ layout_mode = 2
 position = Vector2(196, 14)
 texture = ExtResource("2_ic6xa")
 
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer2/mint" to="." method="_on_mint_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer2/mint2" to="." method="_on_mint_2_pressed"]
 [connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="Control/Panel/VBoxContainer/HBoxContainer/mint" to="." method="_on_mint_pressed"]

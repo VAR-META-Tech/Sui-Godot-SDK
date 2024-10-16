@@ -9,11 +9,13 @@
 #include "src/sui_nfts.h"
 #include "src/sui_transaction.h"
 #include "src/sui_wallet.h"
+#include "src/sui_builder.h"
+#include "src/sui_utility.h"
 
 namespace godot
 {
 
-	class SuiSDK : public SuiBalance, public SuiWallet, public SuiMultisig, public SuiNfts, public SuiClient, public SuiTransaction, public Object
+	class SuiSDK : public SuiBalance, public SuiWallet, public SuiBuilder, public SuiMultisig, public SuiNfts, public SuiClient, public SuiTransaction, public SuiUtility, public Object
 	{
 		GDCLASS(SuiSDK, Object);
 
@@ -77,7 +79,6 @@ namespace godot
 		String signTransaction(String sender, String recipient, uint64_t amount) { return SuiTransaction::signTransaction(sender, recipient, amount); };
 		String programmableTransactionAllowSponser(String sender_address, String recipient_address, uint64_t amount, String sponser_address) { return SuiTransaction::programmableTransactionAllowSponser(sender_address, recipient_address, amount, sponser_address); };
 		String requestTokensFromFaucet(String address_str) { return SuiTransaction::requestTokensFromFaucet(address_str); };
-		String programmableTransactionBuilder(String sender, String recipient, uint64_t amount) { return SuiTransaction::programmableTransactionBuilder(sender, recipient, amount); };
 
 		/**
 		 * Wallet
@@ -91,6 +92,52 @@ namespace godot
 		{
 			return SuiWallet::importFromMnemonic(mnemonic, sig_scheme, alias);
 		};
+
+		/**
+		 * Transaction builder
+		 */
+		void makePure(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiBSCBasic *pure) { return SuiBuilder::makePure(builder, arguments, pure); };
+		void makeObjectImmOrOwned(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, String nftId, String sender) { 
+			return SuiBuilder::makeObjectImmOrOwned(builder, arguments, nftId, sender); 
+		};
+		void addSplitCoinsCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *coin, SuiArguments *amount) { return SuiBuilder::addSplitCoinsCommand(builder, coin, amount); };
+		void addTransferObjectCommand(SuiProgrammableTransactionBuilder *builder, SuiArguments *arguments, SuiArguments *recipient) { return SuiBuilder::addTransferObjectCommand(builder, arguments, recipient); };
+		void addMoveCallCommand(SuiProgrammableTransactionBuilder *builder, String package, String module, String function, SuiTypeTags *type_arguments, SuiArguments *arguments) { return SuiBuilder::addMoveCallCommand(builder, package, module, function, type_arguments, arguments); };
+		String executeTransaction(SuiProgrammableTransactionBuilder *builder, String senderAddress, uint64_t gasLimit)
+		{
+			return SuiBuilder::executeTransaction(builder, senderAddress, gasLimit);
+		};
+		void addTypeTag(SuiTypeTags *type_tags, String tag) { return SuiBuilder::addTypeTag(type_tags, tag); };
+
+		void addArgumentGasCoin(SuiArguments *arguments) { return SuiBuilder::addArgumentGasCoin(arguments); };
+		void addArgumentResult(SuiArguments *arguments, uint16_t value) { return SuiBuilder::addArgumentResult(arguments, value); };
+		void addArgumentInput(SuiArguments *arguments, uint16_t value) { return SuiBuilder::addArgumentInput(arguments, value); };
+		void addArgumentNestedResult(SuiArguments *arguments, uint16_t value1, uint16_t value2)
+		{
+			return SuiBuilder::addArgumentNestedResult(arguments, value1, value2);
+		};
+		void addMergeCoinsCommand(SuiProgrammableTransactionBuilder *builder,
+															SuiArguments *coin,
+															SuiArguments *agreements)
+		{
+			return SuiBuilder::addMergeCoinsCommand(builder, coin, agreements);
+		};
+		String executeTransactionAllowSponser(SuiProgrammableTransactionBuilder *builder,
+																					String sender,
+																					uint64_t gas_budget,
+																					String sponser)
+		{
+			return SuiBuilder::executeTransactionAllowSponser(builder, sender, gas_budget, sponser);
+		};
+
+		/**
+		 * Utility
+		 */
+		void connectLocalnet() { SuiUtility::connectLocalnet(); };
+		void connectDevnet() { SuiUtility::connectDevnet(); };
+		void connectTestnet() { SuiUtility::connectTestnet(); };
+		TypedArray<String> availableSubscription() { return SuiUtility::availableSubscription(); };
+		TypedArray<String> availableRPCMethods() { return SuiUtility::availableRPCMethods(); };
 
 		SuiSDK();
 	};

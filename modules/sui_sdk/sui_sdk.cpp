@@ -6,6 +6,8 @@
 #include "modules/sui_sdk/src/sui_nfts.cpp"
 #include "modules/sui_sdk/src/sui_transaction.cpp"
 #include "modules/sui_sdk/src/sui_wallet.cpp"
+#include "modules/sui_sdk/src/sui_builder.cpp"
+#include "modules/sui_sdk/src/sui_utility.cpp"
 
 using namespace godot;
 
@@ -51,7 +53,6 @@ void SuiSDK::_bind_methods()
 	 * Transaction
 	 */
 	ClassDB::bind_method(D_METHOD("signTransaction", "sender_address", "recipient_address", "amount"), &SuiSDK::signTransaction);
-	ClassDB::bind_method(D_METHOD("programmableTransactionBuilder", "sender_address", "recipient_address", "amount"), &SuiSDK::programmableTransactionBuilder);
 	ClassDB::bind_method(D_METHOD("programmableTransactionAllowSponser", "sender_address", "recipient_address", "amount", "sponser_address"), &SuiSDK::programmableTransactionAllowSponser);
 	ClassDB::bind_method(D_METHOD("requestTokensFromFaucet", "address"), &SuiSDK::requestTokensFromFaucet);
 
@@ -64,6 +65,33 @@ void SuiSDK::_bind_methods()
 	ClassDB::bind_method(D_METHOD("getWalletFromAddress", "address"), &SuiSDK::getWalletFromAddress);
 	ClassDB::bind_method(D_METHOD("importFromPrivateKey", "key_base64"), &SuiSDK::importFromPrivateKey);
 	ClassDB::bind_method(D_METHOD("importFromMnemonic", "mnemonic", "scheme", "alias"), &SuiSDK::importFromMnemonic);
+
+	/**
+	 * Transaction builder
+	 */
+	ClassDB::bind_method(D_METHOD("makePure", "builder", "arguments", "value"), &SuiSDK::makePure);
+	ClassDB::bind_method(D_METHOD("makeObjectImmOrOwned", "builder", "arguments", "nft_id", "sender_address"), &SuiSDK::makeObjectImmOrOwned);
+	ClassDB::bind_method(D_METHOD("addSplitCoinsCommand", "builder", "coin", "amount"), &SuiSDK::addSplitCoinsCommand);
+	ClassDB::bind_method(D_METHOD("addTransferObjectCommand", "builder", "arguments", "recipient"), &SuiSDK::addTransferObjectCommand);
+	ClassDB::bind_method(D_METHOD("addMoveCallCommand", "builder", "package", "module", "function", "type_arguments", "arguments"), &SuiSDK::addMoveCallCommand);
+	ClassDB::bind_method(D_METHOD("executeTransaction", "builder", "sender_address", "gas_limit"), &SuiSDK::executeTransaction);
+	ClassDB::bind_method(D_METHOD("addTypeTag", "type_tags", "tag"), &SuiSDK::addTypeTag);
+
+	ClassDB::bind_method(D_METHOD("addArgumentGasCoin", "arguments"), &SuiSDK::addArgumentGasCoin);
+	ClassDB::bind_method(D_METHOD("addArgumentResult", "arguments", "value"), &SuiSDK::addArgumentResult);
+	ClassDB::bind_method(D_METHOD("addArgumentInput", "arguments", "value"), &SuiSDK::addArgumentInput);
+	ClassDB::bind_method(D_METHOD("addArgumentNestedResult", "arguments", "value1", "value2"), &SuiSDK::addArgumentNestedResult);
+	ClassDB::bind_method(D_METHOD("addMergeCoinsCommand", "builder", "coin", "agreements"), &SuiSDK::addMergeCoinsCommand);
+	ClassDB::bind_method(D_METHOD("executeTransactionAllowSponser", "builder", "sender", "gas_budget", "sponser"), &SuiSDK::executeTransactionAllowSponser);
+
+	/**
+	 * Utility
+	 */
+	ClassDB::bind_method(D_METHOD("connectLocalnet"), &SuiSDK::connectLocalnet);
+	ClassDB::bind_method(D_METHOD("connectDevnet"), &SuiSDK::connectDevnet);
+	ClassDB::bind_method(D_METHOD("connectTestnet"), &SuiSDK::connectTestnet);
+	ClassDB::bind_method(D_METHOD("availableSubscription"), &SuiSDK::availableSubscription);
+	ClassDB::bind_method(D_METHOD("availableRPCMethods"), &SuiSDK::availableRPCMethods);
 
 	// ClassDB::bind_method(D_METHOD("set_amplitude", "p_amplitude"), &GDExample::set_amplitude);
 	// ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "amplitude"), "set_amplitude", "get_amplitude");
