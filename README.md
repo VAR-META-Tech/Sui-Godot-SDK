@@ -1,5 +1,6 @@
-![645bca632d1c27a85cee236d_sui-logo8d3c44e](https://github.com/user-attachments/assets/5b74fbae-1a87-427d-9c57-8bc164ca09cb)
-
+<p align="center">
+	<img src="./resources/sui_logo.png" alt="Sui-Godo-SDKLogo" width="256" height="128" />
+</p>
 # Sui-Godot-SDK
 
 Sui-Godot-SDK is a package to help developers integrate Sui blockchain technology into their godot projects.
